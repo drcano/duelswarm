@@ -1,0 +1,33 @@
+{
+  "cells": 30,
+  "coverage": 2,
+  "diversity": 0.0667,
+  "entries": [
+    {
+      "cell": [
+        0,
+        0
+      ],
+      "service": "struts",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "fitness": 0.6667,
+      "meta": {
+        "episode": 1,
+        "seed": 1337
+      }
+    },
+    {
+      "cell": [
+        0,
+        1
+      ],
+      "service": "struts",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "fitness": 0.6667,
+      "meta": {
+        "episode": 2,
+        "seed": 42
+      }
+    }
+  ]
+}

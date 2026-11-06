@@ -1,0 +1,554 @@
+{
+  "connects": [
+    {
+      "src": "struts",
+      "dst": "decoy",
+      "dst_ips": [
+        "172.22.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "mail",
+      "dst_ips": [
+        "172.22.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "db",
+      "dst_ips": [
+        "172.20.0.2"
+      ],
+      "reached_on_ip": "172.20.0.2",
+      "l4_open_port": 5432,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "ldap",
+      "dst_ips": [
+        "172.22.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "jenkins",
+      "dst_ips": [
+        "172.21.0.2",
+        "172.20.0.3"
+      ],
+      "reached_on_ip": "172.21.0.2",
+      "l4_open_port": 8080,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "struts",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": 22,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "struts",
+      "dst_ips": [
+        "172.21.0.3",
+        "172.20.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "mail",
+      "dst_ips": [
+        "172.22.0.3"
+      ],
+      "reached_on_ip": "172.22.0.3",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "db",
+      "dst_ips": [
+        "172.20.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "ldap",
+      "dst_ips": [
+        "172.22.0.2"
+      ],
+      "reached_on_ip": "172.22.0.2",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "jenkins",
+      "dst_ips": [
+        "172.21.0.2",
+        "172.20.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "decoy",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "struts",
+      "dst_ips": [
+        "172.21.0.3",
+        "172.20.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "decoy",
+      "dst_ips": [
+        "172.22.0.4"
+      ],
+      "reached_on_ip": "172.22.0.4",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "db",
+      "dst_ips": [
+        "172.20.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "ldap",
+      "dst_ips": [
+        "172.22.0.2"
+      ],
+      "reached_on_ip": "172.22.0.2",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "jenkins",
+      "dst_ips": [
+        "172.21.0.2",
+        "172.20.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "mail",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "struts",
+      "dst_ips": [
+        "172.21.0.3",
+        "172.20.0.4"
+      ],
+      "reached_on_ip": "172.20.0.4",
+      "l4_open_port": 8080,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "decoy",
+      "dst_ips": [
+        "172.22.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "mail",
+      "dst_ips": [
+        "172.22.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "ldap",
+      "dst_ips": [
+        "172.22.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "jenkins",
+      "dst_ips": [
+        "172.21.0.2",
+        "172.20.0.3"
+      ],
+      "reached_on_ip": "172.20.0.3",
+      "l4_open_port": 8080,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "db",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "struts",
+      "dst_ips": [
+        "172.21.0.3",
+        "172.20.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "decoy",
+      "dst_ips": [
+        "172.22.0.4"
+      ],
+      "reached_on_ip": "172.22.0.4",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "mail",
+      "dst_ips": [
+        "172.22.0.3"
+      ],
+      "reached_on_ip": "172.22.0.3",
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "db",
+      "dst_ips": [
+        "172.20.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "jenkins",
+      "dst_ips": [
+        "172.21.0.2",
+        "172.20.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": false,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "ldap",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "struts",
+      "dst_ips": [
+        "172.21.0.3",
+        "172.20.0.4"
+      ],
+      "reached_on_ip": "172.21.0.3",
+      "l4_open_port": 8080,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "decoy",
+      "dst_ips": [
+        "172.22.0.4"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "mail",
+      "dst_ips": [
+        "172.22.0.3"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "db",
+      "dst_ips": [
+        "172.20.0.2"
+      ],
+      "reached_on_ip": "172.20.0.2",
+      "l4_open_port": 5432,
+      "l4_measured": true,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "ldap",
+      "dst_ips": [
+        "172.22.0.2"
+      ],
+      "reached_on_ip": null,
+      "l4_open_port": null,
+      "l4_measured": true,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "internet:1.1.1.1",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "internet:example.com",
+      "l4_open_port": null,
+      "l3_ping": false,
+      "reached": false,
+      "raw_path": true
+    },
+    {
+      "src": "jenkins",
+      "dst": "docker-host-gateway",
+      "dst_ip": "172.21.0.1",
+      "l4_open_port": 22,
+      "l3_ping": true,
+      "reached": true,
+      "raw_path": true
+    }
+  ]
+}

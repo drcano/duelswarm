@@ -1,0 +1,64 @@
+{
+  "seeds": [
+    1337
+  ],
+  "per_seed": [
+    {
+      "path": "docs/smoke_seed1337.jsonl",
+      "chain_verified": true,
+      "oos_executed": 0,
+      "llm_driven_moves": 9,
+      "llm_picks": 9,
+      "reflector_vetoes": 0,
+      "silent_fallback_events": 0,
+      "min_llm_moves": 1,
+      "llm_duel": true,
+      "disqualified": false,
+      "gate_blocks_total": 3,
+      "gate_blocks_llm_or_discovery": 0,
+      "gate_blocks_simulated": 3,
+      "floor_status": "HELD",
+      "tokens_by_tier": {
+        "ultra": {
+          "calls": 9,
+          "prompt_tokens": 2558,
+          "completion_tokens": 6631
+        },
+        "super": {
+          "calls": 1,
+          "prompt_tokens": 370,
+          "completion_tokens": 129
+        }
+      },
+      "seed": 1337,
+      "crown_reached": false
+    }
+  ],
+  "cost_table": {
+    "by_tier": {
+      "ultra": {
+        "calls": 9,
+        "prompt_tokens": 2558,
+        "completion_tokens": 6631,
+        "cost_usd": 0.269412
+      },
+      "super": {
+        "calls": 1,
+        "prompt_tokens": 370,
+        "completion_tokens": 129,
+        "cost_usd": 0.002271
+      }
+    },
+    "total_usd": 0.271683,
+    "n_logs": 1
+  },
+  "projection": {
+    "usd_per_seed": 0.271683,
+    "balance": 22.0,
+    "margin": 0.7,
+    "n_affordable": 56
+  },
+  "paths": [
+    "docs/smoke_seed1337.jsonl"
+  ]
+}

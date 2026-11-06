@@ -1,0 +1,13 @@
+=== D2b: honest engine traverses the realistic ZONED world (live; red discovers all) ===
+seed=1 perimeter=['struts_edge', 'edge_lookalike_0'] (vulnerable: struts_edge; look-alikes: ['edge_lookalike_0']) app=['app_0'] crown=crown_db oos=oos_backoffice
+struts entry exploitable at t~6s
+
+--- 1. perimeter: red pops the vulnerable entry for real; look-alikes fail ---
+  real S2-045 foothold on struts_edge: True
+--- 2-4. multi-hop walk: harvest -> recon -> pivot, entry -> app -> crown ---
+  owned=['struts_edge', 'app_0', 'crown_db']  path=[('struts_edge', 'app_0'), ('app_0', 'crown_db')]  hops=2  looted=['crown_db']
+--- 5. out-of-scope stays gate-blocked; floor ---
+  oos pivot (10.99.0.10): BLOCKED
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — the honest engine traversed the realistic zoned world end to end: real foothold on the one vulnerable perimeter service, then 2 real gate-mediated pivots along the discovered credential chain to the crown; look-alikes never popped; oos isolated; floor oos=0; chain re-derives.

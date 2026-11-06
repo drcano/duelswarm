@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" font-family="sans-serif" font-size="12">
+<rect width="640" height="360" fill="white"/>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="bold">T4: adversarial range drops red’s reused-path rate</text>
+<line x1="56" y1="304" x2="584" y2="304" stroke="#333"/>
+<line x1="56" y1="56" x2="56" y2="304" stroke="#333"/>
+<text x="48" y="60.0" text-anchor="end">1.0</text>
+<text x="48" y="308.0" text-anchor="end">0.0</text>
+<text x="320" y="344" text-anchor="middle">generation</text>
+<text x="48" y="180" text-anchor="end" transform="rotate(-90 26 180)">reused-path rate</text>
+<polyline points="56.0,56.0 131.4,56.0 206.9,56.0 282.3,56.0 357.7,56.0 433.1,56.0 508.6,56.0 584.0,56.0" fill="none" stroke="#999999" stroke-width="2"/>
+<circle cx="56.0" cy="56.0" r="3" fill="#999999"/>
+<circle cx="131.4" cy="56.0" r="3" fill="#999999"/>
+<circle cx="206.9" cy="56.0" r="3" fill="#999999"/>
+<circle cx="282.3" cy="56.0" r="3" fill="#999999"/>
+<circle cx="357.7" cy="56.0" r="3" fill="#999999"/>
+<circle cx="433.1" cy="56.0" r="3" fill="#999999"/>
+<circle cx="508.6" cy="56.0" r="3" fill="#999999"/>
+<circle cx="584.0" cy="56.0" r="3" fill="#999999"/>
+<rect x="340" y="46" width="12" height="12" fill="#999999"/><text x="356" y="56">fixed range — reused 1.0</text>
+<polyline points="56.0,56.0 131.4,262.7 206.9,268.6 282.3,91.4 357.7,56.0 433.1,254.4 508.6,56.0 584.0,126.9" fill="none" stroke="#2ca02c" stroke-width="2"/>
+<circle cx="56.0" cy="56.0" r="3" fill="#2ca02c"/>
+<circle cx="131.4" cy="262.7" r="3" fill="#2ca02c"/>
+<circle cx="206.9" cy="268.6" r="3" fill="#2ca02c"/>
+<circle cx="282.3" cy="91.4" r="3" fill="#2ca02c"/>
+<circle cx="357.7" cy="56.0" r="3" fill="#2ca02c"/>
+<circle cx="433.1" cy="254.4" r="3" fill="#2ca02c"/>
+<circle cx="508.6" cy="56.0" r="3" fill="#2ca02c"/>
+<circle cx="584.0" cy="126.9" r="3" fill="#2ca02c"/>
+<rect x="340" y="64" width="12" height="12" fill="#2ca02c"/><text x="356" y="74">curriculum range — reused 0.583</text>
+</svg>

@@ -1,0 +1,101 @@
+{
+  "boundary": "tier_line",
+  "tiers": {
+    "bkupctl": "T2",
+    "ws02": "T3",
+    "dba02": "T2",
+    "web02": "T3",
+    "cache01": "T3",
+    "dba01": "T2",
+    "ws01": "T3",
+    "db-bastion": "T1",
+    "mon01": "T3",
+    "app02": "T3",
+    "web01": "T3",
+    "ci01": "T3",
+    "etl01": "T2",
+    "backup": "T1",
+    "ws03": "T3",
+    "app01": "T3",
+    "db-core": "T1",
+    "dc-01": "T0",
+    "jump-01": "T0",
+    "decoy-fin": "T1"
+  },
+  "declared_terrain": [
+    "app01",
+    "app02",
+    "backup",
+    "bkupctl",
+    "cache01",
+    "ci01",
+    "db-bastion",
+    "db-core",
+    "dba01",
+    "dba02",
+    "dc-01",
+    "decoy-fin",
+    "etl01",
+    "jump-01",
+    "mon01",
+    "web01",
+    "web02",
+    "ws01",
+    "ws02",
+    "ws03"
+  ],
+  "gate_out_of_scope_tier0": [
+    "dc-01",
+    "jump-01"
+  ],
+  "crown": {
+    "data": "db-core",
+    "identity": "dc-01"
+  },
+  "crown_login": {
+    "user": "svc_dba",
+    "password": "Svc-DBA-Range!2026",
+    "path": "/home/svc_dba/pii.json"
+  },
+  "cred_seam": {
+    "bootstrap_host": "web01",
+    "bootstrap_authorizes": "dba01",
+    "chain": [
+      "web01",
+      "dba01",
+      "db-bastion",
+      "db-core"
+    ],
+    "bootstrap_cred": "dbadmin (reused workstation pw)",
+    "svc_cred": "svc_dba"
+  },
+  "credential_graph": [
+    {
+      "loot_host": "web01",
+      "loot": "reused DBA workstation cred (config file)",
+      "unlocks": "dba01",
+      "idiom": "reused-cred-bootstrap",
+      "anomalous": true
+    },
+    {
+      "loot_host": "dba01",
+      "loot": "svc_dba svc cred (config file)",
+      "unlocks": "db-bastion",
+      "idiom": "legit-admin-lotl"
+    },
+    {
+      "loot_host": "db-bastion",
+      "loot": "svc_dba svc cred (config file)",
+      "unlocks": "db-core",
+      "idiom": "legit-admin-lotl"
+    }
+  ],
+  "decoys": [
+    "decoy-fin"
+  ],
+  "ad_tier": {
+    "dc": "dc-01",
+    "stub": true,
+    "note": "inert in Phase 1 (reachable-but-gated floor surface); the real Samba AD DC realization is deferred to the loud-red AD dimension"
+  }
+}

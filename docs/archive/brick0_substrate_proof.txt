@@ -1,0 +1,21 @@
+=== Brick 0 substrate proof (BOOTED) ===
+seed=1337  entry(pivot)=webrce  crown=db
+
+--- 1. real subnets with IPAM CIDRs ---
+  range_attacker   10.9.0.0/24
+  range_dmz        10.10.0.0/24
+  range_internal   10.11.0.0/24
+  attacker container IP = 10.9.0.2  |  crown db IP = 10.11.0.2
+  entry webrce IPs = ['10.10.0.2', '10.11.0.5', '10.9.0.3'] (multi-homed pivot)
+
+--- 2. entry reachable on its published port from the Docker host ---
+  host -> entry 127.0.0.1:18080  reachable=True
+
+--- 3. segmentation: attacker CANNOT reach crown directly, pivot CAN ---
+  attacker -> crown 10.11.0.2:8080  reachable=False   (MUST be False)
+  pivot webrce -> crown 10.11.0.2:8080  reachable=True   (MUST be True)
+
+--- 4. external egress still blocked (F2 preserved) ---
+  entry -> 1.1.1.1:53 (open internet)  reachable=False   (MUST be False)
+
+RESULT: PASS — real segmentation booted; crown reachable only via the pivot; no external egress.

@@ -1,0 +1,12 @@
+# Env-boundary LIVE proof — kernel-level floor (gate removed from the path)
+# Host: macOS 26.6.2, Colima/Docker 29.5.2, arch arm64
+# Run: python3 scripts/prove_env_boundaries.py --live --minimal --seed 1337
+# Date: 2026-10-17
+# Minimal range: heavy vulnerable images (incl. 4.5GB WebLogic) swapped for python:3.12-slim nodes on the SAME range/range_oos segmentation; each node runs an http.server:8080 listener so the in-scope reach is positively demonstrated.
+
+[static]  seed=1337  entry=webrce  in=4  out=2  range_oos.internal=True  entry↔oos shared nets=0
+[static]  dispatch parser (software layer): 8/8 parseable  |  blind to 2/3 known-bypass classes
+[static]  env boundary (kernel layer):    all (segmentation routes none of them)
+[static]  CLAIM: boundaries alone are structurally sufficient: compose segmentation forbids any route from the entry to an out-of-scope host, so no free-form shell on the entry can reach one — regardless of the gate. The dispatch parser is the second, software layer; it catches the forms it was built for and misses others, which is exactly why the kernel-level boundary is the sole-sufficient layer.
+[live]    seed=1337  entry=webrce  gate_neutered=True  oos_tcp_reaches=0  in_scope_reaches=3  battery_slipped=0
+ENV-BOUNDARY FLOOR PROVEN  (gate removed from the path; kernel still refuses every out-of-scope packet)

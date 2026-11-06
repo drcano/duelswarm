@@ -1,0 +1,5 @@
+=== Brick 5 proof: environment co-evolution (UED, real-agent MCC) ===
+MCC real: well-formed world PASSES; severed-pivot world FAILS (not bootable)
+curriculum: 4 worlds accepted, 1 rejected by MCC; mastered=[4, 6, 6, 6] (ANNECS=6, monotone=True); difficulty=[4, 2, 0, 0]
+floor: every accepted generation re-derives oos_executed=0 (per-actor auditor)
+RESULT: PASS — worlds co-evolve against the real populations under a real MCC gate; difficulty tracks skill; open-endedness accumulates; floor at 0.

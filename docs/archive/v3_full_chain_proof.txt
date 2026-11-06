@@ -1,0 +1,20 @@
+=== gate_V3-fullchain: whole kill chain REAL, end-to-end, one booted run ===
+struts exploitable at t~6s
+
+--- 1. initial access: real S2-045 OGNL RCE (confirmed by container state) ---
+  RCE id: 'uid=0(root) gid=0(root) groups=0(root)'
+--- 2. credential access: read the stolen deploy key on the foothold ---
+  stolen key present on foothold: True
+--- 3. lateral movement: real ssh pivot struts -> db (DMZ->internal hop, REAL) ---
+  struts -> customer_db_0 (10.11.0.10): OK
+  struts -> customer_db_1 (10.11.0.11): OK
+  struts -> customer_db_2 (10.11.0.12): OK
+--- 4. exfil: real crown bytes over the earned ssh (confirmed == planted) ---
+  exfil customer_db_0: bytes_match_planted=True
+  exfil customer_db_1: bytes_match_planted=True
+  exfil customer_db_2: bytes_match_planted=True
+--- 5. out-of-scope stays gate-blocked; floor ---
+  oos decoy pivot: BLOCKED
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — the WHOLE kill chain is REAL end-to-end on one booted run: real S2-045 RCE foothold -> real stolen-key ssh pivot struts->db (the DMZ->internal hop, now REAL) -> real exfil of 3/3 crowns; oos blocked; floor oos=0.

@@ -1,0 +1,92 @@
+{
+  "red": [
+    {
+      "seed": 1337,
+      "worked": {
+        "recon": 5,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 42,
+      "worked": {
+        "recon": 9,
+        "exploit": 1,
+        "exfiltrate": 2,
+        "cred_pivot": 3
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 7,
+      "worked": {
+        "recon": 5,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 99,
+      "worked": {
+        "recon": 11,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 256,
+      "worked": {
+        "recon": 9,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 512,
+      "worked": {
+        "recon": 11,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 2
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 2024,
+      "worked": {
+        "recon": 7,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 31337,
+      "worked": {
+        "recon": 7,
+        "exploit": 1,
+        "cred_pivot": 3,
+        "exfiltrate": 1
+      },
+      "blocked": {},
+      "caught": {}
+    }
+  ]
+}

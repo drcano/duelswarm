@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv
+venv/
+.env
+data/
+*.log
+.DS_Store
+.claude/
+
+# ephemeral per-run compose files from live_promote/live_sensors (may embed msf pass)
+docs/build-bundle/**/generated-compose-*.yml
+
+# 96 MB vendored reference tree (Incalmo) — not a casual blob in history. If it becomes a
+# deliberate dependency, vendor it explicitly (pinned + documented), not via a loose add.
+third_party/incalmo/
+
+# session-resume scratch files
+sessionresume_*
+
+# Session scratch output (never part of the repo)
+Claude outputs/

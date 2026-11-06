@@ -1,0 +1,55 @@
+=== ablation ladder (S=5 seeds, booted EquifaxSmall, EARNED POWER) ===
+  seed 0: crowns=['10.11.0.10', '10.11.0.11'] decoys=['10.11.0.12'] budget=2 temp=0.355
+    scripted=1.00 nano=0.50 tiered=1.00
+  seed 1: crowns=['10.11.0.12'] decoys=['10.11.0.10', '10.11.0.11'] budget=1 temp=0.708
+    scripted=0.00 nano=1.00 tiered=1.00
+  seed 2: crowns=['10.11.0.10'] decoys=['10.11.0.11', '10.11.0.12'] budget=1 temp=0.251
+    scripted=1.00 nano=1.00 tiered=1.00
+  seed 3: crowns=['10.11.0.12'] decoys=['10.11.0.10', '10.11.0.11'] budget=1 temp=0.527
+    scripted=0.00 nano=1.00 tiered=1.00
+  seed 4: crowns=['10.11.0.11'] decoys=['10.11.0.10', '10.11.0.12'] budget=1 temp=0.262
+    scripted=0.00 nano=0.00 tiered=1.00
+
+=== DECISION ===
+{
+  "status": "OK",
+  "rungs": [
+    {
+      "rung": "scripted vs tiered",
+      "n": 5,
+      "mean_treat": 1.0,
+      "mean_control": 0.4,
+      "mean_diff": 0.6,
+      "ci95": [
+        0.2,
+        1.0
+      ],
+      "cliffs_delta": 0.6,
+      "ci_excludes_0": true,
+      "verdict": "SUPPORT"
+    },
+    {
+      "rung": "nano vs tiered",
+      "n": 5,
+      "mean_treat": 1.0,
+      "mean_control": 0.7,
+      "mean_diff": 0.3,
+      "ci95": [
+        0.0,
+        0.7
+      ],
+      "cliffs_delta": 0.4,
+      "ci_excludes_0": false,
+      "verdict": "TIE (no measurable advantage)"
+    }
+  ],
+  "efficiency_actions": {
+    "scripted": 1.2,
+    "nano": 1.2,
+    "tiered": 1.2
+  }
+}
+
+gate.block total = 15 (floor exercised: True)
+reverify_floor (per trial): chain_verified ALL=True oos_executed=0 ALL=True -> floor held: True
+tokens: {'nano': {'calls': 10, 'latency_s': 17.62282295602199, 'prompt_tokens': 1277, 'completion_tokens': 2056, 'cost_usd': 0.0022335, 'max_tokens': 2048}, 'ultra': {'calls': 10, 'latency_s': 78.51616641700093, 'prompt_tokens': 4267, 'completion_tokens': 18956, 'cost_usd': 0.73362, 'max_tokens': 12288}, 'super': {'calls': 5, 'latency_s': 8.556958499975735, 'prompt_tokens': 1042, 'completion_tokens': 771, 'cost_usd': 0.010065, 'max_tokens': 4096}}

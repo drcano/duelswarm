@@ -1,0 +1,55 @@
+=== gate_M6: blue FIGHTS on the multi-flag terrain (EquifaxSmall) ===
+
+Blind blue perceives red ONLY through a lossy Bernoulli sensor view; from
+belief + its OWN topology it revokes the pivot credential, severing the
+downstream cred_pivot tree. SIMULATED-substrate fidelity (labeled), same as red.
+
+--- 1. contested coverage (vs the M5 threshold stub) ---
+  M5 threshold stub : coverage=1.000  (red romps — uncontested)
+  M6 fighting blue  : coverage=0.333  captured=1/3  blue_protected_value=110000
+
+  per-flag outcome:
+    customer_db_0    class=PII_TABLE  value=   1000000  captured=True  contained=True
+    customer_db_1    class=CARD_TABLE value=    100000  captured=False  contained=True
+    customer_db_2    class=CREDS_DUMP value=     10000  captured=False  contained=True
+
+--- 2. path-severing is real (HEADLINE) ---
+  blue revoked credential deploy@webserver (reaches all 3 db flags).
+  cred_pivots that WORKED in M2 now FAIL (key dead): 2 severed
+    pivot -> customer_db_1    FAILED  (revoked key ['webserver', 'deploy'])
+    pivot -> customer_db_2    FAILED  (revoked key ['webserver', 'deploy'])
+
+--- 3. real MTTC, no inversion ---
+  MTTD (first detection - first red action) = 1
+  MTTC (containment confirm - first compromise) = 17
+  MTTD <= MTTC (no narration inversion): True
+
+--- 4. floor=0 BOTH actors (reverify_floor, imports neither gate nor audit) ---
+  chain_verified=True  oos_executed=0
+  per-actor scope: {'blue': ['customer_db_0', 'customer_db_1', 'customer_db_2', 'sensor_edr', 'sensor_siem', 'webserver'], 'judge': ['attacker_c2', 'attacker_staging', 'customer_db_0', 'customer_db_1', 'customer_db_2', 'webserver'], 'red': ['attacker_c2', 'attacker_staging', 'customer_db_0', 'customer_db_1', 'customer_db_2', 'webserver']}
+
+--- 5. AIR-GAP assertion (both ways) ---
+  red_blind (acts only on discovered hosts; reads no topology/roe/blue) : True
+  blue_sensor_lossy (12/18 red actions seen — NOT an oracle) : True
+  blue_acted_on_sensor (every blue action after a detection)            : True
+  no_blue_into_red (stripping blue events leaves red's belief identical) : True
+  => air_gapped BOTH ways: True
+
+--- 6. (stretch) cross-episode: blue pre-armed detects MORE (BlueSTAR memory) ---
+  pre-armed on prior-episode techniques: ['T1005', 'T1021', 'T1190', 'T1595', 'recon_from']
+  sensor detections on the same log: naive=12/18 -> pre-armed=17/18  (MTTD floored at latency=1: 1->1)
+  pre-arm raises detection rate: True  
+
+--- M6 §3: re-run M5 with the REAL blue — regret now ENGAGES ---
+  EquifaxSmall regret (1-coverage) = 0.667  (was 0 under uncontested M5)
+  generated-terrain regrets         = [0.0, 1.0, 1.0]
+  regret engages (non-zero signal the UED's argmax-regret lacked): True
+
+--- gate_M6 acceptance ---
+  (1) contested coverage < 1.0 with protected value > 0 : True
+  (2) path-severing real (>=1 cred_pivot fails)          : True
+  (3) real MTTC, no inversion                            : True
+  (4) floor=0 both actors                                : True
+  (5) air-gap both ways                                  : True
+
+RESULT: PASS — blue detects on a lossy sensor view and fights with a gated, belief-driven response frontier; on EquifaxSmall red's coverage drops 1.00 -> 0.33 with blue severing 2 real pivot paths (one credential revocation kills the tree); MTTC real; floor=0 both actors; air-gap holds both directions. Episode log committed (docs/m6_contested_duel.jsonl).

@@ -1,0 +1,19 @@
+=== gate_N2: black-box live-red seat on booted EquifaxSmall ===
+entry_net=10.90.0.0/24 inner_net=10.11.0.0/24 dbs=['customer_db_0', 'customer_db_1', 'customer_db_2'] decoy(oos)=decoy_portal
+
+--- episode 1: blind red, NO pivot key on the foothold (must fail) ---
+  reached_crown=False (want False)  discovered=['10.11.0.10', '10.11.0.11', '10.11.0.12']
+
+--- episode 2: blind red, pivot key present (reaches crowns via real pivot) ---
+  reached_crown=True crowns=['10.11.0.10', '10.11.0.11', '10.11.0.12']
+  exfiltrated bytes == planted secrets (out-of-band check): True
+
+--- out-of-scope decoy (by IP) is GATE-BLOCKED ---
+  red recon decoy_portal (10.99.0.10): BLOCKED
+
+--- air-gap + floor (independent re-derivation) ---
+  blue events in red's log: 0 (want 0 — air-gap)
+  every red target discovered-first (by IP): True
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — black-box red on the booted range: it discovers by its own recon, can LOSE without the key, reaches the crowns with it via real pivot+exfil, the decoy is gate-blocked, air-gap holds, floor oos=0.

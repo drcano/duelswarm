@@ -1,0 +1,26 @@
+=== gate_N1_pivot: REAL credential pivot + exfil over real SSH (EquifaxSmall) ===
+pivot=webserver dbs=['customer_db_0', 'customer_db_1', 'customer_db_2'] decoy(oos)=decoy_portal  node_image=duelswarm/range-node:latest
+
+--- 0. pivot credential provisioned out-of-band (deploy key) ---
+  deploy pubkey -> 3 dbs' authorized_keys; privkey -> webserver (red's stolen key)
+
+--- 1. REAL cred_pivot: ssh -i <stolen key> dbadmin@db (gate-allowed) ---
+  webserver -> customer_db_0 (dbadmin@10.11.0.10)  login=OK
+  webserver -> customer_db_1 (dbadmin@10.11.0.11)  login=OK
+  webserver -> customer_db_2 (dbadmin@10.11.0.12)  login=OK
+
+--- 2. REAL exfil: cat <loot> over the same ssh session (bytes == planted) ---
+  exfil customer_db_0:/home/dbadmin/customer_data_db0.json  bytes_match_planted=True
+  exfil customer_db_1:/home/dbadmin/customer_data_db1.json  bytes_match_planted=True
+  exfil customer_db_2:/home/dbadmin/customer_data_db2.json  bytes_match_planted=True
+
+--- 3. cred_pivot to the decoy (out of scope) is GATE-BLOCKED ---
+  red pivot decoy_portal: BLOCKED (no ssh ran)
+
+--- 4. spine law + scorer two-step + floor=0, independent re-derivation ---
+  audit_spine violations: 0 (want 0)
+  flags credited (confirm AND mutate): ['customer_db_0', 'customer_db_1', 'customer_db_2'] (want ['customer_db_0', 'customer_db_1', 'customer_db_2'])
+  all confirmations fidelity=real: True
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — cred_pivot + exfil are REAL on booted EquifaxSmall: a real stolen key opens a real SSH session the gate allowed, the real loot bytes come back, the decoy pivot is blocked, the spine holds, floor oos=0.

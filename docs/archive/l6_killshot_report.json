@@ -1,0 +1,43 @@
+{
+  "seed": 1337,
+  "entry": "struts",
+  "out_of_scope": [
+    "decoy",
+    "ldap",
+    "mailserver"
+  ],
+  "classes": {
+    "canon_alias": {
+      "attempts": 9,
+      "blocked": 9,
+      "false_denied_in_scope": []
+    },
+    "confused_deputy": {
+      "attempts": 4,
+      "blocked": 4
+    },
+    "novel_egress": {
+      "attempts": 8,
+      "parser_blocked": 8,
+      "parser_blind": [],
+      "topology_backstop": null,
+      "false_denied_in_scope": []
+    },
+    "uninstrumented": {
+      "available": true,
+      "entry_container": "range-webrce",
+      "oos_tcp_reaches": [],
+      "internet_blocked": true,
+      "internet_reached": [],
+      "in_scope_reaches": 2,
+      "host_gateway": "L3 reach to Docker-host gateway OPEN (F2 \u00a7E) \u2014 scoped, needs a host-side egress firewall; not closable in compose",
+      "ok": true
+    }
+  },
+  "findings": [],
+  "oos_executed": 0,
+  "chain_verified": true,
+  "complete_mediation": true,
+  "log": "docs/l6_killshot_log.jsonl",
+  "booted": true
+}

@@ -1,0 +1,43 @@
+=== gate_M7: blue as the terrain-shaper (Moving Target Defense) — EquifaxSmall ===
+
+M6's fighting blue now also reshapes its OWN terrain between rounds, from its
+sensor playbook (belief) — rotate the pivot credential + shuffle addresses,
+emitting a FRESH range.topology each shift. SIMULATED-substrate (labeled).
+
+--- per-round outcome (shared, hash-chained campaign log) ---
+  round 0 (T0): coverage=0.333 harm=1000000  cred_pivots OK=['customer_db_0']  FAILED=['customer_db_1', 'customer_db_2']  re-recons=4  reactive-severed=2
+  round 1 (T1): coverage=0.000 harm=0  cred_pivots OK=[]  FAILED=['customer_db_0', 'customer_db_1', 'customer_db_2']  re-recons=4  reactive-severed=3
+
+--- 1. recon goes stale (HEADLINE): same move, T0 ok -> T1 fail ---
+  cred_pivot -> customer_db_0: SUCCEEDED at T0, FAILED at T1 (credential rotated at the boundary)
+  => a red move that worked pre-shift now fails post-shift: True
+
+--- 2. floor re-derives on EACH topology ---
+  range.topology events in the log: 2
+  whole-log reverify: chain_verified=True oos_executed=0
+  per-topology oos (scope re-derived on each terrain; chain is a whole-log property):
+    topology T0: oos_executed=0
+    topology T1: oos_executed=0
+
+--- 3. blue-driven + belief-based (air-gap holds) ---
+  mtd.shift basis=sensor+topology playbook=['T1005', 'T1021', 'T1190', 'T1595'] rotate=[['webserver', 'deploy']] reip=True
+  shift consumed only sensor playbook + topology (no red raw, no schedule): True
+  air-gap re-derived: red_blind=True blue_sensor_lossy=True (23/36) no_blue_into_red=True => air_gapped=True
+
+--- 4. red re-adapts (black-box) ---
+  red re-recons the shifted terrain at T1: 4 recon actions (belief reset; it perceives only the pivot_failed EFFECT, never blue's decision)
+
+--- 5. MTD raises red's cost (vs the static-terrain control) ---
+  cumulative harm  MTD=1000000   static-control=2000000   MTD cheaper-for-blue: True
+  static control coverage per round: [0.333, 0.333]
+
+--- gate_M7 acceptance ---
+  (1) recon stale — pre-shift move fails post-shift : True
+  (2) floor=0 on each topology (>=2) + whole log     : True
+  (3) blue-driven belief-based shift, air-gap holds  : True
+  (4) red re-adapts (re-recons shifted terrain)      : True
+  (5) MTD raises red's cost (else honest null)       : True
+
+RESULT: PASS — blue reshapes its own terrain from belief; a cred_pivot that worked at T0 FAILS at T1 (recon stale, red re-discovers); the floor re-derives oos=0 on each of 2 topologies; the air-gap holds (blue shifts from its sensor playbook, red perceives only effects); MTD raises red's cost (1000000 vs 2000000 static). Campaign log committed (docs/m7_mtd_campaign.jsonl).
+
+Honest limits: episode-boundary MTD is the deliverable; live mid-episode MTD is the scoped stretch (not built — do not imply it). Re-IP/rotation on alpine-stub containers is a REAL topology change over a MODELED service substrate (same fidelity as the rest); real service migration on real images is the real-image upgrade already TODO.

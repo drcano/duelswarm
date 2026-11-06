@@ -1,0 +1,89 @@
+{
+  "headline_controls": {
+    "governed_live": {
+      "oos_executed": 0,
+      "spine_violations": 0,
+      "chain_verified": true,
+      "legibility": 1.0,
+      "legible": true
+    },
+    "governed_log": "docs/l1_live_discovery_duel_seed1337.jsonl",
+    "ungoverned": {
+      "oos_executed": 2,
+      "spine_violations": 4,
+      "chain_verified": true,
+      "legibility": 0.0,
+      "legible": false
+    },
+    "legibility_gap": 1.0,
+    "reflexivity": [
+      {
+        "defender": "regex",
+        "reflexivity": 0.1,
+        "rate": 0.125,
+        "note": "byte-matching \u2014 loses on variants"
+      },
+      {
+        "defender": "behavioral",
+        "reflexivity": 0.6,
+        "rate": 1.0,
+        "note": "kill-chain structure \u2014 catches, but gameable by an adaptive red"
+      },
+      {
+        "defender": "gate",
+        "reflexivity": 0.0,
+        "rate": 1.0,
+        "note": "non-reflexive deterministic floor \u2014 holds forever"
+      }
+    ]
+  },
+  "selection_operator": {
+    "archives": [
+      {
+        "shape_seed": 1337,
+        "in_scope": [
+          "webrce",
+          "jenkins",
+          "db",
+          "weblogic"
+        ],
+        "peak_diversity": 0.1667,
+        "final_diversity": 0.1667,
+        "gens": 4
+      },
+      {
+        "shape_seed": 7,
+        "in_scope": [
+          "webrce",
+          "weblogic"
+        ],
+        "peak_diversity": 0.1481,
+        "final_diversity": 0.1481,
+        "gens": 4
+      }
+    ],
+    "archives_differ": true,
+    "finding": "floor shape is associated with a different evolved archive",
+    "power": "UNDERPOWERED at demo N: few generations and the two shapes are seed-varied ranges, so shape is confounded with range. A real result needs the preregistered multi-seed, fixed-range-shape protocol (docs/PREREGISTRATION.md). Reported as a null, not curve-fit."
+  },
+  "tail_pipeline": {
+    "severity_series": [
+      1.0,
+      3.0
+    ],
+    "tail": {
+      "label": "live duel harm (kill-chain depth x crown)",
+      "n": 2,
+      "underpowered": true,
+      "alpha": null,
+      "x_min": null,
+      "n_tail": 0,
+      "credible_alpha": false,
+      "xi_gpd": null,
+      "n_exc": 0,
+      "note": "n<20 or <3 distinct values: too few points for any tail claim"
+    }
+  },
+  "reflexivity_svg": "docs/l5_reflexivity_curve.svg",
+  "note": "instrument run on LIVE logs; the selection-operator and tail results are honest demo-N nulls, power-labeled \u2014 significance is compute-gated."
+}

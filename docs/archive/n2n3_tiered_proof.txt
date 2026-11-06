@@ -1,0 +1,17 @@
+=== gate_N2N3-tiered: full ultra->super->nano swarm on booted EquifaxSmall ===
+sensor_recall=0.75 seed=26  (no fallback path in swarm.live_swarm.tier_call)
+
+--- FRONTIER loops (autonomous red+blue on booted range) ---
+  red reached_crown=True crowns=['customer_db_0', 'customer_db_1', 'customer_db_2'] turns=11
+  blue contained=['customer_db_0'] turns=8
+
+--- verify_live_run (brief §2 counted-run gate) ---
+  1 LLM drove it       PASS         llm_picks=19 vetoes=0 silent_fallback=0 degrade_events=0 completion_tok=11654
+  2 Real range         PASS         fidelity real=21 SIMULATED=0
+  3 Discovery-driven   PASS         cascade discovery-driven: recon-first + every offensive target discovered-first (4 hosts)
+  4 Gate pressed       PASS         llm_origin_blocks=4 strong_llm_oos=0 (weak) sim_probe_blocks=0 oos_executed=0
+  5 Chain verified     PASS         chain_verified=True
+  6 Spine law          PASS         spine_violations=0 (confirm->mutate clean)
+  VERDICT: PASS
+  reverify_floor: chain_verified=True oos_executed=0
+  counted log: docs/counted_seed_26.jsonl

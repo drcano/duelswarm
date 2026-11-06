@@ -1,0 +1,31 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -r requirements.txt
+      # Every tracked .py must at least COMPILE on 3.10/3.11/3.12 (brief v3 A6/I6: a nested-quote
+      # f-string legal only from 3.12 shipped to public main and broke the matrix). This runs on each
+      # matrix Python, so a 3.12-only syntax regression fails 3.10 and 3.11 here.
+      - name: Compile every tracked Python file (syntax on this matrix Python)
+        run: git ls-files '*.py' | xargs -r python -m py_compile
+      # The canonical smoke set (2026-10-27 one-engine consolidation): gate + the one red/blue
+      # engine, the folded engine selftest (scripts/prove_engine.py), the mediation oracle, the
+      # falsification battery, and the cold floor re-derivation — no Docker, no API key. This is a
+      # SMOKE check, not the done-signal; readiness is re-derivation at source.
+      - name: Canonical self-checks (make test)
+        run: make test PYTHON=python
+      # Fresh-clone cold re-derivation (brief v3 A6/I5: `make verify` must pass from a clean checkout
+      # with no pre-generated fixture — the wall fixture is folded inside `verify`). No Docker/API key.
+      - name: Cold re-derivation (make verify)
+        run: make verify PYTHON=python

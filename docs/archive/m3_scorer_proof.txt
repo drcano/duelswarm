@@ -1,0 +1,34 @@
+=== gate_M3: per-flag heterogeneous-value scorer ===
+
+--- (1) heterogeneous flag values recorded in range.topology ---
+  value classes present : ['CARD_TABLE', 'CREDS_DUMP', 'PII_TABLE']
+  values (ascending)    : [10000.0, 100000.0, 1000000.0]
+  spread (max/min)      : 100x  (>= 10x => heterogeneous: True)
+
+--- (2) per-flag partial credit, re-derived from the log ---
+  stop=None: captures=3/3, harm=1110000, coverage=1.00
+  stop=('exfiltrate', 'customer_db_2'): captures=2/3, harm=1100000, coverage=0.67
+  stop=('exfiltrate', 'customer_db_1'): captures=1/3, harm=1000000, coverage=0.33
+  distinct capture counts across the three episodes: [1, 2, 3] (expect {1,2,3}: True)
+
+--- (3) harm series fed to the tail pipeline (fixes the bounded-tail null) ---
+  harm series                : [1110000.0, 1100000.0, 1000000.0]
+  spread                     : 110000 (real variance: True)
+  tail_report.alpha          : None
+  tail_report.underpowered   : True  n_tail=0  credible_alpha=False
+  NOTE: tail REPORT is honestly underpowered at demo-N; what M3 ships is the
+  METRIC — a severity axis that spans the VALUE_CLASSES catalog (unbounded in
+  principle), not the bounded-by-construction harm proxy of the significance run.
+
+--- (4) blue scoring symmetry (per-flag protection + availability) ---
+  stop=None: protected=0/3, protected_value=0, availability=0.0
+  stop=('exfiltrate', 'customer_db_2'): protected=1/3, protected_value=10000, availability=0.0
+  stop=('exfiltrate', 'customer_db_1'): protected=2/3, protected_value=110000, availability=0.0
+  per-flag conservation (captured + protected == n_flags): True
+
+--- (5) floor=0 BOTH actors every episode, chain verified ---
+  stop=None: chain_verified=True, oos_executed=0
+  stop=('exfiltrate', 'customer_db_2'): chain_verified=True, oos_executed=0
+  stop=('exfiltrate', 'customer_db_1'): chain_verified=True, oos_executed=0
+
+RESULT: PASS — per-flag partial-credit scorer; heterogeneous flag values spanning orders of magnitude; harm series fed to the tail pipeline has real variance (the bounded-tail null is METRIC-level resolved; the tail SIGNIFICANCE remains honestly N-gated); blue symmetry; floor=0 both actors every episode.

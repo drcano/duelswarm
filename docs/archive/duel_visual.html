@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>DUELSWARM</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#ccc;font-family:'JetBrains Mono','Fira Code','SF Mono',monospace;overflow:hidden;width:100vw;height:100vh}
+.container{display:flex;height:100%;gap:0}
+.panel{flex:1;padding:16px 14px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.red-panel{border-right:1px solid #1a1a2e}
+.blue-panel{border-left:1px solid #1a1a2e}
+.center{width:120px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:#0d0d18}
+.header{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.red-panel .header{color:#ff4444}
+.blue-panel .header{color:#4488ff}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.red-panel .dot{background:#ff4444;box-shadow:0 0 8px #ff4444}
+.blue-panel .dot{background:#4488ff;box-shadow:0 0 8px #4488ff}
+.dot.pulse{animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.events{flex:1;overflow:hidden;display:flex;flex-direction:column;gap:4px;font-size:10px}
+.event{padding:5px 8px;border-radius:4px;opacity:0;transform:translateY(8px);transition:all .3s ease}
+.event.show{opacity:1;transform:translateY(0)}
+.red-panel .event{background:rgba(255,68,68,.08);border-left:2px solid #ff4444}
+.blue-panel .event{background:rgba(68,136,255,.08);border-left:2px solid #4488ff}
+.event .label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.red-panel .event .label{color:#ff6666}
+.blue-panel .event .label{color:#6699ff}
+.event .text{color:#999;font-size:9.5px;line-height:1.3}
+.event .tag{display:inline-block;padding:1px 5px;border-radius:2px;font-size:8px;font-weight:600;margin-left:4px}
+.red-panel .tag{background:rgba(255,68,68,.15);color:#ff8888}
+.blue-panel .tag{background:rgba(68,136,255,.15);color:#88aaff}
+.tag.block{background:rgba(255,68,68,.3);color:#ff4444}
+.mem{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;min-height:22px}
+.mem-pill{padding:2px 6px;border-radius:3px;font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;opacity:0;transition:all .4s ease}
+.mem-pill.show{opacity:1}
+.mem-pill.done{background:rgba(0,200,80,.15);color:#00c850}
+.mem-pill.active{background:rgba(255,200,0,.15);color:#ffc800;animation:pulse 1s ease-in-out infinite}
+.mem-pill.blocked{background:rgba(255,68,68,.15);color:#ff4444}
+.mem-pill.pending{background:rgba(100,100,100,.1);color:#555}
+.center-line{position:absolute;top:60px;bottom:60px;left:50%;width:1px;background:linear-gradient(to bottom,transparent,#333,transparent)}
+.center .title{font-size:9px;color:#555;letter-spacing:2px;text-transform:uppercase;writing-mode:vertical-rl;text-orientation:mixed;position:absolute;top:50%;transform:translateY(-50%)}
+.arrow{position:absolute;width:24px;height:2px;opacity:0;transition:opacity .3s}
+.arrow.red-arrow{background:linear-gradient(to right,#ff4444,transparent);right:50%;animation:flyR 1.5s ease-out}
+.arrow.blue-arrow{background:linear-gradient(to left,#4488ff,transparent);left:50%;animation:flyL 1.5s ease-out}
+@keyframes flyR{0%{transform:translateX(30px);opacity:0}30%{opacity:1}100%{transform:translateX(0);opacity:0}}
+@keyframes flyL{0%{transform:translateX(-30px);opacity:0}30%{opacity:1}100%{transform:translateX(0);opacity:0}}
+.round-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:12px;background:rgba(150,100,255,.15);color:#aa88ff;letter-spacing:1px;margin-bottom:8px;opacity:0;transition:all .4s}
+.round-badge.show{opacity:1}
+.outcome{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(10,10,18,.98),transparent);padding:16px;text-align:center;opacity:0;transition:all .6s}
+.outcome.show{opacity:1}
+.outcome h3{font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px}
+.outcome .stats{font-size:10px;color:#888}
+.outcome .contained{color:#00c850;font-weight:700}
+.banner{position:absolute;top:0;left:0;right:0;height:36px;background:linear-gradient(90deg,rgba(255,68,68,.08),rgba(100,60,200,.08),rgba(68,136,255,.08));display:flex;align-items:center;justify-content:center;gap:12px;z-index:10;border-bottom:1px solid #1a1a2e}
+.banner .logo{font-size:13px;font-weight:700;letter-spacing:4px;background:linear-gradient(90deg,#ff4444,#aa66ff,#4488ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.banner .sub{font-size:8px;color:#555;letter-spacing:2px;text-transform:uppercase}
+.main{margin-top:36px;display:flex;height:calc(100% - 36px)}
+</style>
+</head><body>
+
+<div class="banner">
+  <span class="logo">DUELSWARM</span>
+  <span class="sub">Autonomous Red vs Blue Cyber Duel</span>
+</div>
+
+<div class="main">
+<div class="panel red-panel">
+  <div class="header"><span class="dot pulse" id="red-dot"></span> RED SWARM</div>
+  <div class="events" id="red-events"></div>
+  <div class="mem" id="red-mem"></div>
+</div>
+
+<div class="center">
+  <div class="center-line"></div>
+  <div id="round-badges" style="display:flex;flex-direction:column;gap:6px;align-items:center;z-index:1"></div>
+</div>
+
+<div class="panel blue-panel">
+  <div class="header"><span class="dot" id="blue-dot"></span> BLUE SWARM</div>
+  <div class="events" id="blue-events"></div>
+  <div class="mem" id="blue-mem"></div>
+</div>
+</div>
+
+<div class="outcome" id="outcome">
+  <h3>Duel Complete</h3>
+  <div class="stats">
+    45 events &bull; chain <span class="contained">VERIFIED</span> &bull;
+    threat <span class="contained">CONTAINED</span>
+  </div>
+</div>
+
+<script>
+const EVENTS = [
+  {t:300,  side:'round', text:'ROUND 1 — RED SWARM'},
+  {t:600,  side:'red', label:'RECON', text:'Fingerprinting Apache Struts 2.3.x', tag:'T1595'},
+  {t:1000, side:'red', label:'EXPLOIT', text:'Jakarta Multipart OGNL injection → RCE', tag:'CVE-2017-5638'},
+  {t:1500, side:'red', label:'SHELL', text:'uid=0(root) — root access achieved', tag:'T1059'},
+  {t:2000, side:'red', label:'DISCOVERY', text:'Config files, credentials, network topology', tag:'T1083'},
+  {t:2500, side:'red', label:'CREDENTIAL HARVEST', text:'5 credential sets from env, tomcat, config', tag:'T1003'},
+  {t:3000, side:'red', label:'LATERAL MOVE', text:'Pivoting to database via harvested creds', tag:'T1021'},
+  {t:3400, side:'red', label:'EXFILTRATE', text:'7 sensitive files staged for extraction', tag:'T1005'},
+  {t:3800, side:'red', label:'PERSISTENCE', text:'Cron beacon + webshell + SSH backdoor', tag:'T1053'},
+  {t:4200, side:'red', label:'EVASION', text:'Clear logs, bash history, timestomp', tag:'T1070'},
+  // red memory
+  {t:4500, side:'red-mem', phases:{recon:'done',exploit:'done',persist:'done',lateral:'done',exfil:'done',evasion:'done'}},
+  // blue swarm starts
+  {t:5000, side:'round', text:'ROUND 1 — BLUE SWARM'},
+  {t:5400, side:'blue', label:'DETECT', text:'OGNL injection in Content-Type header', tag:'D3-NTA'},
+  {t:5700, side:'blue', label:'DETECT', text:'ProcessBuilder RCE invocation found', tag:'D3-NTA'},
+  {t:6000, side:'blue', label:'ANALYZE', text:'Kill chain reconstructed: 15 ATT&CK techniques', tag:'D3-DA'},
+  {t:6400, side:'blue', label:'INTEL', text:'CVE-2017-5638 — CVSS 10.0 — critical RCE', tag:'NVD'},
+  {t:6800, side:'blue', label:'FORENSICS', text:'18 IOCs, 5 YARA rules, 3 Suricata sigs', tag:'D3-DA'},
+  {t:7200, side:'blue', label:'DECEIVE', text:'Honeytoken planted at /tmp/.db_backup_creds', tag:'D3-DE'},
+  {t:7600, side:'blue', label:'CONTAIN', text:'Network disconnect — threat isolated', tag:'D3-OTF'},
+  // blue memory
+  {t:7900, side:'blue-mem', phases:{detect:'done',analyze:'done',intel:'done',forensics:'done',deceive:'done',contain:'done'}},
+  // adaptive round
+  {t:8500, side:'round', text:'ROUND 2 — ADAPTIVE'},
+  {t:8900, side:'red', label:'REPLAN', text:'Primary target contained. Pivoting to decoy...', tag:'ADAPT'},
+  {t:9300, side:'red', label:'GATE BLOCK', text:'Decoy is out-of-scope — attack denied', tag:'BLOCKED', blocked:true},
+  {t:9700, side:'round', text:'RESOLUTION'},
+  {t:10200, side:'outcome'},
+];
+
+let redCount = 0, blueCount = 0;
+
+function addEvent(side, label, text, tag, blocked) {
+  const container = document.getElementById(side + '-events');
+  const div = document.createElement('div');
+  div.className = 'event';
+  let tagHtml = tag ? `<span class="tag${blocked?' block':''}">${tag}</span>` : '';
+  div.innerHTML = `<div class="label">${label}${tagHtml}</div><div class="text">${text}</div>`;
+  container.appendChild(div);
+  requestAnimationFrame(() => div.classList.add('show'));
+  // scroll to bottom
+  container.scrollTop = container.scrollHeight;
+  // keep max 7 visible
+  const evts = container.querySelectorAll('.event');
+  if (evts.length > 7) {
+    evts[0].style.opacity = '0';
+    evts[0].style.height = '0';
+    evts[0].style.padding = '0';
+    evts[0].style.margin = '0';
+    setTimeout(() => evts[0].remove(), 300);
+  }
+}
+
+function addRound(text) {
+  const container = document.getElementById('round-badges');
+  // remove old badges
+  container.querySelectorAll('.round-badge').forEach(b => {
+    b.style.opacity = '0';
+    setTimeout(() => b.remove(), 300);
+  });
+  const div = document.createElement('div');
+  div.className = 'round-badge';
+  div.textContent = text;
+  container.appendChild(div);
+  requestAnimationFrame(() => div.classList.add('show'));
+}
+
+function setMem(side, phases) {
+  const container = document.getElementById(side);
+  container.innerHTML = '';
+  for (const [name, status] of Object.entries(phases)) {
+    const pill = document.createElement('span');
+    pill.className = 'mem-pill';
+    pill.textContent = name;
+    container.appendChild(pill);
+    setTimeout(() => {
+      pill.classList.add('show', status);
+    }, 100);
+  }
+}
+
+function showOutcome() {
+  document.getElementById('outcome').classList.add('show');
+  document.getElementById('red-dot').classList.remove('pulse');
+  document.getElementById('blue-dot').classList.remove('pulse');
+}
+
+// activate blue dot when blue starts
+function activateBlue() {
+  document.getElementById('red-dot').classList.remove('pulse');
+  document.getElementById('blue-dot').classList.add('pulse');
+}
+
+function activateRed() {
+  document.getElementById('red-dot').classList.add('pulse');
+  document.getElementById('blue-dot').classList.remove('pulse');
+}
+
+// schedule all events
+EVENTS.forEach(e => {
+  setTimeout(() => {
+    if (e.side === 'round') {
+      addRound(e.text);
+      if (e.text.includes('BLUE')) activateBlue();
+      else if (e.text.includes('RED') || e.text.includes('ADAPTIVE')) activateRed();
+    } else if (e.side === 'red-mem') {
+      setMem('red-mem', e.phases);
+    } else if (e.side === 'blue-mem') {
+      setMem('blue-mem', e.phases);
+    } else if (e.side === 'outcome') {
+      showOutcome();
+    } else {
+      addEvent(e.side, e.label, e.text, e.tag, e.blocked);
+    }
+  }, e.t);
+});
+</script>
+</body></html>

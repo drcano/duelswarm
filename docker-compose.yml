@@ -1,0 +1,125 @@
+# Cyber range — isolated sandbox (SPEC §4). Vulnerable-by-design hosts only;
+# nothing here ever touches a real external system.
+#
+# Scope:  struts + db + jenkins are IN the authorized scope.  mailserver, ldap,
+# decoy are OUT of scope — the authorization gate (swarm/gate.py) must block any
+# red action against them.
+#
+# Egress containment (F2) — the TOPOLOGY is the guarantee, not the gate parser:
+#   * `range` and `range_oos` are BOTH `internal: true`, so no container (in-scope
+#     or out) has a route to the Docker host or the open internet.
+#   * out-of-scope hosts live on `range_oos`, which the in-scope hosts don't join,
+#     so the entry can't reach them either.
+#   * published hosts (struts/jenkins) are ALSO on `ingress`, a bridge with IP
+#     masquerade DISABLED: Docker still DNATs host-port -> container (so a judge/
+#     attacker can reach them), but with no SNAT there is no return path for
+#     outbound traffic — reachability WITHOUT an egress route. Verified on a
+#     booted range: docs/external_egress_blocked_proof.txt.
+# The gate's static egress parser is now pure defense-in-depth.
+#
+# Phase 0a HARD-FLOOR POSTURE: every service merges `*hardfloor` below — the same
+# container-runtime hardening the generated ranges get from swarm/range_gen.host_posture()
+# (cap_drop ALL + a minimal cap_add that drops NET_RAW/MKNOD/SETFCAP, no-new-privileges,
+# resource ceilings). This keeps `make range-up`'s fixed range matching the live standup
+# path. host_posture() is the source of truth; if it changes, update this anchor to match.
+name: duelswarm-range
+
+x-hardfloor: &hardfloor
+  cap_drop: [ALL]
+  cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, FSETID, SETGID, SETUID, SETPCAP, NET_BIND_SERVICE, KILL, SYS_CHROOT, AUDIT_WRITE]
+  security_opt: ["no-new-privileges:true"]
+  mem_limit: 2g
+  pids_limit: 2048
+  cpus: 2.0
+
+networks:
+  range:
+    driver: bridge
+    internal: true            # in-scope segment: no egress to host/internet
+  range_oos:
+    driver: bridge
+    internal: true            # out-of-scope segment: isolated, no egress
+  ingress:
+    driver: bridge
+    driver_opts:
+      # DNAT ingress works; masquerade off => no SNAT => no egress route.
+      com.docker.network.bridge.enable_ip_masquerade: "false"
+
+services:
+  struts:
+    # Apache Struts 2 — S2-045 / CVE-2017-5638 (Jakarta Multipart OGNL RCE).
+    # Quick path: prebuilt public image below.
+    # Canonical source: Vulhub build context `vulhub/struts2/s2-045` — swap to
+    # `build:` against that dir once the range is confirmed exploitable.
+    <<: *hardfloor
+    image: piesecurity/apache-struts2-cve-2017-5638
+    platform: linux/amd64        # image is amd64; runs under emulation on arm64 hosts
+    container_name: range-struts
+    networks: [range, ingress]   # reachable on its published port; no egress
+    ports:
+      - "8080:8080"            # public-facing web host (red's entry point)
+    labels:
+      duelswarm.scope: "in"
+      duelswarm.role: "public-web"
+      duelswarm.cve: "CVE-2017-5638"
+
+  db:
+    # Backend DB host — the crown jewels. In scope (lateral-movement target).
+    # Not published to the host: reachable only across the range network,
+    # i.e. via a pivot from the struts host.
+    <<: *hardfloor
+    image: postgres:16-alpine
+    container_name: range-db
+    networks: [range]
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: s3cr3t-range-only   # lab-only; discovered during the duel
+      POSTGRES_DB: appdb
+    labels:
+      duelswarm.scope: "in"
+      duelswarm.role: "crown-jewels"
+
+  jenkins:
+    # CI/CD pipeline — in scope. Secondary pivot target after struts.
+    # Real enterprise ranges always have Jenkins; red uses cached creds.
+    <<: *hardfloor
+    image: jenkins/jenkins:lts-alpine
+    container_name: range-jenkins
+    networks: [range, ingress]   # reachable on its published port; no egress
+    ports:
+      - "8081:8080"
+    labels:
+      duelswarm.scope: "in"
+      duelswarm.role: "ci-cd"
+
+  mailserver:
+    # Corporate email — OUT of scope. Red will try to pivot here for
+    # credential phishing; gate blocks it. Enterprise realism.
+    <<: *hardfloor
+    image: nginx:alpine
+    container_name: range-mail
+    networks: [range_oos]
+    labels:
+      duelswarm.scope: "out"
+      duelswarm.role: "email-server"
+
+  ldap:
+    # Active Directory / LDAP — OUT of scope. Red will try to dump
+    # domain creds; gate blocks. Common APT pivot target.
+    <<: *hardfloor
+    image: nginx:alpine
+    container_name: range-ldap
+    networks: [range_oos]
+    labels:
+      duelswarm.scope: "out"
+      duelswarm.role: "directory-service"
+
+  decoy:
+    # Honeypot — OUT of scope. Red will probe; gate blocks.
+    <<: *hardfloor
+    image: nginx:alpine
+    container_name: range-decoy
+    networks: [range_oos]
+    labels:
+      duelswarm.scope: "out"
+      duelswarm.role: "decoy"

@@ -1,0 +1,24 @@
+=== gate_N3: sensor-only live blue on booted EquifaxSmall (fight + shift) ===
+pivot=webserver dbs=['customer_db_0', 'customer_db_1', 'customer_db_2']
+
+--- red: real cred_pivot to every db (prior successes) ---
+  red pivot customer_db_0: OK
+  red pivot customer_db_1: OK
+  red pivot customer_db_2: OK
+
+--- blue: sensor view recall=0.67 (<1.0, lossy); observed laterals=['customer_db_0', 'customer_db_1'] ---
+  blue contained (real cred revoke): ['customer_db_0', 'customer_db_1']
+
+--- headline: red re-pivots a CONTAINED db -> now FAILS ---
+  red re-pivot customer_db_0 post-containment: FAILED (expected)
+  red re-pivot customer_db_1 post-containment: FAILED (expected)
+
+--- blue: terrain-shift (rotate pivot credential) -> red's stolen key stale ---
+  rotated=['customer_db_2']; red pivot customer_db_2 with OLD key post-shift: FAILED (expected — key rotated)
+
+--- air-gap + floor (independent re-derivation) ---
+  sensor recall 0.67 < 1.0 (lossy, not oracle): True
+  blue read red's raw gate.allow: False (want False — sensor-only)
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — sensor-only blue on the booted range: a real containment makes red's prior pivot FAIL, a real credential-rotation shift makes the stolen key stale, the sensor stays lossy (<1.0), floor oos=0 both actors.

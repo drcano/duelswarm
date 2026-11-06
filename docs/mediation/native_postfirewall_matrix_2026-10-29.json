@@ -1,0 +1,58 @@
+{
+  "measured": {
+    "mail": {
+      "hosts": [
+        "decoy",
+        "ldap"
+      ],
+      "internet": false,
+      "host_gateway": false
+    },
+    "jenkins": {
+      "hosts": [
+        "db",
+        "struts"
+      ],
+      "internet": false,
+      "host_gateway": false
+    },
+    "decoy": {
+      "hosts": [
+        "ldap",
+        "mail"
+      ],
+      "internet": false,
+      "host_gateway": false
+    },
+    "db": {
+      "hosts": [
+        "jenkins",
+        "struts"
+      ],
+      "internet": false,
+      "host_gateway": false
+    },
+    "ldap": {
+      "hosts": [
+        "decoy",
+        "mail"
+      ],
+      "internet": false,
+      "host_gateway": false
+    },
+    "struts": {
+      "hosts": [
+        "db",
+        "jenkins"
+      ],
+      "internet": false,
+      "host_gateway": false
+    }
+  },
+  "violations": [],
+  "floor": {
+    "oos_tcp_reaches": [],
+    "internet_reaches": [],
+    "floor_holds": true
+  }
+}

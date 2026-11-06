@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use duelswarm in research, please cite it as below."
+title: "duelswarm — a sandboxed cyber range for studying adaptive AI attackers and defenders against a fixed rule enforcer"
+authors:
+  - family-names: "Cano"
+    given-names: "Dante"
+    email: "drcano@ucsd.edu"
+    affiliation: "University of California, San Diego"
+repository-code: "https://github.com/drcano/duelswarm"
+url: "https://github.com/drcano/duelswarm"
+version: "0.1.0"
+date-released: "2026-11-02"
+license: "MIT"
+keywords:
+  - "AI safety"
+  - "cybersecurity"
+  - "adversarial co-evolution"
+  - "pre-registered research"
+  - "authorization enforcement"
+abstract: >
+  duelswarm is a sandboxed cyber range in which two adaptive LLM agents (a red attacker and a blue
+  defender) run as co-evolving populations against a non-adaptive authorization enforcer and a
+  tamper-evident hash-chained log. The range exists to test four pre-registered falsifiable claims
+  about what a fixed rule enforcer does to a reflexively adapting adversary while a monitor sitting
+  at the same interface erodes against the same adversary. Every result is cold-re-derivable from
+  the raw chain by a party trusting neither agent.

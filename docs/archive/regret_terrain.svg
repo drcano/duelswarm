@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" font-family="sans-serif" font-size="12">
+<rect width="720" height="420" fill="white"/>
+<text x="360" y="22" text-anchor="middle" font-size="15" font-weight="bold">Regret keeps the terrain solvable; minimax drifts to unsolvable</text>
+<text x="360" y="40" text-anchor="middle" font-size="11" fill="#555">solvability = strong best-response oracle&#8217;s solve prob of the chosen range</text>
+<rect x="56" y="56.0" width="608" height="154.0" fill="#2ca02c" opacity="0.06"/>
+<line x1="56" y1="210.0" x2="664" y2="210.0" stroke="#2ca02c" stroke-dasharray="4 3" stroke-width="1"/>
+<text x="664" y="206.0" text-anchor="end" fill="#2ca02c" font-size="10">solvable band (&gt; 0.5)</text>
+<line x1="56" y1="364" x2="664" y2="364" stroke="#333"/>
+<line x1="56" y1="56" x2="56" y2="364" stroke="#333"/>
+<text x="48" y="60.0" text-anchor="end">1.0</text>
+<text x="48" y="368.0" text-anchor="end">0.0</text>
+<text x="360" y="404" text-anchor="middle">generation (generator reach widening, red improving)</text>
+<polyline points="56.0,56.1 142.9,56.4 229.7,58.2 316.6,67.0 403.4,105.6 490.3,101.6 577.1,117.5 664.0,181.4" fill="none" stroke="#2ca02c" stroke-width="2.5"/>
+<circle cx="56.0" cy="56.1" r="3" fill="#2ca02c"/>
+<circle cx="142.9" cy="56.4" r="3" fill="#2ca02c"/>
+<circle cx="229.7" cy="58.2" r="3" fill="#2ca02c"/>
+<circle cx="316.6" cy="67.0" r="3" fill="#2ca02c"/>
+<circle cx="403.4" cy="105.6" r="3" fill="#2ca02c"/>
+<circle cx="490.3" cy="101.6" r="3" fill="#2ca02c"/>
+<circle cx="577.1" cy="117.5" r="3" fill="#2ca02c"/>
+<circle cx="664.0" cy="181.4" r="3" fill="#2ca02c"/>
+<rect x="390" y="46" width="12" height="12" fill="#2ca02c"/><text x="406" y="56">regret (PAIRED) — stays solvable</text>
+<polyline points="56.0,56.1 142.9,56.4 229.7,57.4 316.6,59.4 403.4,62.3 490.3,76.8 577.1,81.6 664.0,112.2" fill="none" stroke="#1f77b4" stroke-width="2.5"/>
+<circle cx="56.0" cy="56.1" r="3" fill="#1f77b4"/>
+<circle cx="142.9" cy="56.4" r="3" fill="#1f77b4"/>
+<circle cx="229.7" cy="57.4" r="3" fill="#1f77b4"/>
+<circle cx="316.6" cy="59.4" r="3" fill="#1f77b4"/>
+<circle cx="403.4" cy="62.3" r="3" fill="#1f77b4"/>
+<circle cx="490.3" cy="76.8" r="3" fill="#1f77b4"/>
+<circle cx="577.1" cy="81.6" r="3" fill="#1f77b4"/>
+<circle cx="664.0" cy="112.2" r="3" fill="#1f77b4"/>
+<rect x="390" y="66" width="12" height="12" fill="#1f77b4"/><text x="406" y="76">learnability p(1-p)</text>
+<polyline points="56.0,56.1 142.9,56.4 229.7,58.2 316.6,67.0 403.4,105.6 490.3,210.0 577.1,314.4 664.0,349.4" fill="none" stroke="#d62728" stroke-width="2.5"/>
+<circle cx="56.0" cy="56.1" r="3" fill="#d62728"/>
+<circle cx="142.9" cy="56.4" r="3" fill="#d62728"/>
+<circle cx="229.7" cy="58.2" r="3" fill="#d62728"/>
+<circle cx="316.6" cy="67.0" r="3" fill="#d62728"/>
+<circle cx="403.4" cy="105.6" r="3" fill="#d62728"/>
+<circle cx="490.3" cy="210.0" r="3" fill="#d62728"/>
+<circle cx="577.1" cy="314.4" r="3" fill="#d62728"/>
+<circle cx="664.0" cy="349.4" r="3" fill="#d62728"/>
+<rect x="390" y="86" width="12" height="12" fill="#d62728"/><text x="406" y="96">minimax (hardest-first) — drifts unsolvable</text>
+</svg>

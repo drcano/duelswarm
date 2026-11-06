@@ -1,0 +1,9 @@
+=== Brick 2 proof: tiered blue that fights ===
+structure-beats-bytes: behavioral 8/8 vs regex 1/8
+fast-path law: blue_fast imports no router/llm
+seed=1337: mttd=13 mttc=4 inversion=False tdsr=1.0 sdr=0.0 survived=True
+seed=7: mttd=13 mttc=4 inversion=False tdsr=1.0 sdr=0.0 survived=True
+seed=3: mttd=25 mttc=4 inversion=False tdsr=1.0 sdr=0.0 survived=True
+seed=42: mttd=9 mttc=4 inversion=False tdsr=1.0 sdr=0.0 survived=True
+seed=100: mttd=21 mttc=4 inversion=False tdsr=1.0 sdr=0.0 survived=True
+RESULT: PASS — structure beats bytes; containment is a confirmed observable; MTTC real (no inversion); self-DoS penalized; floor at 0.

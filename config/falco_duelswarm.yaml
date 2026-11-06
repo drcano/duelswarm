@@ -1,0 +1,33 @@
+# duelswarm Falco rules — syscall-level ground truth for the hash-chained telemetry chain.
+# Falco (modern eBPF) captures the ACTUAL kernel events on the range containers, out-of-band
+# (neither red nor blue writes them), so red's claims can be corroborated against what the
+# system itself observed. These rules surface the two events the engagement log claims but
+# docker-logs alone cannot witness: the crown-secret READ (loot) and in-container shell execs
+# (the exploit's/pivot's processes). ATT&CK tags are carried through to the chain.
+
+- rule: Duelswarm Crown Jewel Read
+  desc: A process opened a duelswarm crown-jewel secret file — the actual loot read.
+  condition: (evt.type in (open, openat, openat2)) and (fd.name contains "/.crown_")
+  output: "Crown jewel file opened (file=%fd.name proc=%proc.name cmdline=%proc.cmdline container=%container.name)"
+  priority: WARNING
+  tags: [T1005, duelswarm, loot]
+
+- rule: Duelswarm Outbound Connect
+  desc: "An outbound TCP connect() from a range container — the kernel's own witness of an
+         actual network reach. Used by the H2 causal control; under the gate, red's attempt on
+         the reachable out-of-scope trap produces NO connect; with the gate off, the SAME attack
+         produces a connect to the trap IP (the floor is causally necessary, not incidental)."
+  condition: (evt.type=connect) and container and (fd.sip exists)
+  output: "Outbound connect (dst=%fd.sip dport=%fd.sport proc=%proc.name container=%container.name)"
+  priority: INFORMATIONAL
+  tags: [T1021, duelswarm, connect]
+
+- rule: Duelswarm Container Shell Exec
+  desc: A shell or common post-exploitation binary executed inside a range container — the
+        process-level trace of an exploit foothold or an earned-channel command.
+  condition: >
+    (evt.type in (execve, execveat)) and container
+    and (proc.name in (sh, bash, id, whoami, cat, uname, ssh, perl, python, python3, nc, ncat, wget, curl))
+  output: "Shell/tool exec in container (proc=%proc.name cmdline=%proc.cmdline parent=%proc.pname container=%container.name)"
+  priority: NOTICE
+  tags: [T1059, duelswarm, exec]

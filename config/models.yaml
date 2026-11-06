@@ -1,0 +1,49 @@
+# Model routing — ALL calls go through Nebius Token Factory (SPEC §2, §4).
+# Swap models here without touching code (judges reward config-driven selection).
+# Confirm exact IDs against GET /v1/models in the Token Factory console; the
+# Nano casing in particular varies across catalogs.
+#
+# CONFIRMED 2026-10-19 against live GET /v1/models + a 1-token probe per tier
+# (docs/model_catalog_probe_2026-10-19.txt): all three ids below are EXACT catalog
+# matches and each returned non-empty content. No drift. Re-confirm before any batch.
+
+provider:
+  base_url: https://api.tokenfactory.nebius.com/v1/
+  api_key_env: NEBIUS_API_KEY
+  timeout_s: 60        # per-request timeout (env NEBIUS_TIMEOUT_S overrides)
+  max_retries: 4       # SDK retries transient 429/5xx/timeout with backoff (env NEBIUS_MAX_RETRIES)
+
+tiers:
+  # max_tokens is a per-tier output budget (a FLOOR a caller may raise, never silently
+  # shrink). Reasoning tiers spend output on internal reasoning before emitting content,
+  # so ultra/super need generous budgets or they return empty; nano does not reason.
+  ultra:                                  # orchestration, multi-step planning
+    model: nvidia/Nemotron-3-Ultra-550b-a55b   # exact id from GET /v1/models (case-sensitive)
+    max_tokens: 12288
+  super:                                  # specialist agents
+    model: nvidia/nemotron-3-super-120b-a12b
+    max_tokens: 4096
+  nano:                                   # fast triage, ATT&CK/D3FEND tagging
+    model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+    max_tokens: 2048
+
+roles:                                    # role -> tier (see SPEC §4 table)
+  red.orchestrator: ultra
+  red.attack: super
+  blue.orchestrator: ultra
+  blue.detect: super
+  blue.triage: nano
+  overseer: ultra                         # authorizing officer (manipulation theater, F2)
+  red.negotiator: super                   # red's persuade-on-deny voice (F2)
+  red.recon: nano                         # fast recon scout + target ordering (make_llm_red_picker)
+  # red.reflector retired 2026-10-24 (Phase-6 tiering): the folded multi-role cascade's
+  # "specialist dissent" role has no live caller (the reflector_veto provenance tag is unrelated).
+
+# Frontier BENCHMARK ONLY — NOT submission-valid (submission must use Nebius +
+# Nemotron, above). `--provider anthropic` maps the same tiers onto Claude so we
+# can compare open vs frontier models from one harness.
+anthropic:
+  tiers:
+    ultra: claude-opus-5-5
+    super: claude-sonnet-5-5
+    nano: claude-haiku-5-5

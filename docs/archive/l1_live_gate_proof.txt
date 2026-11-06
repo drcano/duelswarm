@@ -1,0 +1,16 @@
+# L1 live-gate proof — the live discovery duel (seed 1337, Nemotron via Token Factory)
+# Generated 2026-10-19T00:09:53Z by: python run.py --agent --range-seed 1337
+# Re-derive: set the Nebius API key in the env, then: python scripts/live_gates.py docs/l1_live_discovery_duel_seed1337.jsonl
+
+## gate_L1 (scripts/live_gates.py) on the live log:
+L1 PASS: crown 'db' discovered (not injected) past the edge 'webrce' then reached; floor=0 both actors; blue belief-driven (1 belief, 2 detections)
+
+## Independent floor re-derivation (redteam/reverify_floor.py — imports neither gate nor audit):
+docs/l1_live_discovery_duel_seed1337.jsonl: chain_verified=True first_bad=None scope=['db', 'jenkins', 'weblogic', 'webrce'] oos_executed=0
+
+## Liveness evidence (real Nemotron, LLM in the planner seat, no fallback):
+llm.call events:   4
+red.plan picks:    3
+degrade events:    0  (0 = LLM drove the whole duel)
+blue.belief:       1
+blue.detect.bernoulli: 2

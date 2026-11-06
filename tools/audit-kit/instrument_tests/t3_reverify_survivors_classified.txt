@@ -1,0 +1,124 @@
+ORIGINAL: {'C1_oos_allow': (True, 1), 'C2_oos_allow_by_ip': (True, 1), 'C3_tampered': (False, 1), 'C4_oos_exfil': (True, 1), 'C5_roe_other_actor': (True, 1)}
+DANGER assign:EXEC:L23 collection emptied  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER assign:EXEC:L23 collection element 0 removed  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+benign assign:EXEC:L23 collection element 1 removed
+benign assign:EXEC:L23 collection element 2 removed
+benign assign:EXEC:L23 collection element 3 removed
+benign assign:EXEC:L23 collection element 4 removed
+benign assign:EXEC:L23 collection element 5 removed
+benign assign:EXEC:L23 collection element 6 removed
+benign assign:EXEC:L23 collection element 7 removed
+DANGER assign:EXEC:L23 collection element 8 removed  -> C4_oos_exfil: misses OOS ((True, 0))
+benign assign:EXEC:L23 collection element 9 removed
+benign assign:EXEC:L23 collection element 10 removed
+benign assign:EXEC:L23 collection element 11 removed
+benign assign:EXEC:L23 collection element 12 removed
+benign assign:EXEC:L23 collection element 13 removed
+benign assign:EXEC:L23 collection element 14 removed
+benign _destrip:L38 statement deleted (Return)
+benign _destrip:L38 return -> None
+benign _destrip:L38 IfExp condition negated
+benign canon:L42 statement deleted (Assign)
+benign canon:L43 statement deleted (Assign)
+benign canon:L47 statement deleted (If)
+benign canon:L48 statement deleted (If)
+benign canon:L50 statement deleted (If)
+benign canon:L51 statement deleted (Try)
+benign canon:L58 statement deleted (If)
+benign canon:L59 statement deleted (Return)
+benign canon:L47 statement deleted (Return)
+benign canon:L48 If condition negated
+benign canon:L48 statement deleted (Return)
+benign canon:L50 If condition negated
+benign canon:L50 statement deleted (Return)
+benign canon:L52 statement deleted (Assign)
+benign canon:L53 statement deleted (If)
+benign canon:L54 statement deleted (If)
+benign canon:L58 statement deleted (Return)
+benign canon:L59 return -> None
+benign canon:L43 boolop drop operand 1
+benign canon:L48 compare In->NotIn
+benign canon:L50 compare In->NotIn
+benign canon:L50 return -> None
+benign canon:L53 If condition negated
+benign canon:L53 statement deleted (Return)
+benign canon:L54 If condition negated
+benign canon:L54 statement deleted (Return)
+benign canon:L58 return -> None
+benign canon:L53 boolop And flipped
+benign canon:L53 boolop drop operand 0
+benign canon:L53 boolop drop operand 1
+benign canon:L53 return -> None
+benign canon:L54 boolop And flipped
+benign canon:L54 boolop drop operand 0
+benign canon:L54 boolop drop operand 1
+benign canon:L54 return -> None
+benign canon:L53 compare In->NotIn
+benign canon:L54 compare In->NotIn
+benign _ip2name:L68 statement deleted (If)
+benign _ip2name:L69 statement deleted (Continue)
+benign _ip2name:L71 statement deleted (If)
+benign _ip2name:L70 boolop drop operand 1
+benign _ip2name:L72 statement deleted (Continue)
+benign _ip2name:L74 boolop drop operand 1
+benign _ip2name:L77 boolop And flipped
+benign _ip2name:L77 boolop drop operand 0
+benign _ip2name:L77 boolop drop operand 1
+benign _ip2name:L70 boolop drop operand 1
+benign getscope:L83 statement deleted (If)
+benign getscope:L86 statement deleted (Return)
+benign getscope:L83 statement deleted (Return)
+benign getscope:L86 return -> None
+DANGER reverify:L93 statement deleted (For)  -> C3: tampered chain reported verified
+benign reverify:L107 statement deleted (Assign)
+benign reverify:L116 statement deleted (If)
+benign reverify:L127 statement deleted (Assign)
+DANGER reverify:L131 statement deleted (For)  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER reverify:L95 statement deleted (If)  -> C3: tampered chain reported verified
+benign reverify:L112 statement deleted (If)
+benign reverify:L117 statement deleted (Return)
+benign reverify:L133 statement deleted (If)
+benign reverify:L134 statement deleted (Assign)
+benign reverify:L145 statement deleted (If)
+DANGER reverify:L146 statement deleted (Expr)  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER reverify:L96 statement deleted (Assign)  -> C3: tampered chain reported verified
+benign reverify:L96 statement deleted (Break)
+benign reverify:L112 If condition negated
+benign reverify:L114 statement deleted (If)
+benign reverify:L117 return -> None
+benign reverify:L125 IfExp condition negated
+DANGER reverify:L133 If condition negated  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+benign reverify:L133 statement deleted (Continue)
+DANGER reverify:L145 If condition negated  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+benign reverify:L145 statement deleted (Continue)
+benign reverify:L? comprehension filter removed
+DANGER reverify:L95 boolop Or flipped  -> C3: tampered chain reported verified
+benign reverify:L95 boolop drop operand 0
+DANGER reverify:L95 boolop drop operand 1  -> C3: tampered chain reported verified
+benign reverify:L112 compare Eq->NotEq
+benign reverify:L114 If condition negated
+benign reverify:L115 statement deleted (Assign)
+benign reverify:L? comprehension filter removed
+DANGER reverify:L133 compare NotIn->In  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER reverify:L134 IfExp condition negated  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER reverify:L135 boolop Or flipped  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+DANGER reverify:L135 boolop drop operand 0  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+benign reverify:L135 boolop drop operand 1
+benign reverify:L136 boolop drop operand 1
+DANGER reverify:L145 boolop And flipped  -> C4_oos_exfil: misses OOS ((True, 0))
+benign reverify:L145 boolop drop operand 0
+DANGER reverify:L145 boolop drop operand 1  -> C4_oos_exfil: misses OOS ((True, 0))
+DANGER reverify:L128 boolop And flipped  -> C4_oos_exfil: misses OOS ((True, 0))
+DANGER reverify:L128 boolop drop operand 0  -> C4_oos_exfil: misses OOS ((True, 0))
+benign reverify:L128 boolop drop operand 1
+DANGER reverify:L136 compare In->NotIn  -> C1_oos_allow: misses OOS ((True, 0)); C2_oos_allow_by_ip: misses OOS ((True, 0)); C4_oos_exfil: misses OOS ((True, 0)); C5_roe_other_actor: misses OOS ((True, 0))
+benign reverify:L145 compare NotEq->Eq
+DANGER reverify:L145 compare In->NotIn  -> C4_oos_exfil: misses OOS ((True, 0))
+DANGER reverify:L128 compare Eq->NotEq  -> C4_oos_exfil: misses OOS ((True, 0))
+benign reverify:L113 boolop Or flipped
+benign reverify:L113 boolop drop operand 0
+benign reverify:L113 boolop drop operand 1
+benign reverify:L127 boolop Or flipped
+benign reverify:L127 boolop drop operand 0
+benign reverify:L127 boolop drop operand 1
+survivors=122 dangerous=23

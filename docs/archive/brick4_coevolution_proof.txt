@@ -1,0 +1,7 @@
+=== Brick 4 proof: two-sided cross-episode adaptation ===
+seed=1337: CVEs=3 red_adapted=True blue_adapted=True co_evolution=True | episodes(cve:mttd)= 9193:5 22205:5 10271:5 9193:1 22205:1 10271:1 | blue sped up CVE-2017-10271 5->1
+seed=7: CVEs=3 red_adapted=True blue_adapted=True co_evolution=True | episodes(cve:mttd)= 22205:5 23897:5 10271:5 22205:1 23897:1 10271:1 | blue sped up CVE-2017-10271 5->1
+seed=2: CVEs=2 red_adapted=True blue_adapted=True co_evolution=True | episodes(cve:mttd)= 22205:5 41773:5 22205:1 41773:1 22205:1 41773:1 | blue sped up CVE-2021-41773 5->1
+seed=42: CVEs=2 red_adapted=True blue_adapted=True co_evolution=True | episodes(cve:mttd)= 22205:5 10271:5 22205:1 10271:1 22205:1 10271:1 | blue sped up CVE-2017-10271 5->1
+seed=100: CVEs=5 red_adapted=True blue_adapted=True co_evolution=True | episodes(cve:mttd)= 9193:5 22205:5 23897:5 5638:5 10271:5 9193:1 | blue sped up CVE-2019-9193 5->1
+RESULT: PASS — red morphs across the CVE registry; blue pre-arms from persisted memory; co-evolution demonstrated both ways; gate flat at 0 every episode.

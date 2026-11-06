@@ -1,0 +1,22 @@
+=== gate_N1_recon: REAL connect-scan against booted EquifaxSmall ===
+topology=equifax_small pivot=webserver dbs=['customer_db_0', 'customer_db_1', 'customer_db_2'] decoy(oos)=decoy_portal
+
+--- 1. REAL scan from the attacker origin (range-attacker) ---
+  attacker -> webserver:22  open=True  (want True)
+  attacker -> customer_db_0:22  open=False  (want False — segmentation drops the route)
+  attacker -> customer_db_1:22  open=False  (want False — segmentation drops the route)
+  attacker -> customer_db_2:22  open=False  (want False — segmentation drops the route)
+
+--- 2. REAL scan from the pivot (range-webserver, multi-homed into db_net) ---
+  webserver -> customer_db_0:22  open=True  (want True)
+  webserver -> customer_db_1:22  open=True  (want True)
+  webserver -> customer_db_2:22  open=True  (want True)
+
+--- 3. scanning the decoy (out of scope) is GATE-BLOCKED ---
+  red scan decoy_portal: BLOCKED (no scan ran)
+
+--- 4. floor=0 both actors, independent auditor, on the committed boot log ---
+  reverify_floor(n1_recon_boot_log.jsonl): chain_verified=True oos_executed=0
+  7 recon discoveries, all fidelity=real source=tcp-connect: True
+
+RESULT: PASS — recon is REAL on booted EquifaxSmall: a real connect-scan finds the pivot open and the dbs open only via the pivot, segmentation drops the direct route, the decoy is gate-blocked, floor oos=0.

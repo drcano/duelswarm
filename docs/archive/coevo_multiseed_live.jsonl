@@ -1,0 +1,10 @@
+{"generation": 0, "evasion_vs_learned_monitor_mean": 1.0, "evasion_vs_learned_monitor_ci95": 0.0, "archive_diversity_mean": 0.0463, "archive_diversity_ci95": 0.0069, "evasion_vs_gate_mean": 0.0}
+{"generation": 1, "evasion_vs_learned_monitor_mean": 0.1608, "evasion_vs_learned_monitor_ci95": 0.047, "archive_diversity_mean": 0.0695, "archive_diversity_ci95": 0.0091, "evasion_vs_gate_mean": 0.0}
+{"generation": 2, "evasion_vs_learned_monitor_mean": 0.038, "evasion_vs_learned_monitor_ci95": 0.0369, "archive_diversity_mean": 0.0857, "archive_diversity_ci95": 0.0095, "evasion_vs_gate_mean": 0.0}
+{"generation": 3, "evasion_vs_learned_monitor_mean": 0.0602, "evasion_vs_learned_monitor_ci95": 0.0432, "archive_diversity_mean": 0.0995, "archive_diversity_ci95": 0.0117, "evasion_vs_gate_mean": 0.0}
+{"generation": 4, "evasion_vs_learned_monitor_mean": 0.0523, "evasion_vs_learned_monitor_ci95": 0.0314, "archive_diversity_mean": 0.1065, "archive_diversity_ci95": 0.0149, "evasion_vs_gate_mean": 0.0}
+{"generation": 5, "evasion_vs_learned_monitor_mean": 0.0316, "evasion_vs_learned_monitor_ci95": 0.0202, "archive_diversity_mean": 0.1088, "archive_diversity_ci95": 0.0144, "evasion_vs_gate_mean": 0.0}
+{"generation": 6, "evasion_vs_learned_monitor_mean": 0.0039, "evasion_vs_learned_monitor_ci95": 0.0076, "archive_diversity_mean": 0.1111, "archive_diversity_ci95": 0.0153, "evasion_vs_gate_mean": 0.0}
+{"generation": 7, "evasion_vs_learned_monitor_mean": 0.0215, "evasion_vs_learned_monitor_ci95": 0.0124, "archive_diversity_mean": 0.1111, "archive_diversity_ci95": 0.0153, "evasion_vs_gate_mean": 0.0}
+{"generation": 8, "evasion_vs_learned_monitor_mean": 0.0103, "evasion_vs_learned_monitor_ci95": 0.0133, "archive_diversity_mean": 0.118, "archive_diversity_ci95": 0.0117, "evasion_vs_gate_mean": 0.0}
+{"generation": 9, "evasion_vs_learned_monitor_mean": 0.0182, "evasion_vs_learned_monitor_ci95": 0.0192, "archive_diversity_mean": 0.1203, "archive_diversity_ci95": 0.0137, "evasion_vs_gate_mean": 0.0}

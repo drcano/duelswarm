@@ -1,0 +1,65 @@
+swarm/live_agent:330 real_struts_foothold._do run_effect[docker exec] governed=a
+      ungoverned caller: scripts/prove_e2e_broad:_gated_stage
+      ungoverned caller: swarm/live_agent:real_struts_foothold
+      ungoverned caller: swarm/live_lateral:_try_response_channel
+      ungoverned caller: swarm/live_pivot:cred_pivot
+      ungoverned caller: swarm/live_pivot:dc_auth
+      ungoverned caller: swarm/live_pivot:exfil
+      ungoverned caller: swarm/live_pivot:kerberoast
+      ungoverned caller: swarm/live_pivot:pass_the_hash
+      ungoverned caller: swarm/live_pivot:privesc
+      ungoverned caller: swarm/live_recon:reveal_real
+      ungoverned caller: swarm/live_red:_ffire_vector
+      ungoverned caller: swarm/live_red:_flat
+swarm/live_msf:33 _run run_effect[None] governed=None
+      ungoverned caller: scripts/host_egress_firewall:_exec
+      ungoverned caller: scripts/host_egress_firewall:_present
+      ungoverned caller: scripts/host_egress_firewall:down
+      ungoverned caller: scripts/host_egress_firewall:selftest
+      ungoverned caller: scripts/host_egress_firewall:up
+      ungoverned caller: scripts/host_egress_firewall:verify
+      ungoverned caller: scripts/prove_control_reasoning:main
+      ungoverned caller: scripts/prove_control_reasoning:main.<lambda@150>
+      ungoverned caller: scripts/prove_env_boundaries:_docker_available
+      ungoverned caller: scripts/prove_env_boundaries:_down_range
+      ungoverned caller: scripts/prove_env_boundaries:_up_range
+      ungoverned caller: scripts/prove_floor_causality:_access_log
+swarm/live_pivot:69 _ssh run_effect[docker exec] governed=b
+swarm/live_recon:33 _exec run_effect[docker exec] governed=None
+      ungoverned caller: scripts/mediation/reachability_probe:_has_bash
+      ungoverned caller: scripts/mediation/reachability_probe:_l3_pingable
+      ungoverned caller: scripts/mediation/reachability_probe:_tcp_reaches
+      ungoverned caller: scripts/mediation/reachability_probe:measure
+      ungoverned caller: scripts/vet_pool:probe_jenkins
+      ungoverned caller: scripts/vet_pool:probe_postgres
+      ungoverned caller: swarm/blue_contain:_pids_matching
+      ungoverned caller: swarm/blue_contain:close_vector
+      ungoverned caller: swarm/blue_contain:remove_foothold
+      ungoverned caller: swarm/live_recon:scan_many
+      ungoverned caller: swarm/live_red:own_ips
+      ungoverned caller: swarm/live_red:own_subnets
+swarm/live_red:180 _exec run_effect[docker exec] governed=None
+      ungoverned caller: scripts/mediation/reachability_probe:_has_bash
+      ungoverned caller: scripts/mediation/reachability_probe:_l3_pingable
+      ungoverned caller: scripts/mediation/reachability_probe:_tcp_reaches
+      ungoverned caller: scripts/mediation/reachability_probe:measure
+      ungoverned caller: scripts/vet_pool:probe_jenkins
+      ungoverned caller: scripts/vet_pool:probe_postgres
+      ungoverned caller: swarm/blue_contain:_pids_matching
+      ungoverned caller: swarm/blue_contain:close_vector
+      ungoverned caller: swarm/blue_contain:remove_foothold
+      ungoverned caller: swarm/live_recon:scan_many
+      ungoverned caller: swarm/live_red:own_ips
+      ungoverned caller: swarm/live_red:own_subnets
+swarm/live_red:306 fast_web_sweep run_effect[docker exec] governed=None
+      ungoverned caller: swarm/live_red:recon_from
+swarm/live_red:337 _docker_sh._sh run_effect[docker exec] governed=None
+      ungoverned caller: scripts/vet_pool:_boot
+      ungoverned caller: scripts/vet_pool:_build
+      ungoverned caller: scripts/vet_pool:_exec
+      ungoverned caller: scripts/vet_pool:_http_code
+      ungoverned caller: scripts/vet_pool:_running
+      ungoverned caller: scripts/vet_pool:_teardown
+      ungoverned caller: scripts/vet_pool:probe_jenkins
+      ungoverned caller: scripts/vet_pool:probe_weblogic
+total sinks swarm+scripts: 71; agent-module sinks: 7

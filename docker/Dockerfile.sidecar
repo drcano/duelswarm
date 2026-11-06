@@ -1,0 +1,7 @@
+# Sidecar for the live MSF path (swarm/msf.py Pymetasploit3Backend).
+# Runs on the internal range_live bridge (no internet), so pymetasploit3 is
+# baked at build time. The repo is mounted at /duelswarm at run time.
+FROM python:3.14-slim
+RUN pip install --no-cache-dir pymetasploit3==1.0.6
+WORKDIR /duelswarm
+ENV PYTHONPATH=/duelswarm

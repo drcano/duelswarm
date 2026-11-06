@@ -1,0 +1,17 @@
+# L3 real-beacon proof — state advances only on a real implant callback (Incalmo check_new_agents)
+# Generated 2026-10-19T00:32:23Z by: python run.py --agent --range-seed 1337 --real-beacon
+# Re-derive: python -c "from scripts.live_gates import gate_L3; print(gate_L3('docs/l3_real_beacon_duel_seed1337.jsonl').line())"
+
+## gate_L3 on the live booted log:
+L3 PASS: 1 foothold(s) confirmed by a REAL beacon (e.g. range-db @ 10.11.0.2, id=d600765c58d3d84d); claim-without-beacon did not mutate state; floor=0; chain verified
+
+## Real foothold confirmation — observer=collector (NOT the acting agent), fidelity=real, with the beacon source:
+  actor=collector confirms=foothold fidelity=real      beacon={'beacon_id': 'd600765c58d3d84d', 'container': 'range-db', 'ip': '10.11.0.2'}
+  actor=range     confirms=exfil    fidelity=SIMULATED beacon=None
+
+## Negative test (anti-hallucination) — a foothold claim with no matching implant beacon does NOT mutate state:
+   beacon.negative {'host': 'jenkins', 'mutated': False, 'note': 'claim with no matching implant beacon -> no state change', 'observed': False}
+
+## Independent floor re-derivation + spine law:
+docs/l3_real_beacon_duel_seed1337.jsonl: chain_verified=True first_bad=None scope=['db', 'jenkins', 'weblogic', 'webrce'] oos_executed=0
+  spine violations: none (every mutation has a prior observer confirmation)

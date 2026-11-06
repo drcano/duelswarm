@@ -1,0 +1,15 @@
+# L5 tail pipeline at scale (n=64 deterministic episodes)
+# Re-derive: python scripts/instrument_live.py --tail-scale 64
+
+severity series (bounded harm proxy = kill-chain depth x crown):
+  n=64  distinct=4  min=5.0  max=11.0
+  underpowered=False  n_tail=49  credible_alpha=False
+  alpha=3.0  x_min=7.0  xi_gpd=None  n_exc=0
+  tail_kind=None
+
+READING: with n now adequate to estimate (unlike the demo-N n=2), the harm proxy shows a
+FINITE upper endpoint (xi<=0 / bounded support) — it is NOT heavy-tailed, BY CONSTRUCTION:
+the metric is capped by the host/technique catalog (the FALSIFICATION_REPORT's standing note).
+So the tail question is HARM-METRIC-gated, not compute-gated: a genuinely heavy tail would
+need a richer, unbounded severity (real $ loss / cascading impact), which this range does not
+model. Reported honestly as a null with its true cause, not curve-fit.

@@ -1,0 +1,17 @@
+=== gate_V3-realCVE: real CVE-2017-5638 S2-045 OGNL RCE on the booted range ===
+booted piesecurity/apache-struts2-cve-2017-5638 as range-struts (amd64 emulated); waiting for Struts...
+  Struts up and exploitable at t~6s
+
+--- 1. real initial access: S2-045 OGNL RCE, confirmed by container state ---
+  RCE id output: 'uid=0(root) gid=0(root) groups=0(root)'
+  foothold mutated=True  confirm fidelity=real  marker_confirmed=True
+
+--- 2. real file read over the RCE (real container content) ---
+  cat /etc/passwd -> root line present: True  (first line: 'root:x:0:0:root:/root:/bin/bash')
+
+--- 3. out-of-scope exploit still gate-blocked ---
+  red exploit decoy: BLOCKED
+
+--- 4. floor: chain_verified=True oos_executed=0 ---
+
+RESULT: PASS — initial access is REAL: a genuine CVE-2017-5638 S2-045 OGNL RCE ran as root on the real Struts container, confirmed by the container's own marker state (not the scorer), a real file read returned real content, the out-of-scope exploit stayed gate-blocked, floor oos=0. SIMULATED->REAL on initial access.

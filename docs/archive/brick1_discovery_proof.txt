@@ -1,0 +1,7 @@
+=== Brick 1 proof: objective-blind, discovery-driven red ===
+seed=1337: first_action=('recon', 'webrce') crown_discovered=['gitlab'] reached=True known=3 auditor:chain=True oos=0
+seed=7: first_action=('recon', 'webrce') crown_discovered=['jenkins'] reached=True known=3 auditor:chain=True oos=0
+seed=3: first_action=('recon', 'struts') crown_discovered=['jenkins'] reached=True known=6 auditor:chain=True oos=0
+seed=42: first_action=('recon', 'struts') crown_discovered=['weblogic'] reached=True known=2 auditor:chain=True oos=0
+seed=100: first_action=('recon', 'struts') crown_discovered=['db'] reached=True known=5 auditor:chain=True oos=0
+RESULT: PASS — enumerate-first, discover-then-target, crown reached via the discovered path, red on its own infra, floor re-derives to 0.

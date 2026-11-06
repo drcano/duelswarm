@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" font-family="sans-serif" font-size="12">
+<rect width="720" height="440" fill="white"/>
+<text x="360" y="24" text-anchor="middle" font-size="15" font-weight="bold">Co-evolution vs the floor — measured, not stated</text>
+<line x1="56" y1="384" x2="664" y2="384" stroke="#333"/>
+<line x1="56" y1="56" x2="56" y2="384" stroke="#333"/>
+<text x="48" y="60.0" text-anchor="end">1.0</text>
+<text x="48" y="388.0" text-anchor="end">0.0</text>
+<text x="360" y="424" text-anchor="middle">generation</text>
+<polyline points="56.0,134.7 111.3,128.2 166.5,128.2 221.8,104.1 277.1,104.1 332.4,97.6 387.6,97.6 442.9,97.6 498.2,84.4 553.5,84.4 608.7,84.4 664.0,84.4" fill="none" stroke="#d62728" stroke-width="2"/>
+<circle cx="56.0" cy="134.7" r="3" fill="#d62728"/>
+<circle cx="111.3" cy="128.2" r="3" fill="#d62728"/>
+<circle cx="166.5" cy="128.2" r="3" fill="#d62728"/>
+<circle cx="221.8" cy="104.1" r="3" fill="#d62728"/>
+<circle cx="277.1" cy="104.1" r="3" fill="#d62728"/>
+<circle cx="332.4" cy="97.6" r="3" fill="#d62728"/>
+<circle cx="387.6" cy="97.6" r="3" fill="#d62728"/>
+<circle cx="442.9" cy="97.6" r="3" fill="#d62728"/>
+<circle cx="498.2" cy="84.4" r="3" fill="#d62728"/>
+<circle cx="553.5" cy="84.4" r="3" fill="#d62728"/>
+<circle cx="608.7" cy="84.4" r="3" fill="#d62728"/>
+<circle cx="664.0" cy="84.4" r="3" fill="#d62728"/>
+<rect x="420" y="46" width="12" height="12" fill="#d62728"/><text x="436" y="56">co-evolution best fitness</text>
+<polyline points="56.0,377.9 111.3,359.7 166.5,359.7 221.8,347.6 277.1,341.5 332.4,329.3 387.6,329.3 442.9,329.3 498.2,323.3 553.5,323.3 608.7,311.1 664.0,311.1" fill="none" stroke="#9467bd" stroke-width="2"/>
+<circle cx="56.0" cy="377.9" r="3" fill="#9467bd"/>
+<circle cx="111.3" cy="359.7" r="3" fill="#9467bd"/>
+<circle cx="166.5" cy="359.7" r="3" fill="#9467bd"/>
+<circle cx="221.8" cy="347.6" r="3" fill="#9467bd"/>
+<circle cx="277.1" cy="341.5" r="3" fill="#9467bd"/>
+<circle cx="332.4" cy="329.3" r="3" fill="#9467bd"/>
+<circle cx="387.6" cy="329.3" r="3" fill="#9467bd"/>
+<circle cx="442.9" cy="329.3" r="3" fill="#9467bd"/>
+<circle cx="498.2" cy="323.3" r="3" fill="#9467bd"/>
+<circle cx="553.5" cy="323.3" r="3" fill="#9467bd"/>
+<circle cx="608.7" cy="311.1" r="3" fill="#9467bd"/>
+<circle cx="664.0" cy="311.1" r="3" fill="#9467bd"/>
+<rect x="420" y="66" width="12" height="12" fill="#9467bd"/><text x="436" y="76">archive diversity (strategies speciating)</text>
+<polyline points="56.0,56.0 111.3,127.3 166.5,325.7 221.8,354.2 277.1,327.0 332.4,316.9 387.6,376.4 442.9,384.0 498.2,369.7 553.5,362.6 608.7,363.1 664.0,369.4" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+<circle cx="56.0" cy="56.0" r="3" fill="#ff7f0e"/>
+<circle cx="111.3" cy="127.3" r="3" fill="#ff7f0e"/>
+<circle cx="166.5" cy="325.7" r="3" fill="#ff7f0e"/>
+<circle cx="221.8" cy="354.2" r="3" fill="#ff7f0e"/>
+<circle cx="277.1" cy="327.0" r="3" fill="#ff7f0e"/>
+<circle cx="332.4" cy="316.9" r="3" fill="#ff7f0e"/>
+<circle cx="387.6" cy="376.4" r="3" fill="#ff7f0e"/>
+<circle cx="442.9" cy="384.0" r="3" fill="#ff7f0e"/>
+<circle cx="498.2" cy="369.7" r="3" fill="#ff7f0e"/>
+<circle cx="553.5" cy="362.6" r="3" fill="#ff7f0e"/>
+<circle cx="608.7" cy="363.1" r="3" fill="#ff7f0e"/>
+<circle cx="664.0" cy="369.4" r="3" fill="#ff7f0e"/>
+<rect x="420" y="86" width="12" height="12" fill="#ff7f0e"/><text x="436" y="96">evasion vs learned monitor</text>
+<polyline points="56.0,220.0 111.3,384.0 166.5,384.0 221.8,384.0 277.1,384.0 332.4,384.0 387.6,384.0 442.9,384.0 498.2,384.0 553.5,384.0 608.7,384.0 664.0,384.0" fill="none" stroke="#7f7f7f" stroke-width="2"/>
+<circle cx="56.0" cy="220.0" r="3" fill="#7f7f7f"/>
+<circle cx="111.3" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="166.5" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="221.8" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="277.1" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="332.4" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="387.6" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="442.9" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="498.2" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="553.5" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="608.7" cy="384.0" r="3" fill="#7f7f7f"/>
+<circle cx="664.0" cy="384.0" r="3" fill="#7f7f7f"/>
+<rect x="420" y="106" width="12" height="12" fill="#7f7f7f"/><text x="436" y="116">scripted-red baseline (control)</text>
+<polyline points="56.0,384.0 111.3,384.0 166.5,384.0 221.8,384.0 277.1,384.0 332.4,384.0 387.6,384.0 442.9,384.0 498.2,384.0 553.5,384.0 608.7,384.0 664.0,384.0" fill="none" stroke="#2ca02c" stroke-width="3"/>
+<circle cx="56.0" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="111.3" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="166.5" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="221.8" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="277.1" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="332.4" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="387.6" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="442.9" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="498.2" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="553.5" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="608.7" cy="384.0" r="3" fill="#2ca02c"/>
+<circle cx="664.0" cy="384.0" r="3" fill="#2ca02c"/>
+<rect x="420" y="126" width="12" height="12" fill="#2ca02c"/><text x="436" y="136">evasion vs deterministic gate (the floor)</text>
+</svg>

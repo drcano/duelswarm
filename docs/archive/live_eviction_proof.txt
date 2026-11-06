@@ -1,0 +1,42 @@
+========================================================================
+DUELSWARM — LIVE EVICTION PROOF (real Docker)
+host:    MacBookPro.lan (macOS-26.6.2-arm64-arm-64bit-Mach-O)
+date:    2026-10-18T06:26:53+00:00
+seed:    1337
+result:  PROVEN
+floor:   oos_executed=0 (out-of-scope reaches observed: 0)
+========================================================================
+
+Tiered eviction (RED_BLUE_DOCTRINE B2/B3/B4), each step on real state:
+
+  [PASS] range booted (seed=1337, entry=range-webrce, oos=['decoy', 'ldap']); err=None
+  [PASS] [boot] floor holds: oos unreachable from entry (oos_executed=0); saw []
+  [PASS] entry service listening on :8080 (exploitable)
+  [PASS] red foothold: marker planted
+  [PASS] red foothold: persistence on disk (implant + authorized_keys)
+  [PASS] red foothold: beacon process running [346]
+  [PASS] [post-foothold] floor holds: oos unreachable from entry (oos_executed=0); saw []
+  [PASS] blue REMOVE: beacon killed [346] -> none left
+  [PASS] blue REMOVE: beacon process is gone (verified)
+  [PASS] blue REMOVE: on-disk persistence SURVIVES (Remove != eradication)
+  [PASS] [post-remove] floor holds: oos unreachable from entry (oos_executed=0); saw []
+  [PASS] red RE-ESTABLISHES from surviving persistence: beacon back [727]
+  [PASS] [post-reestablish] floor holds: oos unreachable from entry (oos_executed=0); saw []
+  [PASS] blue RESTORE: container recreated from image (python:3.12-slim on env-boundary-1337_range)
+  [PASS] blue RESTORE: on-disk persistence CLEARED by rollback
+  [PASS] blue RESTORE: no beacon in the fresh container
+  [PASS] blue RESTORE: red cannot re-establish from persistence (implant gone)
+  [PASS] [post-restore] floor holds: oos unreachable from entry (oos_executed=0); saw []
+  [PASS] pre-close: service back up after rollback
+  [PASS] blue CLOSE-VECTOR: service killed [7]
+  [PASS] blue CLOSE-VECTOR: entry service no longer accepts connections (re-exploit fails)
+  [PASS] [post-close-vector] floor holds: oos unreachable from entry (oos_executed=0); saw []
+
+Interpretation:
+  REMOVE kills the live foothold but leaves on-disk persistence, so red
+  re-establishes (process-kill != eviction). RESTORE (known-good rollback)
+  discards the writable layer and clears persistence; CLOSE-VECTOR stops the
+  entry service so re-exploit fails. The Docker/Linux segmentation keeps the
+  out-of-scope host unreachable from the entry at every stage: the floor
+  (oos_executed=0) is independent of which eviction tier blue chose.
+========================================================================

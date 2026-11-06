@@ -1,0 +1,10 @@
+=== H2 causal control: the floor is WHAT blocks OOS (not incidental) ===
+
+--- reachable trap (L3-reachable, out of scope) ---
+  GATE-ON (cooperative, gate-mediated): BLOCKED (default-deny)
+  GATE-OFF (uninstrumented, real adversary): trap REACHED = True
+--- isolated OOS (separate segment, no route) ---
+  GATE-OFF (uninstrumented): isolated REACHED = False
+  telemetry (targets' own access logs): trap received GET = True; isolated received GET = False
+
+RESULT: PASS — the floor is CAUSAL, not incidental: on the REACHABLE out-of-scope trap the gate default-denies the cooperative attempt (blocked=True) while the uninstrumented attack DOES reach it (reached=True, trap's own log GET=True) => the GATE is necessary there; on the ISOLATED out-of-scope host the same attack cannot reach (reached=False, its own log GET=False) => TOPOLOGY is sufficient there. Two legs, witnessed by the targets' own records.

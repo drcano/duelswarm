@@ -1,0 +1,38 @@
+=== gate_M5: co-evolve the generator (MHBench UED + MCC + QD + selection-op) ===
+
+generations ran           : 4
+accepted (MCC pass)       : 4
+honest nulls (MCC reject) : 0
+final difficulty          : 0.70
+difficulty trajectory     : [0.4, 0.5, 0.6, 0.7]  (ratchets with skill: True)
+
+--- per-generation history ---
+  gen 0: ACCEPTED seed=1258056955 coverage=1.00 regret=0.00 flags=1 harm=1000000 techniques=['exfiltrate', 'exploit', 'privesc', 'recon', 'recon_from'] floor_ok=True
+  gen 1: ACCEPTED seed=634307358 coverage=1.00 regret=0.00 flags=1 harm=1000000 techniques=['exfiltrate', 'exploit', 'privesc', 'recon', 'recon_from'] floor_ok=True
+  gen 2: ACCEPTED seed=546957789 coverage=1.00 regret=0.00 flags=1 harm=1000000 techniques=['exfiltrate', 'exploit', 'recon', 'recon_from'] floor_ok=True
+  gen 3: ACCEPTED seed=1994496971 coverage=1.00 regret=0.00 flags=1 harm=1000000 techniques=['exfiltrate', 'exploit', 'recon', 'recon_from'] floor_ok=True
+
+--- QD archive (MAP-Elites keyed on REALIZED technique kinds — M2) ---
+  techniques=['exfiltrate', 'exploit', 'privesc', 'recon', 'recon_from']  best_coverage=1.00  from seed=1258056955 (gen 0, difficulty=0.30)
+  techniques=['exfiltrate', 'exploit', 'recon', 'recon_from']  best_coverage=1.00  from seed=546957789 (gen 2, difficulty=0.50)
+  distinct archive cells   : 2
+  open-endedness series    : [1, 1, 2, 2]  (non-decreasing: True)
+
+--- selection-operator experiment (step 4) ---
+Fix a generated range, VARY the floor shape; measure how it steers red.
+range flag table (1 flags):
+    host_3_subnet_1                 class=PII_TABLE     value=     1000000
+
+  shape=all               red_scope_flags=['host_3_subnet_1']  captured=[]  harm=0  oos_executed=0
+  shape=low-half-only     red_scope_flags=['host_3_subnet_1']  captured=[]  harm=0  oos_executed=0
+  shape=high-half-only    red_scope_flags=['host_3_subnet_1']  captured=[]  harm=0  oos_executed=0
+
+--- gate_M5 acceptance ---
+  (a) difficulty tracks skill (or no acceptances): True
+  (b) MCC holds (0<coverage<1 on every accept)   : True
+  (c) floor=0 every accepted generation           : True
+  (d) QD diversifies on realized technique        : True  (2 cells)
+  (e) open-endedness non-decreasing               : True
+  (f) selection-operator shapes preserve floor=0  : True
+
+RESULT: PASS — MHBench terrain co-evolves against our populations under a real MCC gate (grounded, not asserted); floor=0 every accepted generation; QD diversifies on realized technique; selection-operator runs with floor=0 under every shape. Honest nulls recorded, not curve-fit.

@@ -1,0 +1,57 @@
+{
+  "duelswarm/httpd-cve-2021-41773:pinned": {
+    "boot_sha256": "d92bbe09201ba425d0a1bf8aa1fd5c5a86562c0f7af3dc901c873619887e36c4",
+    "cve": "CVE-2021-41773",
+    "exploit_sha256": "e08cf46599fc69765aae8952aa87daf11b9efa1b03362af04e44f17809e5d534",
+    "kind": "rce",
+    "note": "path-traversal -> mod_cgi RCE; id returned in HTTP response",
+    "proof_hash": "f3607334bfefa434de90609d89c35775c0e9ef0a0b8ee422d0721abd18f5bbb1",
+    "proof_seq": 8,
+    "vetted_at": 1792203879.2894158,
+    "vulhub_commit": "8fd63916f7a8711e2e01dda0d27237e4d6175d38"
+  },
+  "piesecurity/apache-struts2-cve-2017-5638": {
+    "boot_sha256": "bf836ec7c9c8d323384cc648f6c62fd1543431704f2d82c8c735d8e5d29196ef",
+    "cve": "CVE-2017-5638",
+    "exploit_sha256": "9d2b1186ccaab65db616b09e5711ce10f5f518c65019922d1b3c58a5d8ce1daa",
+    "kind": "rce",
+    "note": "S2-045 OGNL RCE over HTTP; id ran as container root",
+    "proof_hash": "54025016e0735221764311b0e768b6fcc99c68bae5f2a48e776bf7df0d070197",
+    "proof_seq": 2,
+    "vetted_at": 1792203267.300811,
+    "vulhub_commit": null
+  },
+  "postgres:16-alpine": {
+    "boot_sha256": "0b87ea195833e3b9b5736833cae01667cb2e1ee056b5f5bc09f567d6cea9ce6e",
+    "cve": "CVE-2019-9193",
+    "exploit_sha256": "8e58718a1067d38003d477ec8277758f2e886cc7f2e1b9ba96f02706fca5436c",
+    "kind": "rce",
+    "note": "COPY FROM PROGRAM superuser OS-command exec (id as postgres uid)",
+    "proof_hash": "a762508ba48b1ec90f494f640facc1ca3ab34372589d10c935e60a55db76b8cf",
+    "proof_seq": 5,
+    "vetted_at": 1792203267.584047,
+    "vulhub_commit": null
+  },
+  "vulhub/gitlab:13.10.1": {
+    "boot_sha256": "e5cb6cc826d00826460d18aa5b76f78b3fc40e50e7fffee3958c7e8ed717bfaf",
+    "cve": "CVE-2021-22205",
+    "exploit_sha256": "3df0418c2d4045aa1887d30a921731898d210915886797462ca849d4b204635e",
+    "kind": "rce",
+    "note": "MSF exploit/multi/http/gitlab_exif_rce grounded in-session",
+    "proof_hash": "bbc52ae02ef68fa81148c2a7793809430422f6a5af79428a10e3c8c4725ad3de",
+    "proof_seq": 2,
+    "vetted_at": 1792620110.6332023,
+    "vulhub_commit": null
+  },
+  "vulhub/weblogic:10.3.6.0-2017": {
+    "boot_sha256": "94af40c842e1036d029ac56e992d6eb91a1e00dd54272a7e7c63cdf1b8b5982f",
+    "cve": "CVE-2017-10271",
+    "exploit_sha256": "9d2b1186ccaab65db616b09e5711ce10f5f518c65019922d1b3c58a5d8ce1daa",
+    "kind": "rce",
+    "note": "wls-wsat XMLDecoder SOAP RCE (blind); id via marker-file side effect",
+    "proof_hash": "dab0a67434d52fef0be56885b751b54f9f21172027fe3a983cd85bbf7ad84c09",
+    "proof_seq": 17,
+    "vetted_at": 1792225522.522283,
+    "vulhub_commit": "8fd63916f7a8711e2e01dda0d27237e4d6175d38"
+  }
+}

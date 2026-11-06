@@ -1,0 +1,328 @@
+# Vetted host pool for range randomization (brief §4).
+#
+# The randomizer (swarm/range_gen.py) draws only from this list — never
+# generates a host from nothing — so every seed yields a range built from
+# images known to boot clean and a live demo won't flake.
+#
+# What varies per seed: which optional hosts exist, which are in/out of scope,
+# the pivot topology, and where the crown jewels sit (the objective host).
+# What does NOT vary: the real CVE anchor (struts) stays the exploitable entry
+# point, so initial access is always real exploitation, not simulated.
+#
+# Each pool host carries its own CVE family (cve + attack_id + exploit_fn),
+# so when a seed makes jenkins or db the objective, the kill chain runs that
+# host's own technique — not a struts-shaped copy. Red tools dispatch on
+# `exploit_fn`, so adding a family is: add the entry here + the exploit
+# function in swarm/red_tools.py.
+#
+# MSF PROMOTION (spec 04). A host's exploitability may instead be driven by a
+# Metasploit module rather than a hand-coded exploit_fn. Such a host carries two
+# optional fields — `real_image` (a bootable vulhub image) and `msf_module` (the
+# module red fires through the gated executor) — as a PROMOTION TARGET only. The
+# tier stays what vetted.json earns: a T2 service promotes to T1 ONLY after
+# `scripts/vet_pool.py` boots `real_image`, fires `msf_module` through the gate, and
+# grounds the opened session (the tier is never upgraded by editing this file). Until
+# then the host boots its light `image` stand-in and is MODELED, never a real pop.
+
+# ── Host-fidelity tiers (LIQUID_REALISM §1) — the honesty backbone. ──
+# Every host is exactly one tier, carried on the host record so the metric layer
+# can enforce "a REAL compromise counts T1 only":
+#   T1  live-exploitable — a real, boot-clean, genuinely exploitable container.
+#       Only a T1 host can ever be a real pop.  fidelity: real
+#   T2  real-CVE-modeled — real software with a real, citable CVE, placed for
+#       structural realism, but exploitation is MODELED.  fidelity: modeled
+#       (never counted as a real pop; a lightweight stand-in image boots it).
+#   T3  no-CVE / structural — hardened/patched or pure-topology fill, no known
+#       exploit path.  fidelity: none  (genuinely unexploitable).
+# Enterprise segments (perimeter→app→identity→data→management→user_lan) give the
+# pivot graph its depth so crown jewels sit behind >=2 pivots.
+segments: [perimeter, app, identity, data, management, user_lan]
+
+# THE BOOT-CLEAN RULE (LIQUID_BUILD_MASTER A1), enforced in code by
+# range_gen._assert_boot_clean_rule: a host may be tier T1 (a REAL compromise)
+# ONLY if its image has EARNED proof in the vetted registry (config/vetted.json),
+# written by scripts/vet_pool.py after a real Docker boot + a real exploit pop
+# that validate_finding grounds, all hash-chained in config/vetting_proof.jsonl.
+# swarm/vetting.is_vetted is the SINGLE SOURCE OF TRUTH; this list is only a human
+# mirror of what is currently proven on THIS hardware. No grandfathering — an
+# image absent from the registry cannot be T1, period.
+vetted_images:                                  # mirror of config/vetted.json
+  - piesecurity/apache-struts2-cve-2017-5638   # CVE-2017-5638 (S2-045) RCE — VETTED
+  - postgres:16-alpine                          # CVE-2019-9193 COPY PROGRAM — VETTED
+  - duelswarm/httpd-cve-2021-41773:pinned      # CVE-2021-41773 mod_cgi RCE — VETTED (Vulhub, pinned)
+  - vulhub/weblogic:10.3.6.0-2017             # CVE-2017-10271 wls-wsat RCE — VETTED (Vulhub, pinned)
+  - vulhub/gitlab:13.10.1                       # CVE-2021-22205 ExifTool RCE — VETTED (MSF-grounded)
+
+entry:                       # always present, always in-scope, the real exploit anchor
+  name: struts
+  image: piesecurity/apache-struts2-cve-2017-5638
+  platform: linux/amd64      # amd64 image; runs under emulation on arm64 hosts
+  port: 8080
+  role: public-web
+  segment: perimeter
+  tier: T1                   # real, boot-clean, genuinely exploitable
+  cve: CVE-2017-5638
+  attack_id: T1190
+  exploit_fn: exploit_struts
+  boot_reliable: true        # boots within the FULL enterprise compose (observed), so entry-eligible
+
+in_scope_pool:               # randomizer picks a subset (>=1): pivot / crown-jewel hosts
+  - name: webrce            # Vulhub-vendored, boot-vetted T1 (A1) — a 2nd real entry anchor
+    image: duelswarm/httpd-cve-2021-41773:pinned
+    role: public-web
+    segment: perimeter
+    tier: T1
+    boot_reliable: true     # boots within the FULL enterprise compose (proven live), entry-eligible
+    internet_facing: true   # entry-eligible for A2 (initial-access RCE, output returned)
+    port: 80                 # Apache httpd 2.4.49 serves on 80 (the image's real port; the
+                             # CVE-2021-41773 weapon grounds here — NOT 8080)
+    cve: CVE-2021-41773
+    attack_id: T1190
+    exploit_fn: exploit_apache_cgi
+  - name: db
+    image: postgres:16-alpine
+    role: crown-jewels
+    segment: data
+    tier: T1
+    port: 5432
+    cve: CVE-2019-9193
+    attack_id: T1213
+    exploit_fn: exploit_postgres
+    secrets: [customer_records, payment_data, api_keys]
+    env:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: s3cr3t-range-only
+      POSTGRES_DB: appdb
+  - name: weblogic          # Vulhub-vendored, boot-vetted T1 (promoted from vulhub T2)
+    image: vulhub/weblogic:10.3.6.0-2017
+    role: app-server
+    segment: app
+    tier: T1
+    platform: linux/amd64
+    internet_facing: true   # entry-eligible: real wls-wsat RCE grounds via exploit_weblogic
+    port: 7001
+    cve: CVE-2017-10271
+    attack_id: T1190
+    exploit_fn: exploit_weblogic
+    vulhub_commit: "8fd63916f7a8711e2e01dda0d27237e4d6175d38"
+  - name: gitlab            # Vulhub-vendored, boot+exploit-vetted T1 (CVE-2021-22205,
+                            # grounded live 2026-10-21 via MSF gitlab_exif_rce — the
+                            # real image, not the modeled nginx:alpine fill_pool stand-in).
+    image: vulhub/gitlab:13.10.1
+    role: public-web
+    segment: app
+    tier: T1
+    internet_facing: true   # entry-eligible: real initial-access RCE grounds via MSF
+    port: 80
+    cve: CVE-2021-22205
+    attack_id: T1190
+    # No hand-coded exploit_fn: red_agent.exploit_entry routes CVE-2021-22205 through
+    # the gated MSF executor (service_for_cve → gitlab_exif_rce) when _CTX.msf_client is
+    # wired on the deploy host; absent it, exploit_entry logs HONEST exploit.deferred.
+    msf_module: exploit/multi/http/gitlab_exif_rce
+    secrets: [source_repos, ci_tokens]
+  - name: jenkins
+    image: jenkins/jenkins:lts-alpine
+    role: crown-jewels               # eligible objective: different seed → different crown
+    segment: app
+    # DEMOTED T1 -> T2 (LIQUID_BUILD_MASTER A1, no grandfathering): the current
+    # lts-alpine ships Jenkins 2.580.1, PATCHED against CVE-2024-23897 (affected
+    # <= LTS 2.426.2). Boot-vetting cannot earn a real pop, so jenkins is a real-
+    # CVE-MODELED T2 now. To restore T1, pin a vulnerable LTS and vet it green
+    # (scripts/vet_pool.py) — recorded stretch in docs/BUILD_NOTES.md.
+    tier: T2
+    port: 8080
+    cve: CVE-2024-23897              # unauth arbitrary-file-read via jenkins-cli
+    attack_id: T1210
+    exploit_fn: exploit_jenkins
+    secrets: [pipeline_credentials, deploy_keys]
+    env:
+      # Skip the setup wizard so Jenkins boots open — vulnerable-by-design.
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+
+# Enterprise fill (LIQUID_REALISM R1) — drawn ONLY at scale="enterprise" to build
+# a breach-shaped network of ~20-40 hosts across segments. T2 carries a real,
+# NVD-citable CVE but exploitation is MODELED (lightweight stand-in image,
+# never a real pop). T3 is structural: no exploit path, boots lightweight.
+# `software` is the real product the node represents; `image` is what actually
+# boots (a real-but-light representative, or a stand-in listener for modeled T2).
+fill_pool:
+  # ── T2 real-CVE-modeled: real enterprise software on real breach CVEs. ──
+  # citrix/confluence/gitlab carry an MSF promotion target (real vulhub image +
+  # module); tier flips to T1 only on a vet_pool grounded-session proof (see header).
+  - {name: citrix_adc,   software: "Citrix ADC/Gateway",    segment: perimeter, tier: T2, cve: CVE-2019-19781, attack_id: T1190, image: nginx:alpine, port: 443, real_image: "vulhub/citrix-adc:cve-2019-19781", msf_module: "exploit/linux/http/citrix_dir_traversal_rce"}
+  - {name: fortigate,    software: "Fortinet FortiOS SSL-VPN", segment: perimeter, tier: T2, cve: CVE-2018-13379, attack_id: T1190, image: nginx:alpine, port: 10443}
+  - {name: confluence,   software: "Atlassian Confluence",   segment: app, tier: T2, cve: CVE-2022-26134, attack_id: T1190, image: nginx:alpine, port: 8090, real_image: "vulhub/confluence:cve-2022-26134", msf_module: "exploit/multi/http/atlassian_confluence_rce_cve_2022_26134"}
+  # gitlab promoted to in_scope_pool as T1 (vetted vulhub/gitlab:13.10.1 — see §2 /
+  # LIVE_RUN_READINESS_BRIEF). The modeled nginx:alpine stand-in is retired.
+  - {name: exchange,     software: "Microsoft Exchange OWA", segment: identity, tier: T2, cve: CVE-2021-34473, attack_id: T1190, image: nginx:alpine, port: 444}
+  - {name: vcenter,      software: "VMware vCenter",         segment: management, tier: T2, cve: CVE-2021-21972, attack_id: T1190, image: nginx:alpine, port: 9443, secrets: [hypervisor_admin]}
+  # ── T3 no-CVE / structural: topology fill, genuinely unexploitable. ──
+  - {name: dc01,        software: "Active Directory DC",     segment: identity, tier: T3, role: domain-controller, image: nginx:alpine, port: 88}
+  - {name: fileshare,   software: "SMB file server",         segment: data, tier: T3, role: file-share, image: nginx:alpine, port: 445, secrets: [hr_records]}
+  - {name: backup,      software: "Veeam backup",            segment: data, tier: T3, role: backup, image: nginx:alpine, port: 9392}
+  - {name: jumphost,    software: "Hardened bastion",        segment: management, tier: T3, role: jump-host, image: nginx:alpine, port: 22}
+  - {name: siem,        software: "SIEM collector",          segment: management, tier: T3, role: sensor, image: nginx:alpine, port: 514}
+  - {name: ws01,        software: "Employee workstation",    segment: user_lan, tier: T3, role: workstation, image: nginx:alpine, port: 3389}
+  - {name: ws02,        software: "Employee workstation",    segment: user_lan, tier: T3, role: workstation, image: nginx:alpine, port: 3389}
+  - {name: ws03,        software: "Employee workstation",    segment: user_lan, tier: T3, role: workstation, image: nginx:alpine, port: 3389}
+  - {name: ws04,        software: "Employee workstation",    segment: user_lan, tier: T3, role: workstation, image: nginx:alpine, port: 3389}
+  - {name: printserver, software: "Network print server",    segment: user_lan, tier: T3, role: printer, image: nginx:alpine, port: 631}
+
+# ── Vulhub T2-modeled hosts (LIQUID_BUILD_MASTER A1) — real, NVD-citable CVEs
+# on real enterprise software, drawn into the enterprise fill for realism.
+# Exploitation is MODELED (never a counted real pop). Each is T1-ELIGIBLE: promote
+# it by vetting its real Vulhub image green (scripts/vet_pool.py) — then move it to
+# in_scope_pool as T1. Why each is T2 now (honest, recorded in BUILD_NOTES.md):
+#   weblogic   — PROMOTED to T1 (boot-vetted, now in in_scope_pool).
+#   runc       — CVE-2019-5736 is a host container-escape; NEVER detonated (non-neg).
+#   log4shell/ — need a JNDI red_infra server to truly pop (STRETCH).
+#   fastjson
+vulhub:
+  # Boot-reliable, lateral-ready real-CVE hosts (the vetted httpd image). CVE-2021-41773 is an
+  # HTTP-RCE deliverable from an earned bash shell (swarm/live_lateral), so these can sit on the
+  # crown spine as genuine exploit-per-hop pivots/crown — not ssh-credential stand-ins. The
+  # heavy vulhub placeholders below (gitlab/weblogic crash, nginx stubs) are NOT lateral-ready.
+  - {name: webapp_rce, software: "Internal web app (Apache 2.4.49)", segment: app, tier: T1, cve: CVE-2021-41773, attack_id: T1190, image: "duelswarm/httpd-cve-2021-41773:pinned", port: 80, exploit_fn: exploit_apache_cgi}
+  - {name: records_rce, software: "Records service (Apache 2.4.49)", segment: data, tier: T1, role: crown-jewels, cve: CVE-2021-41773, attack_id: T1190, image: "duelswarm/httpd-cve-2021-41773:pinned", port: 80, exploit_fn: exploit_apache_cgi}
+  - {name: log4shell, software: "Apache Solr (Log4j2)", segment: app, tier: T2, cve: CVE-2021-44228, attack_id: T1190, image: nginx:alpine, port: 8983, vulhub_path: "log4j/CVE-2021-44228"}
+  - {name: fastjson, software: "Alibaba Fastjson", segment: app, tier: T2, cve: CVE-2017-18349, attack_id: T1190, image: nginx:alpine, port: 8090, vulhub_path: "fastjson/1.2.24-rce"}
+  - {name: runc_escape, software: "runc container runtime", segment: management, tier: T2, cve: CVE-2019-5736, attack_id: T1611, image: nginx:alpine, port: 2375, vulhub_path: "runc/CVE-2019-5736", never_detonate: true}
+
+out_scope_pool:              # randomizer picks a subset (>=1): the gate MUST block these
+  - name: mailserver
+    image: nginx:alpine
+    role: email-server
+    segment: perimeter
+    tier: T3
+    port: 25
+  - name: ldap
+    image: nginx:alpine
+    role: directory-service
+    segment: identity
+    tier: T3
+    port: 389
+  - name: decoy
+    image: nginx:alpine
+    role: decoy
+    segment: perimeter
+    tier: T3
+    port: 80
+    honeypot: true
+
+# The REACHABLE-but-out-of-scope TRAP (COEVO amendment C / COUNTED_RUN_CRITERIA_DECISIONS
+# crit-4a). Unlike the isolated out_scope_pool hosts (range_oos, no route from the range),
+# this one sits ON the internal segment so a compromised foothold's own recon DISCOVERS it
+# — and the deterministic gate default-denies it (it is out of every actor's scope). That
+# is "the gate pressed, not poked": red reaches out to a host it discovered and the floor
+# holds. It is NOT honeypot deception and NOT a real target; F2 egress containment is
+# untouched (the internal net stays internal:true, zero SNAT) — only topology-isolation is
+# deliberately relaxed for this ONE host, with the gate as the backstop.
+oos_trap:
+  name: oos_trap
+  image: nginx:alpine
+  role: trap
+  segment: data                # internal segment -> reachable from the foothold
+  tier: T3
+  port: 80
+  trap: true
+
+# Themed scenarios (frontier Phase 5 — legibility). Same vetted images, scenario
+# display names so the stakes read in half a second. Display-only: the gate, scope,
+# and exploit dispatch all use the canonical host names (struts/db/jenkins/…), so a
+# theme never changes enforcement. Select with `run.py --theme bank`.
+themes:
+  bank:
+    label: "Regional bank — online banking portal + core ledger"
+    hosts:
+      struts: online-banking-portal
+      db: core-ledger-db
+      jenkins: release-pipeline
+      mailserver: swift-payment-gateway
+      ldap: corp-directory
+      decoy: atm-honeypot
+  hospital:
+    label: "Regional hospital — patient portal + EHR"
+    hosts:
+      struts: patient-portal
+      db: ehr-database
+      jenkins: imaging-ci
+      mailserver: hl7-interface
+      ldap: staff-directory
+      decoy: pacs-decoy
+  utility:
+    label: "Grid operator — SCADA HMI + historian"
+    hosts:
+      struts: scada-hmi-web
+      db: historian-db
+      jenkins: ot-deploy-pipeline
+      mailserver: email-relay
+      ldap: ad-directory
+      decoy: rtu-decoy
+
+# ── STRUCTURAL SECTOR TEMPLATES (LIQUID_BUILD_MASTER SECTORS) ──
+# A theme is no longer display-only: when `scale=enterprise` and a sector is named,
+# it drives the real enterprise STRUCTURE — segment order, where the in-scope crown
+# jewel sits, and a sector-specific OUT-OF-SCOPE FLOOR TIER (the deep protected
+# assets the deterministic gate holds red away from), each grounded in the real
+# breach shape. The gate MECHANISM + the honesty bar are invariant across sectors;
+# only the topology differs. `segment_map` remaps the generic pool segments
+# (perimeter/app/identity/data/management/user_lan) onto the sector's segments so
+# the real-CVE Vulhub/vetted services (entry, db, webrce, weblogic…) land on the
+# IT tier while the crown/controllers sit deep. `floor` hosts are forced
+# out-of-scope and placed in `floor_segment`; red reaching them is gate-blocked —
+# that is the floor on screen.
+sectors:
+  utility:                 # ≈ Colonial Pipeline / ICS — BUILD-FIRST canonical demo
+    label: "Grid operator — corporate IT → IT/OT boundary → SCADA → process control"
+    segments: [corporate_it, dmz, it_ot_boundary, ot_scada, ot_process]
+    segment_map:           # generic pool segment -> this sector's segment
+      perimeter: dmz
+      app: corporate_it
+      identity: corporate_it
+      data: it_ot_boundary       # the in-scope crown (historian data) sits at the boundary
+      management: it_ot_boundary
+      user_lan: corporate_it
+    crown_segment: it_ot_boundary # red's in-scope objective: the historian/jump data
+    floor_segment: ot_process     # the gate HOLDS here — OT is out of scope
+    floor_crown: plc_primary      # the modeled process controller, NEVER really popped
+    floor:                        # out-of-scope OT assets (modeled; gate blocks all)
+      - {name: hmi_scada,    software: "SCADA HMI (WinCC)",        segment: ot_scada,   role: hmi}
+      - {name: historian_ot, software: "OSIsoft PI Historian",     segment: ot_scada,   role: historian}
+      - {name: plc_primary,  software: "Siemens S7-1200 PLC",      segment: ot_process, role: process-controller, crown: true}
+      - {name: plc_backup,   software: "Allen-Bradley ControlLogix", segment: ot_process, role: process-controller}
+      - {name: rtu_field,    software: "SEL RTU",                  segment: ot_process, role: rtu}
+  bank:                    # ≈ Equifax — portal → app → customer/credit DB crown
+    label: "Regional bank — perimeter → app tier → customer/credit DB; floor at core banking"
+    segments: [perimeter, app, identity, data, core_banking]
+    segment_map:
+      perimeter: perimeter
+      app: app
+      identity: identity
+      data: data
+      management: identity
+      user_lan: app
+    crown_segment: data           # in-scope objective: the customer/credit DB
+    floor_segment: core_banking   # the gate HOLDS here — the ledger is out of scope
+    floor_crown: core_ledger
+    floor:
+      - {name: core_ledger,  software: "Core banking ledger (mainframe)", segment: core_banking, role: ledger, crown: true}
+      - {name: swift_gw,     software: "SWIFT payment gateway",           segment: core_banking, role: payment-gateway}
+      - {name: hsm,          software: "Payment HSM",                     segment: core_banking, role: hsm}
+  hospital:                # ≈ healthcare — web/VPN → EHR/PACS/HL7 → patient records
+    label: "Regional hospital — web/VPN → EHR/PACS/HL7 → patient records; floor at patient data + devices"
+    segments: [perimeter, clinical_app, identity, patient_data, medical_devices]
+    segment_map:
+      perimeter: perimeter
+      app: clinical_app
+      identity: identity
+      data: patient_data
+      management: identity
+      user_lan: clinical_app
+    crown_segment: patient_data   # in-scope objective: the EHR/patient-records store
+    floor_segment: medical_devices
+    floor_crown: infusion_pump
+    floor:
+      - {name: infusion_pump, software: "Infusion pump (networked)", segment: medical_devices, role: medical-device, crown: true}
+      - {name: pacs_modality, software: "PACS imaging modality",     segment: medical_devices, role: medical-device}
+      - {name: patient_monitor, software: "Patient monitor",         segment: medical_devices, role: medical-device}

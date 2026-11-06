@@ -1,0 +1,71 @@
+# Model lineage graph — operationalizes "genealogical proximity" for the
+# lineage-blindspot experiment (RESEARCH_BRIEF §3). This is the documented
+# provenance, NOT folklore: every non-trivial edge carries a `basis` citing the
+# model card / paper it comes from, and edges that depend on *which* checkpoint
+# we end up pulling from Token Factory are flagged `verify_at_resolve` — they are
+# re-checked against the resolved checkpoint's model card and pinned in the
+# hash-anchored panel addendum BEFORE any corpus data is collected.
+#
+# proximity(a, b) ∈ [0, 1]:  1.0 = same lineage, 0.0 = independently trained.
+# Symmetric. Unlisted pairs default to 0.0 (no documented shared provenance).
+
+# Family detection: a resolved model id is mapped to a family by the FIRST alias
+# that is a case-insensitive substring of the id. Order matters (most specific
+# first) so e.g. a DeepSeek-R1-Distill-Qwen checkpoint resolves per the selection
+# rule in PREREGISTRATION.md, not by accident of substring order.
+families:
+  nemotron:
+    vendor: NVIDIA
+    aliases: [nemotron]
+  deepseek:
+    vendor: DeepSeek
+    aliases: [deepseek]
+  qwen:
+    vendor: Alibaba
+    aliases: [qwen, qwq]
+  llama:
+    vendor: Meta
+    aliases: [llama, meta-llama]
+  mistral:
+    vendor: Mistral AI
+    aliases: [mistral, mixtral, ministral]
+  gemma:
+    vendor: Google
+    aliases: [gemma]       # resolved panel: Llama/Mistral are not served on this catalog
+  gptoss:
+    vendor: OpenAI
+    aliases: [gpt-oss, gpt_oss]   # OpenAI open-weight lineage
+  claude:
+    vendor: Anthropic
+    aliases: [claude]      # frontier monitor only (never an attacker)
+
+# Documented cross-family provenance. Same-family proximity (1.0) is implicit.
+relations:
+  - pair: [nemotron, llama]
+    proximity: 0.5
+    basis: >
+      Many NVIDIA Nemotron checkpoints are derived from / aligned on Meta Llama
+      bases (e.g. Llama-3.1-Nemotron-70B, the Minitron prune-distill line). The
+      Nemotron-3 MoE tiers used as the submission protagonist are NVIDIA-trained;
+      whether the open Nemotron *attacker* checkpoint we pull shares Llama weights
+      is checkpoint-dependent.
+    verify_at_resolve: true
+  - pair: [deepseek, qwen]
+    proximity: 0.0
+    basis: >
+      DeepSeek-R1 was distilled into Qwen bases (DeepSeek-R1-Distill-Qwen-*), which
+      would give proximity 0.4. RESOLVED 2026-10-15 to 0.0 for this panel: the
+      selected attacker is the NATIVE deepseek-ai/DeepSeek-V4 lineage, not a
+      Qwen-distill checkpoint, so no weights are shared. (Revert to 0.4 only if a
+      distill checkpoint is used.)
+    verify_at_resolve: resolved
+  - pair: [deepseek, llama]
+    proximity: 0.0
+    basis: >
+      DeepSeek-R1-Distill-Llama-* would give 0.4; RESOLVED to 0.0 (native DeepSeek-V4
+      selected, and no Llama is served on this catalog anyway).
+    verify_at_resolve: resolved
+  # In the RESOLVED panel (nemotron, qwen, deepseek, gemma, gptoss) every open
+  # lineage is independently trained, so cross-family proximity is 0.0 and the
+  # signal is the same-family diagonal (1.0). The Nemotron<->Llama edge is moot
+  # (no Llama served). gemma (Google) and gptoss (OpenAI) are independent.

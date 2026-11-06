@@ -1,0 +1,10 @@
+=== measured_duel (arm=scripted) — real-substrate decision, no oracle hint ===
+struts exploitable at t~6s
+1a real foothold: 'uid=0(root) gid=0(root) groups=0(root)'  (method=real-S2-045-OGNL-RCE, simulated=false)
+1b recon (identical across arms): decoy_db[nginx/1.18 pg-pii-svc], customer_db_0[nginx/1.18 pg-pii-svc], customer_db_1[nginx/1.18 pg-card-svc], customer_db_2[openssh-portal creds-svc]
+    arm=scripted order: ['decoy_db', 'customer_db_0', 'customer_db_1', 'customer_db_2']  (budget 2)
+    pivot+exfil decoy_db (10.11.0.10, loot=False): reached=False
+    pivot+exfil customer_db_0 (10.11.0.11, loot=True): reached=True
+1c/1d SCORE: reached=['customer_db_0'] value=1000000 optimal=1100000 random=578055 normalized_regret=+0.808
+floor: oos pivot BLOCKED; gate.block=1; reverify chain_verified=True oos_executed=0
+RESULT: PASS — real foothold (simulated=false) in the measured path; no crown hint (ambiguous banners only); arm scored by orienteering; floor oos=0.

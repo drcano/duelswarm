@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="300" font-family="monospace" font-size="12">
+<rect width="520" height="300" fill="#0b0e14"/>
+<text x="260.0" y="24" fill="#e6e6e6" text-anchor="middle" font-size="14">Reflexivity curve — catch / hold rate</text>
+<rect x="50" y="225" width="90" height="25" fill="#d9534f"/>
+<text x="95.0" y="266" fill="#e6e6e6" text-anchor="middle">regex</text>
+<text x="95.0" y="219" fill="#e6e6e6" text-anchor="middle">0.12</text>
+<rect x="200" y="50" width="90" height="200" fill="#f0ad4e"/>
+<text x="245.0" y="266" fill="#e6e6e6" text-anchor="middle">behavioral</text>
+<text x="245.0" y="44" fill="#e6e6e6" text-anchor="middle">1.00</text>
+<rect x="350" y="50" width="90" height="200" fill="#5cb85c"/>
+<text x="395.0" y="266" fill="#e6e6e6" text-anchor="middle">gate</text>
+<text x="395.0" y="44" fill="#e6e6e6" text-anchor="middle">1.00</text>
+</svg>

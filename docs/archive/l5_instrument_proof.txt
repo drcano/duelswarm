@@ -1,0 +1,41 @@
+# L5 instrument-at-demo-N proof — the measurement layer on LIVE logs (FRONTIER_MASTER §11)
+# Generated 2026-10-19T00:47:37Z by: python scripts/instrument_live.py
+# Re-derive: python -c "from scripts.live_gates import gate_L5; print(gate_L5('x').line())"
+
+## gate_L5:
+L5 PASS: instrument ran on live logs: governed legible / ungoverned not (gap 1.0); reflexivity regex 0.125 < behavioral 1.0 < gate 1.0; selection-operator produced 2 archives (floor shape is associated with a different evolved archive; underpowered); tail self-labeled (n=2, underpowered=True, credible_alpha=False) — Q1/tail are honest demo-N nulls
+
+## What ran on LIVE logs (docs/l1_live_discovery_duel_seed1337.jsonl, docs/l3_real_beacon_duel_seed1337.jsonl):
+## 1. Governed-vs-ungoverned control (headline): the live governed duel is LEGIBLE (floor=0 +
+##    clean spine); the neutered-floor control is NOT. Legibility gap = 1.0.
+## 2. Reflexivity curve (regex -> behavioral -> gate): catch/hold rate rises as the defender
+##    becomes LESS reflexive; the non-reflexive deterministic gate holds at 1.0 (docs/l5_reflexivity_curve.svg).
+## 3. Selection-operator experiment (Q1): two floor SHAPES -> two evolved MAP-Elites archives,
+##    compared. HONEST NULL: underpowered at demo N and shape is confounded with the seed-varied
+##    range; a real result needs the preregistered multi-seed fixed-shape protocol.
+## 4. Tail pipeline (Clauset alpha + EVT xi, powerlaw): runs and SELF-LABELS power.
+##    n is far below the Clauset n_tail>=50 bar -> alpha NOT credibly estimable. Underpowered by
+##    design at demo N; significance is the compute-gated step, not curve-fit here.
+
+## Full artifact: docs/l5_instrument_live.json
+{
+  "legibility_gap": 1.0,
+  "reflexivity": {
+    "regex": 0.125,
+    "behavioral": 1.0,
+    "gate": 1.0
+  },
+  "selection_operator_finding": "floor shape is associated with a different evolved archive",
+  "tail": {
+    "label": "live duel harm (kill-chain depth x crown)",
+    "n": 2,
+    "underpowered": true,
+    "alpha": null,
+    "x_min": null,
+    "n_tail": 0,
+    "credible_alpha": false,
+    "xi_gpd": null,
+    "n_exc": 0,
+    "note": "n<20 or <3 distinct values: too few points for any tail claim"
+  }
+}

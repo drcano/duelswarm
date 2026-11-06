@@ -1,0 +1,81 @@
+hypothesis target-string bypasses (declared target allowed though libc maps it to dc-01): 0
+hypothesis egress bypasses (command reaching dc-01 by a libc-valid spelling, not blocked): 546
+    ('ips', "bash -c 'cat </dev/tcp/0001214400013/22'")
+    ('ips', "bash -c 'cat </dev/tcp/001214400013/22'")
+    ('ips', "bash -c 'cat </dev/tcp/01214400013/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0x00A32000B/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0x00a32000b/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0x0A32000B/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0x0a32000b/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0xA32000B/22'")
+    ('ips', "bash -c 'cat </dev/tcp/0xa32000b/22'")
+    ('ips', "bash -c 'cat </dev/tcp/171048971/22'")
+    ('ips', 'curl 0001214400013')
+    ('ips', 'curl 0001214400013:80')
+    ('ips', 'curl 001214400013')
+    ('ips', 'curl 001214400013:80')
+    ('ips', 'curl 01214400013')
+    ('ips', 'curl 01214400013:80')
+    ('ips', 'curl 0x00A32000B')
+    ('ips', 'curl 0x00A32000B:80')
+    ('ips', 'curl 0x00a32000b')
+    ('ips', 'curl 0x00a32000b:80')
+    ('ips', 'curl 0x0A32000B')
+    ('ips', 'curl 0x0A32000B:80')
+    ('ips', 'curl 0x0a32000b')
+    ('ips', 'curl 0x0a32000b:80')
+    ('ips', 'curl 0xA32000B')
+
+FIXED TARGET TABLE (target | libc->dc-01 | names-scope | ips-scope | canonical)
+   '10.50.0.11'                       True  BLOCKED  BLOCKED  'dc-01'
+   '171048971'                        True  BLOCKED  BLOCKED  '171048971'
+   '0x0a32000b'                       True  BLOCKED  BLOCKED  '0x0a32000b'
+   '0xa32000b'                        True  BLOCKED  BLOCKED  '0xa32000b'
+   '012.062.0.013'                    True  BLOCKED  BLOCKED  '012.062.0.013'
+   '10.50.11'                         True  BLOCKED  BLOCKED  '10.50.11'
+   '10.3276811'                       True  BLOCKED  BLOCKED  '10.3276811'
+   '010.050.000.011'                  False BLOCKED  BLOCKED  '010.050.000.011'
+   '10.50.0.11.'                      False BLOCKED  BLOCKED  '10.50.0.11.'
+   ' 10.50.0.11'                      True  BLOCKED  BLOCKED  ' 10.50.0.11'
+   '10.50.0.11\n'                     True  BLOCKED  BLOCKED  '10.50.0.11\n'
+   'DC-01'                            False BLOCKED  BLOCKED  'DC-01'
+   'dc-01.'                           False BLOCKED  BLOCKED  'dc-01.'
+   'Range-dc-01'                      False BLOCKED  BLOCKED  'Range-dc-01'
+   '::ffff:10.50.0.11'                False BLOCKED  BLOCKED  '::ffff:10.50.0.11'
+   '::ffff:a32:b'                     False BLOCKED  BLOCKED  '::ffff:a32:b'
+   '[::ffff:10.50.0.11]'              False BLOCKED  BLOCKED  '[::ffff:10.50.0.11]'
+   'http://10.50.0.11:22'             False BLOCKED  BLOCKED  'dc-01'
+   'http://[::ffff:a32:b]/'           False BLOCKED  BLOCKED  'http://[::ffff:a32:b]/'
+   'root@10.50.0.11'                  False BLOCKED  BLOCKED  'root@10.50.0.11'
+   '10.50.0.11/32'                    False BLOCKED  BLOCKED  '10.50.0.11/32'
+   '10.50.0.0/24'                     False BLOCKED  BLOCKED  '10.50.0.0/24'
+   '10.50.0.11:22'                    False BLOCKED  BLOCKED  'dc-01'
+   'web01:22@10.50.0.11'              False ALLOWED  BLOCKED  'web01'
+   'web01:x@dc-01'                    False ALLOWED  BLOCKED  'web01'
+   '10.50.0.10:80@10.50.0.11'         False ALLOWED  ALLOWED  'web01'
+   'range-web01:1@10.50.0.11'         False ALLOWED  BLOCKED  'web01'
+   'web01:22 10.50.0.11'              False ALLOWED  BLOCKED  'web01'
+   'web01:@dc-01'                     False ALLOWED  BLOCKED  'web01'
+   'http://web01@10.50.0.11/'         False BLOCKED  BLOCKED  'dc-01'
+   'web01@10.50.0.11'                 False BLOCKED  BLOCKED  'web01@10.50.0.11'
+   'range-web01/../dc-01'             False BLOCKED  BLOCKED  'web01/../dc-01'
+   'web01#@10.50.0.11'                False BLOCKED  BLOCKED  'web01#@10.50.0.11'
+
+FIXED EGRESS TABLE (command | names-scope | ips-scope)
+   'curl 171048971'                                                            ALLOWED                        ALLOWED
+   'curl http://171048971/'                                                    ALLOWED                        ALLOWED
+   'curl 0x0a32000b'                                                           ALLOWED                        ALLOWED
+   'nc 0xa32000b 22'                                                           ALLOWED                        ALLOWED
+   'curl 10.50.11'                                                             BLOCKED['10.50.11']            BLOCKED['10.50.11']
+   'curl 012.062.0.013'                                                        BLOCKED['012.062.0.013']       BLOCKED['012.062.0.013']
+   'curl http://[::ffff:10.50.0.11]/'                                          ALLOWED                        ALLOWED
+   'curl http://[::ffff:a32:b]/'                                               ALLOWED                        ALLOWED
+   'nc 10.50.0.11 22'                                                          BLOCKED['10.50.0.11']          BLOCKED['10.50.0.11']
+   'ping -c1 10.50.0.11'                                                       ALLOWED                        ALLOWED
+   'python3 -c "import socket;socket.create_connection((\'10.50.0.11\',22))"'  ALLOWED                        ALLOWED
+   'H=10.50.0.11; curl http://$H/'                                             ALLOWED                        ALLOWED
+   'curl http://web01@10.50.0.11/'                                             BLOCKED['web01@10.50.0.11']    BLOCKED['web01', 'web01@10.50.0.11']
+   'curl -u web01:x 10.50.0.11'                                                ALLOWED                        BLOCKED['web01']
+   'curl $(printf 10.50.0.11)'                                                 ALLOWED                        ALLOWED
+   'nc dc-01 22'                                                               BLOCKED['dc-01']               BLOCKED['dc-01']
+   'curl DC-01'                                                                BLOCKED['dc-01']               BLOCKED['dc-01']

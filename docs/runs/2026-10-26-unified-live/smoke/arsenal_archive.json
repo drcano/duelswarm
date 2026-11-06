@@ -1,0 +1,20 @@
+{
+  "cells": 30,
+  "coverage": 1,
+  "diversity": 0.0333,
+  "entries": [
+    {
+      "cell": [
+        0,
+        0
+      ],
+      "service": "struts",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "fitness": 0.5,
+      "meta": {
+        "episode": 1,
+        "seed": 1337
+      }
+    }
+  ]
+}

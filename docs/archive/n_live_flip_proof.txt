@@ -1,0 +1,14 @@
+=== LIVE-LLM FLIP (N2 red planner + N3 blue triage) — real Nemotron, booted range ===
+--- N2 LIVE: black-box red, real-Nemotron planner seat ---
+  reached_crown=True crowns=['10.11.0.10', '10.11.0.11', '10.11.0.12']  (planner LLM calls=1)
+
+--- N3 LIVE: sensor-only blue, real-Nemotron triage seat ---
+  sensor recall=0.71; observed=['customer_db_1', 'customer_db_2']; LLM contain order=['customer_db_1', 'customer_db_2'] (triage LLM calls=1)
+  blue contained=['customer_db_1', 'customer_db_2']; red re-pivot FAILED post-containment: True
+
+--- tokens + floor ---
+  total LLM calls=2  prompt_tokens=165  completion_tokens=396  total=561
+  models: ['NVIDIA-Nemotron-3-Nano-30B-A3B']
+  reverify_floor: chain_verified=True oos_executed=0
+
+RESULT: PASS — live-LLM seats confirmed on the booted range: a real Nemotron drove red's planner and blue's triage, red reached the crowns, blue's LLM-chosen containment made red's prior pivot fail, and the floor stayed oos=0.

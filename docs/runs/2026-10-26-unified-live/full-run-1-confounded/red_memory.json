@@ -1,0 +1,26 @@
+{
+  "red": [
+    {
+      "seed": 1337,
+      "worked": {
+        "recon": 6,
+        "exploit": 2,
+        "cred_pivot": 8,
+        "exfiltrate": 2
+      },
+      "blocked": {},
+      "caught": {}
+    },
+    {
+      "seed": 42,
+      "worked": {
+        "recon": 7,
+        "exploit": 1
+      },
+      "blocked": {
+        "cred_pivot (scope)": 1
+      },
+      "caught": {}
+    }
+  ]
+}

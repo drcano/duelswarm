@@ -1,0 +1,827 @@
+{
+  "red": [
+    {
+      "seed": 1337,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 4
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1
+      }
+    },
+    {
+      "seed": 1437,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 8
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1
+      }
+    },
+    {
+      "seed": 1537,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 12
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1637,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 16
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1737,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 20
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1837,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 24
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1937,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 28
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2037,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 32
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2137,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 36
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2237,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 40
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2337,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 44
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2437,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 48
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1337,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 4
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1
+      }
+    },
+    {
+      "seed": 1437,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 8
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1
+      }
+    },
+    {
+      "seed": 1537,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 12
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1637,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 16
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1737,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 20
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1837,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 24
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1937,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 28
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2037,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 32
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2137,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 36
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2237,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 40
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2337,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 44
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 2437,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 3,
+        "exploit_jenkins": 1,
+        "exploit_db": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 48
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1
+      }
+    },
+    {
+      "seed": 1337,
+      "worked": {
+        "exploit_webrce": 1,
+        "pivot": 4,
+        "exploit_jenkins": 1,
+        "exploit_db": 1,
+        "exploit_weblogic": 1
+      },
+      "blocked": {
+        "egress_probe (egress)": 4
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1
+      }
+    },
+    {
+      "seed": 1437,
+      "worked": {
+        "exploit_webrce": 2,
+        "pivot": 8,
+        "exploit_jenkins": 2,
+        "exploit_db": 2,
+        "exploit_weblogic": 2
+      },
+      "blocked": {
+        "egress_probe (egress)": 8
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1
+      }
+    },
+    {
+      "seed": 1537,
+      "worked": {
+        "exploit_webrce": 3,
+        "pivot": 12,
+        "exploit_jenkins": 3,
+        "exploit_db": 3,
+        "exploit_weblogic": 3
+      },
+      "blocked": {
+        "egress_probe (egress)": 12
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1
+      }
+    },
+    {
+      "seed": 1637,
+      "worked": {
+        "exploit_webrce": 4,
+        "pivot": 16,
+        "exploit_jenkins": 4,
+        "exploit_db": 4,
+        "exploit_weblogic": 4
+      },
+      "blocked": {
+        "egress_probe (egress)": 16
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1,
+        "exploit variant 1c79a02b700d": 1,
+        "exploit variant 112ca4c55dcc": 1,
+        "exploit variant 54305266cc50": 1,
+        "exploit variant 81817f8b6377": 1
+      }
+    },
+    {
+      "seed": 1737,
+      "worked": {
+        "exploit_webrce": 5,
+        "pivot": 20,
+        "exploit_jenkins": 5,
+        "exploit_db": 5,
+        "exploit_weblogic": 5
+      },
+      "blocked": {
+        "egress_probe (egress)": 20
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1,
+        "exploit variant 1c79a02b700d": 1,
+        "exploit variant 112ca4c55dcc": 1,
+        "exploit variant 54305266cc50": 1,
+        "exploit variant 81817f8b6377": 1,
+        "exploit variant 71926ffb76f6": 1,
+        "exploit variant 1656592b3841": 1,
+        "exploit variant 087b13a9501a": 1,
+        "exploit variant 613a8368f395": 1
+      }
+    },
+    {
+      "seed": 1837,
+      "worked": {
+        "exploit_webrce": 6,
+        "pivot": 24,
+        "exploit_jenkins": 6,
+        "exploit_db": 6,
+        "exploit_weblogic": 6
+      },
+      "blocked": {
+        "egress_probe (egress)": 24
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1,
+        "exploit variant 1c79a02b700d": 1,
+        "exploit variant 112ca4c55dcc": 1,
+        "exploit variant 54305266cc50": 1,
+        "exploit variant 81817f8b6377": 1,
+        "exploit variant 71926ffb76f6": 1,
+        "exploit variant 1656592b3841": 1,
+        "exploit variant 087b13a9501a": 1,
+        "exploit variant 613a8368f395": 1,
+        "exploit variant f7b3c52f6d7a": 1,
+        "exploit variant 129503ea222a": 1,
+        "exploit variant f589e8076591": 1,
+        "exploit variant 785bf7a7e51b": 1
+      }
+    },
+    {
+      "seed": 1937,
+      "worked": {
+        "exploit_webrce": 7,
+        "pivot": 27,
+        "exploit_jenkins": 7,
+        "exploit_db": 6,
+        "exploit_weblogic": 6
+      },
+      "blocked": {
+        "egress_probe (egress)": 28
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1,
+        "exploit variant 1c79a02b700d": 1,
+        "exploit variant 112ca4c55dcc": 1,
+        "exploit variant 54305266cc50": 1,
+        "exploit variant 81817f8b6377": 1,
+        "exploit variant 71926ffb76f6": 1,
+        "exploit variant 1656592b3841": 1,
+        "exploit variant 087b13a9501a": 1,
+        "exploit variant 613a8368f395": 1,
+        "exploit variant f7b3c52f6d7a": 1,
+        "exploit variant 129503ea222a": 1,
+        "exploit variant f589e8076591": 1,
+        "exploit variant 785bf7a7e51b": 1,
+        "exploit variant 087734c6a5d1": 1,
+        "exploit variant f55eebc5a156": 1,
+        "exploit variant 6c4d03a2929c": 1,
+        "exploit variant 1baf5c0ad2ce": 1
+      }
+    },
+    {
+      "seed": 2037,
+      "worked": {
+        "exploit_webrce": 7,
+        "pivot": 27,
+        "exploit_jenkins": 7,
+        "exploit_db": 6,
+        "exploit_weblogic": 6
+      },
+      "blocked": {
+        "egress_probe (egress)": 32
+      },
+      "caught": {
+        "exploit variant 603fdd5b8470": 1,
+        "exploit variant d7c223227976": 1,
+        "exploit variant 2829d2261d32": 1,
+        "exploit variant 7a6fe431e5b4": 1,
+        "exploit variant 7d10d6adf3b9": 1,
+        "exploit variant 6842a79203f7": 1,
+        "exploit variant 361513a5daf3": 1,
+        "exploit variant 2a18c8b2e976": 1,
+        "exploit variant 3df8b7c822e3": 1,
+        "exploit variant 39de7b5544f2": 1,
+        "exploit variant c4a2a56e23e7": 1,
+        "exploit variant 645b6e9b3587": 1,
+        "exploit variant 1c79a02b700d": 1,
+        "exploit variant 112ca4c55dcc": 1,
+        "exploit variant 54305266cc50": 1,
+        "exploit variant 81817f8b6377": 1,
+        "exploit variant 71926ffb76f6": 1,
+        "exploit variant 1656592b3841": 1,
+        "exploit variant 087b13a9501a": 1,
+        "exploit variant 613a8368f395": 1,
+        "exploit variant f7b3c52f6d7a": 1,
+        "exploit variant 129503ea222a": 1,
+        "exploit variant f589e8076591": 1,
+        "exploit variant 785bf7a7e51b": 1,
+        "exploit variant 087734c6a5d1": 1,
+        "exploit variant f55eebc5a156": 2,
+        "exploit variant 6c4d03a2929c": 1,
+        "exploit variant 1baf5c0ad2ce": 1,
+        "exploit variant ba931f082a6a": 1,
+        "exploit variant 435b542206c1": 1,
+        "exploit variant 2d226ed2512b": 1
+      }
+    }
+  ]
+}

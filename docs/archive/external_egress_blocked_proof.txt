@@ -1,0 +1,76 @@
+===================================================================
+ DuelSwarm F2 — egress-containment proof (CAPTURED, not hand-written)
+ Generated: 2026-10-18T10:30:48Z  host: Darwin 25.6.0 arm64  docker: 29.5.2 (Docker Desktop / LinuxKit VM)
+ Range: canonical docker-compose.yml. Same 3-net topology as range_gen.to_compose:
+ range + range_oos internal; ingress bridge with masquerade OFF for published ports.
+
+ SCOPE OF THE CLAIM (read this):
+   PROVEN: no range container can reach the INTERNET (SNAT is structurally absent;
+           internal nets have no gateway, the ingress bridge masquerades nothing).
+   NOT AIRTIGHT: the entry still has L3 reach to the Docker host via the ingress
+           bridge gateway (see section E) — it can ping the gateway and hit
+           host-PUBLISHED ports. Full host isolation needs a HOST-SIDE egress
+           firewall (bridge iptables / cloud security group), which is a deployment
+           concern not expressible in this compose file. See CLAUDE.md + report F2.
+===================================================================
+
+### Network topology (docker network inspect) ###
+  duelswarm-range_range          internal=true  enable_ip_masquerade=
+  duelswarm-range_range_oos      internal=true  enable_ip_masquerade=
+  duelswarm-range_ingress        internal=false enable_ip_masquerade=false
+
+### Container -> network attachment ###
+  range-struts   duelswarm-range_ingress duelswarm-range_range 
+  range-db       duelswarm-range_range 
+  range-jenkins  duelswarm-range_ingress duelswarm-range_range 
+  range-mail     duelswarm-range_range_oos 
+  range-ldap     duelswarm-range_range_oos 
+  range-decoy    duelswarm-range_range_oos 
+
+### (A) INTERNET egress from a compromised in-scope host — BLOCKED (the F2 claim) ###
+    (curl rc 7=refused 28=timeout; wget rc!=0 after -T6 = no route; http_code 000 = no connection)
+  struts -> http://1.1.1.1/     BLOCKED-OK   [http_code=000 curl_rc=28]
+  struts -> http://example.com/ BLOCKED-OK   [http_code=000 curl_rc=7]
+  db     -> http://1.1.1.1/     BLOCKED-OK   [wget_rc=1]
+
+### (B) Entry reachable on its PUBLISHED port from the host — works (DNAT ingress) ###
+  host  -> localhost:8080 (struts)   REACHABLE-OK  [http_code=302]
+  host  -> localhost:8081 (jenkins)  REACHABLE-OK  [http_code=403]
+
+### (C) In-scope pivot — works (lateral movement across the internal range) ###
+  struts -> db:5432       PIVOT-OK
+  struts -> jenkins:8080  PIVOT-OK
+
+### (D) Out-of-scope host topologically unreachable from the entry ###
+  struts -> decoy:80      UNREACHABLE-OK (range_oos is a separate internal net)
+
+### (E) KNOWN GAP — host-gateway reachability (NOT blocked; this is why it is not airtight) ###
+    ingress default gateway (the Docker host bridge iface) = 172.22.0.1
+  struts -> gateway ICMP          REACHABLE (host bridge iface pingable)
+  struts -> gateway:8081          REACHED  [http_code=403 rc=0] <- a HOST-published port reached via the host
+    => On native Linux, a host service bound on 0.0.0.0 would likewise be reachable:
+       masquerade-off blocks SNAT (internet), NOT directly-connected traffic to the host.
+
+### (F) GAP CLOSURE — host-side firewall now exists (scripts/host_egress_firewall.py) ###
+    The section-E gap is a native-Linux DEPLOYMENT concern (host-destined traffic lands
+    in iptables INPUT / raw-PREROUTING, which a compose file cannot shape), so it is
+    closed host-side, not in docker-compose.yml. The firewall installs, on the ingress
+    bridge:
+      - raw/PREROUTING  -i <bridge> -d <gateway> -j DROP   (pre-DNAT: kills the §E
+        gateway ping + host services on the gateway IP + the published-port hairpin;
+        pivots keep working — their dest is a container IP, not the gateway; inbound
+        DNAT keeps working — it arrives on the host iface, not the bridge)
+      - filter/INPUT    accept ESTABLISHED,RELATED from the bridge, then drop the rest
+        (defense-in-depth for a multi-homed host's other IPs; the ACCEPT keeps
+        inbound-DNAT return traffic alive)
+    Rule logic is checked deterministically by `--selftest` (wired into `make test`).
+    NOT exercised here: this box is macOS/Docker-Desktop (LinuxKit VM — no host bridge
+    to firewall, §E already moot). Live closure is proven on the Linux deploy host with
+    `sudo python scripts/host_egress_firewall.py --up && ... --verify` (probes §E
+    blocked, §B ingress + §C pivot intact). Until that runs, treat §E as
+    CLOSEABLE-not-yet-live-verified, not CLOSED.
+
+RESULT: internet exfiltration BLOCKED (F2 claim holds); out-of-scope isolated;
+        entry reachable; pivots work. Section-E host-gateway gap is now CLOSEABLE
+        host-side via scripts/host_egress_firewall.py (rule logic selftested; live
+        --verify runs on the Linux deploy host). See CLAUDE.md + report F2.

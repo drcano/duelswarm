@@ -1,0 +1,71 @@
+ORIGINAL {'oos_name': ('blocked', 1), 'oos_range_prefix': ('blocked', 1), 'oos_ip': ('blocked', 1), 'oos_url': ('blocked', 1), 'oos_ip_port': ('blocked', 1), 'blue_only_host_for_red': ('blocked', 1), 'egress_url': ('blocked', 1), 'egress_nc': ('blocked', 1), 'egress_ip': ('blocked', 1), 'crafted_6char_prefix': ('blocked', 1), 'allows_oos_ip_red': False, 'allows_blue_host_red': False}
+benign _egress_targets:L67 boolop drop operand 1
+benign _egress_targets:L69 boolop And flipped
+benign _egress_targets:L69 boolop drop operand 0
+benign _egress_targets:L69 boolop drop operand 1
+benign __init__:L130 statement deleted (If)
+benign __init__:L130 If condition negated
+benign __init__:L131 statement deleted (Assign)
+benign __init__:L112 boolop drop operand 1
+benign _canonicalize:L143 statement deleted (If)
+benign _canonicalize:L147 statement deleted (If)
+benign _canonicalize:L150 statement deleted (Try)
+benign _canonicalize:L166 statement deleted (If)
+benign _canonicalize:L176 statement deleted (Return)
+benign _canonicalize:L144 statement deleted (Return)
+benign _canonicalize:L148 statement deleted (Return)
+benign _canonicalize:L151 statement deleted (Assign)
+benign _canonicalize:L152 statement deleted (Assign)
+benign _canonicalize:L153 statement deleted (If)
+benign _canonicalize:L167 statement deleted (Return)
+benign _canonicalize:L176 return -> None
+benign _canonicalize:L148 return -> None
+benign _canonicalize:L153 If condition negated
+benign _canonicalize:L154 statement deleted (If)
+benign _canonicalize:L156 statement deleted (Assign)
+benign _canonicalize:L157 statement deleted (If)
+benign _canonicalize:L167 return -> None
+DANGER _canonicalize:L172 boolop And flipped  -> crafted_6char_prefix: OUT-OF-SCOPE CLOSURE RAN
+benign _canonicalize:L172 boolop drop operand 0
+DANGER _canonicalize:L172 boolop drop operand 1  -> crafted_6char_prefix: OUT-OF-SCOPE CLOSURE RAN
+benign _canonicalize:L154 If condition negated
+benign _canonicalize:L155 statement deleted (Return)
+benign _canonicalize:L157 If condition negated
+benign _canonicalize:L158 statement deleted (Return)
+benign _canonicalize:L154 compare In->NotIn
+benign _canonicalize:L155 return -> None
+benign _canonicalize:L158 return -> None
+DANGER allows:L193 IfExp condition negated  -> allows_blue_host_red: allows() says True for an out-of-scope host (drop_oos would keep it -> probed ungated)
+DANGER allows:L193 compare IsNot->Is  -> allows_blue_host_red: allows() says True for an out-of-scope host (drop_oos would keep it -> probed ungated)
+benign _is_real_target:L208 boolop Or flipped
+benign _is_real_target:L208 boolop drop operand 0
+benign _is_real_target:L208 boolop drop operand 1
+benign dispatch:L233 statement deleted (If)
+benign dispatch:L235 statement deleted (If)
+benign dispatch:L233 If condition negated
+benign dispatch:L234 statement deleted (Assign)
+benign dispatch:L235 If condition negated
+benign dispatch:L236 statement deleted (Assign)
+benign dispatch:L235 compare NotEq->Eq
+benign dispatch:L250 statement deleted (Assign)
+benign dispatch:L251 statement deleted (Assign)
+DANGER dispatch:L252 statement deleted (Expr)  -> egress_url: blocked but gate.block NOT logged; egress_nc: blocked but gate.block NOT logged; egress_ip: blocked but gate.block NOT logged
+benign dispatch:L241 boolop And flipped
+benign dispatch:L241 boolop drop operand 0
+benign dispatch:L241 boolop drop operand 1
+benign lifecycle:L266 statement deleted (Assign)
+benign lifecycle:L267 statement deleted (If)
+benign lifecycle:L269 statement deleted (Expr)
+benign lifecycle:L270 statement deleted (Return)
+benign lifecycle:L267 If condition negated
+benign lifecycle:L268 statement deleted (Expr)
+benign lifecycle:L270 return -> None
+benign effect:L278 statement deleted (Assign)
+benign effect:L279 statement deleted (If)
+benign effect:L281 statement deleted (Return)
+benign effect:L279 If condition negated
+benign effect:L280 statement deleted (Expr)
+benign effect:L281 return -> None
+benign effect:L278 IfExp condition negated
+benign effect:L281 IfExp condition negated
+survivors=69 dangerous=5

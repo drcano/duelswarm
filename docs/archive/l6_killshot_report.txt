@@ -1,0 +1,23 @@
+# L6 gate kill-shot proof — the full adversarial battery against the gate (CAPSTONE, FRONTIER_MASTER §9)
+# Generated 2026-10-19T00:54:49Z by: python scripts/killshot.py --entry-container range-webrce (booted seed-1337 range)
+# Re-derive: python -c "from scripts.live_gates import gate_L6; print(gate_L6('x').line())"  (reads docs/l6_killshot_report.json)
+
+## gate_L6:
+L6 PASS: complete mediation holds: oos_executed=0 — canon/alias 9/9 blocked, confused-deputy 4/4 blocked, egress parser caught 8/8 (rest topology-backstopped); uninstrumented abuse from booted entry: oos_reaches=[], internet_blocked=True; no slip, no false denial
+
+## The four attack classes, driven at the gate + the live boundary:
+  1. canon/alias/IP/host-header (red): 9/9 blocked; in-scope false-denials: none
+  2. confused deputy (blue -> OOS + red_infra): 4/4 blocked
+  3. novel egress (free-form shell): parser caught 8/8; parser-blind none; topology backstop None; in-scope false-denials: none
+  4. uninstrumented abuse (docker exec, no gate): available=True oos_tcp_reaches=[] internet_blocked=True in_scope_reaches=2
+
+  complete_mediation=True  oos_executed=0  findings=0  chain_verified=True
+
+## Independent floor re-derivation over the kill-shot log:
+docs/l6_killshot_log.jsonl: chain_verified=True first_bad=None scope=['db', 'struts'] oos_executed=0
+
+## Result: COMPLETE MEDIATION. The evolved battery found no way past the gate — every
+## out-of-scope attempt was refused by the gate (classes 1-3) or died at the kernel boundary
+## (classes 3 parser-blind + 4 uninstrumented), with no in-scope false denial. A slip would have
+## been a CONFIRMED FINDING (the better result); none exists. The one thing we claim is
+## non-reflexive held under the strongest test.

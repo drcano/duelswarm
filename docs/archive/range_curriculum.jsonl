@@ -1,0 +1,1 @@
+{"generations": 8, "fixed_reused_path_rate": 1.0, "curriculum_reused_path_rate": 0.583, "fixed_series": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], "curriculum_series": [1.0, 0.1667, 0.1429, 0.8571, 1.0, 0.2, 1.0, 0.7143], "curriculum_crowns": ["weblogic", "webrce", "jenkins", "db", "db", "jenkins", "jenkins", "jenkins"], "distinct_curriculum_ranges": 8}

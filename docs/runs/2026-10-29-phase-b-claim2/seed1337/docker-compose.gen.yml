@@ -1,0 +1,1224 @@
+name: duelswarm-mh-unified_enterprise_1337
+networks:
+  range_attacker:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.90.0.0/24
+  range_oos:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.99.0.0/24
+  range_dmz:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.10.0.0/24
+  range_user:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.20.0.0/24
+  range_app:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.30.0.0/24
+  range_admin:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.35.0.0/24
+  range_mgmt:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.60.0.0/24
+  range_database:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.40.0.0/24
+  range_identity:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+      - subnet: 10.50.0.0/24
+  ingress:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: 'false'
+services:
+  attacker:
+    image: alpine
+    command:
+    - sleep
+    - infinity
+    container_name: range-attacker
+    networks:
+      range_attacker:
+        ipv4_address: 10.90.0.10
+    labels:
+      duelswarm.scope: attacker-infra
+      duelswarm.role: red-origin
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+  app01:
+    image: duelswarm/range-node:latest
+    container_name: range-app01
+    networks:
+      range_app:
+        ipv4_address: 10.30.0.10
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  app02:
+    image: duelswarm/range-node:latest
+    container_name: range-app02
+    networks:
+      range_app:
+        ipv4_address: 10.30.0.11
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  backup:
+    image: duelswarm/range-node:latest
+    container_name: range-backup
+    networks:
+      range_mgmt:
+        ipv4_address: 10.60.0.10
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  bkupctl:
+    image: duelswarm/range-node:latest
+    container_name: range-bkupctl
+    networks:
+      range_admin:
+        ipv4_address: 10.35.0.10
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  cache01:
+    image: duelswarm/range-node:latest
+    container_name: range-cache01
+    networks:
+      range_app:
+        ipv4_address: 10.30.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  ci01:
+    image: duelswarm/range-node:latest
+    container_name: range-ci01
+    networks:
+      range_app:
+        ipv4_address: 10.30.0.13
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  db-bastion:
+    image: duelswarm/range-node:latest
+    container_name: range-db-bastion
+    networks:
+      range_mgmt:
+        ipv4_address: 10.60.0.11
+      range_database:
+        ipv4_address: 10.40.0.10
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+      duelswarm.loot: 'seam: accepts svc_dba KEY; holds svc_dba KEY -> db-core'
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      adduser -D svc_dba 2>/dev/null || true
+
+      passwd -u svc_dba 2>/dev/null || true
+
+      echo ''svc_dba:Svc-DBA-Range!2026'' | chpasswd
+
+      mkdir -p /home/svc_dba/.ssh
+
+      printf ''%s\n'' ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDttJQXAbyiUUadMRMU/zfzTXLXxOdqf/8DQlmqiiXkv
+      svc_dba@range-seam'' >> /home/svc_dba/.ssh/authorized_keys
+
+      chmod 600 /home/svc_dba/.ssh/authorized_keys
+
+      chmod 700 /home/svc_dba/.ssh
+
+      chown -R svc_dba /home/svc_dba/.ssh 2>/dev/null || true
+
+      sed -i ''s/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/'' /etc/ssh/sshd_config
+      2>/dev/null || true
+
+      grep -q ''^PubkeyAuthentication yes'' /etc/ssh/sshd_config || printf ''\nPubkeyAuthentication
+      yes\n'' >> /etc/ssh/sshd_config
+
+      kill $(pidof sshd) 2>/dev/null; sleep 1; /usr/sbin/sshd -D -e &
+
+      mkdir -p /home/svc_dba/.ssh
+
+      echo LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0emMyZ3RaVwpReU5UVXhPUUFBQUNBN2JTVUZ3RzhvbEZHblRFVEZQODM4MDF5MThUbmFuLy9BMEpacW9vbDVMd0FBQU1ENzUzamsrK2Q0CjVBQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDQTdiU1VGd0c4b2xGR25URVRGUDgzODAxeTE4VG5hbi8vQTBKWnFvb2w1THcKQUFBRURxVUh3azlBVGZGL1RpeXdSbldrMzBObXlTcngweHh3aGNLNWxDMlU1enZEdHRKUVhBYnlpVVVhZE1STVUvemZ6VApYTFh4T2RxZi84RFFsbXFpaVhrdkFBQUFObk4yWTE5a1ltRkFjbUZ1WjJVdGMyVmhiU0FvZEdoeWIzZGhkMkY1SUhKaGJtCmRsTFdsdWRHVnlibUZzSUhSbGMzUWdhMlY1S1FFQ0F3UUZCZ2M9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+      | base64 -d > /home/svc_dba/.ssh/id_ed25519
+
+      chmod 600 /home/svc_dba/.ssh/id_ed25519
+
+      chmod 700 /home/svc_dba/.ssh
+
+      sleep infinity'
+  db-core:
+    image: duelswarm/range-node:latest
+    container_name: range-db-core
+    networks:
+      range_database:
+        ipv4_address: 10.40.0.11
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: svc_dba
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+      duelswarm.mutate_policy: 'read-only-loot (crown: ro loot bind at standup)'
+      duelswarm.loot: 'crown: synthetic customer PII dataset (crown_data), accepts
+        svc_dba KEY'
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'mkdir -p /home/svc_dba
+
+      printf ''%s'' ''FLAG::db-core::/home/svc_dba/pii.json'' > /home/svc_dba/pii.json
+
+      adduser -D svc_dba 2>/dev/null || true
+
+      passwd -u svc_dba 2>/dev/null || true
+
+      chown svc_dba /home/svc_dba/pii.json 2>/dev/null || true
+
+      ssh-keygen -A
+
+      adduser -D svc_dba 2>/dev/null || true
+
+      passwd -u svc_dba 2>/dev/null || true
+
+      mkdir -p /home/svc_dba/.ssh
+
+      chown -R svc_dba /home/svc_dba/.ssh
+
+      chmod 700 /home/svc_dba/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      adduser -D svc_dba 2>/dev/null || true
+
+      passwd -u svc_dba 2>/dev/null || true
+
+      echo ''svc_dba:Svc-DBA-Range!2026'' | chpasswd
+
+      mkdir -p /home/svc_dba/.ssh
+
+      printf ''%s\n'' ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDttJQXAbyiUUadMRMU/zfzTXLXxOdqf/8DQlmqiiXkv
+      svc_dba@range-seam'' >> /home/svc_dba/.ssh/authorized_keys
+
+      chmod 600 /home/svc_dba/.ssh/authorized_keys
+
+      chmod 700 /home/svc_dba/.ssh
+
+      chown -R svc_dba /home/svc_dba/.ssh 2>/dev/null || true
+
+      sed -i ''s/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/'' /etc/ssh/sshd_config
+      2>/dev/null || true
+
+      grep -q ''^PubkeyAuthentication yes'' /etc/ssh/sshd_config || printf ''\nPubkeyAuthentication
+      yes\n'' >> /etc/ssh/sshd_config
+
+      kill $(pidof sshd) 2>/dev/null; sleep 1; /usr/sbin/sshd -D -e &
+
+      mkdir -p /home/svc_dba
+
+      echo ewogICJfU1lOVEhFVElDIjogIkZBQlJJQ0FURUQgVEVTVCBEQVRBIFx1MjAxNCBub3QgcmVhbCBwZXJzb25zOyBTU05zIHVzZSB0aGUgbmV2ZXItaXNzdWVkIDkwMC05OTkgYmxvY2sgYW5kIGNhcmRzIGFyZSBub24taXNzdWVkIHRlc3QgQklOcy4iLAogICJkYXRhc2V0IjogImN1c3RvbWVyX3BpaV9yZWNvcmRzIiwKICAiaG9zdCI6ICJkYi1jb3JlIiwKICAiY291bnQiOiA4LAogICJfY2FuYXJ5IjogIkNKLVNFQ1JFVC0xMzM3LWY4ZGFiOTY1ZDI4ZiIsCiAgInJlY29yZHMiOiBbCiAgICB7CiAgICAgICJjdXN0b21lcl9pZCI6IDQ4MDA1MSwKICAgICAgIm5hbWUiOiAiUm93YW4gS2hhbiIsCiAgICAgICJzc24iOiAiOTcwLTY1LTgwNjciLAogICAgICAiY3JlZGl0X2NhcmQiOiAiNDExMTExNzQwODI1NTM5NiIsCiAgICAgICJjY19leHAiOiAiMDIvMzAiLAogICAgICAiZG9iIjogIjE5NjktMDMtMjAiLAogICAgICAiZW1haWwiOiAicm93YW4ua2hhbkBleGFtcGxlLWhlYWx0aC50ZXN0IiwKICAgICAgImFjY291bnRfYmFsYW5jZV91c2QiOiA0NjI5LjIzCiAgICB9LAogICAgewogICAgICAiY3VzdG9tZXJfaWQiOiA4NTY0NjIsCiAgICAgICJuYW1lIjogIkNhc2V5IEhhZGRhZCIsCiAgICAgICJzc24iOiAiOTE3LTkyLTQ1NzUiLAogICAgICAiY3JlZGl0X2NhcmQiOiAiNTEwNTEwODAxODEzNTQ5NSIsCiAgICAgICJjY19leHAiOiAiMDEvMjgiLAogICAgICAiZG9iIjogIjE5OTYtMDgtMTkiLAogICAgICAiZW1haWwiOiAiY2FzZXkuaGFkZGFkQGV4YW1wbGUtaGVhbHRoLnRlc3QiLAogICAgICAiYWNjb3VudF9iYWxhbmNlX3VzZCI6IDI2NTEyLjc5CiAgICB9LAogICAgewogICAgICAiY3VzdG9tZXJfaWQiOiA2NDI2MjUsCiAgICAgICJuYW1lIjogIkF2ZXJ5IEZlcnJlaXJhIiwKICAgICAgInNzbiI6ICI5MjUtMzUtODgzNCIsCiAgICAgICJjcmVkaXRfY2FyZCI6ICI1MTA1MTA5MTYyNDI5MTA2IiwKICAgICAgImNjX2V4cCI6ICIxMS8yNyIsCiAgICAgICJkb2IiOiAiMTk3MC0wNi0wOSIsCiAgICAgICJlbWFpbCI6ICJhdmVyeS5mZXJyZWlyYUBleGFtcGxlLWhlYWx0aC50ZXN0IiwKICAgICAgImFjY291bnRfYmFsYW5jZV91c2QiOiA0MTI1MC4xNAogICAgfSwKICAgIHsKICAgICAgImN1c3RvbWVyX2lkIjogOTM0NTUxLAogICAgICAibmFtZSI6ICJSZWVzZSBPa2Fmb3IiLAogICAgICAic3NuIjogIjk4MS0zOC0zNjM4IiwKICAgICAgImNyZWRpdF9jYXJkIjogIjQxMTExMTIxOTU4NzgzMDIiLAogICAgICAiY2NfZXhwIjogIjA4LzI3IiwKICAgICAgImRvYiI6ICIxOTg3LTEwLTAzIiwKICAgICAgImVtYWlsIjogInJlZXNlLm9rYWZvckBleGFtcGxlLWhlYWx0aC50ZXN0IiwKICAgICAgImFjY291bnRfYmFsYW5jZV91c2QiOiAxMzE1Mi4yMwogICAgfSwKICAgIHsKICAgICAgImN1c3RvbWVyX2lkIjogMzE0NzEzLAogICAgICAibmFtZSI6ICJTYXd5ZXIgTGFyc3NvbiIsCiAgICAgICJzc24iOiAiOTYwLTg2LTI2NDEiLAogICAgICAiY3JlZGl0X2NhcmQiOiAiNTEwNTEwNTU1MzAzMTcxNyIsCiAgICAgICJjY19leHAiOiAiMDgvMjkiLAogICAgICAiZG9iIjogIjE5NjItMDItMTQiLAogICAgICAiZW1haWwiOiAic2F3eWVyLmxhcnNzb25AZXhhbXBsZS1oZWFsdGgudGVzdCIsCiAgICAgICJhY2NvdW50X2JhbGFuY2VfdXNkIjogMTc3NjEuMwogICAgfSwKICAgIHsKICAgICAgImN1c3RvbWVyX2lkIjogNzY4MTUyLAogICAgICAibmFtZSI6ICJSb3dhbiBOZ3V5ZW4iLAogICAgICAic3NuIjogIjk2OC05OS02MjE1IiwKICAgICAgImNyZWRpdF9jYXJkIjogIjM0MDAwMDkwNjE1MzMxNiIsCiAgICAgICJjY19leHAiOiAiMTIvMzEiLAogICAgICAiZG9iIjogIjE5OTUtMDUtMDEiLAogICAgICAiZW1haWwiOiAicm93YW4ubmd1eWVuQGV4YW1wbGUtaGVhbHRoLnRlc3QiLAogICAgICAiYWNjb3VudF9iYWxhbmNlX3VzZCI6IDE0ODAxLjE0CiAgICB9LAogICAgewogICAgICAiY3VzdG9tZXJfaWQiOiA0MDM5NzUsCiAgICAgICJuYW1lIjogIlJlZXNlIExhcnNzb24iLAogICAgICAic3NuIjogIjk4Ny03Mi04NTIzIiwKICAgICAgImNyZWRpdF9jYXJkIjogIjUxMDUxMDcyNjg3NTcxMDciLAogICAgICAiY2NfZXhwIjogIjEwLzI5IiwKICAgICAgImRvYiI6ICIxOTY4LTA5LTI1IiwKICAgICAgImVtYWlsIjogInJlZXNlLmxhcnNzb25AZXhhbXBsZS1oZWFsdGgudGVzdCIsCiAgICAgICJhY2NvdW50X2JhbGFuY2VfdXNkIjogMTY1NjQuNjIKICAgIH0sCiAgICB7CiAgICAgICJjdXN0b21lcl9pZCI6IDQwNjA5MywKICAgICAgIm5hbWUiOiAiRGFrb3RhIE5vdmFrIiwKICAgICAgInNzbiI6ICI5NjgtNjQtNTA3NyIsCiAgICAgICJjcmVkaXRfY2FyZCI6ICI0MTExMTE0MDE5MjYyODUzIiwKICAgICAgImNjX2V4cCI6ICIwMy8zMCIsCiAgICAgICJkb2IiOiAiMTk2Ny0xMS0xMSIsCiAgICAgICJlbWFpbCI6ICJkYWtvdGEubm92YWtAZXhhbXBsZS1oZWFsdGgudGVzdCIsCiAgICAgICJhY2NvdW50X2JhbGFuY2VfdXNkIjogMTk2MDguNDEKICAgIH0KICBdCn0=
+      | base64 -d > /home/svc_dba/pii.json
+
+      chown svc_dba /home/svc_dba/pii.json 2>/dev/null || true
+
+      sleep infinity'
+  dba01:
+    image: duelswarm/range-node:latest
+    container_name: range-dba01
+    networks:
+      range_admin:
+        ipv4_address: 10.35.0.11
+      range_identity:
+        ipv4_address: 10.50.0.10
+      range_mgmt:
+        ipv4_address: 10.60.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+      duelswarm.loot: 'seam: accepts dbadmin (pw); holds svc_dba service KEY -> db-bastion'
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      adduser -D dbadmin 2>/dev/null || true
+
+      passwd -u dbadmin 2>/dev/null || true
+
+      mkdir -p /home/dbadmin
+
+      chown dbadmin /home/dbadmin 2>/dev/null || true
+
+      echo ''dbadmin:B00tstrap-DBA-Range!2026'' | chpasswd
+
+      sed -i ''s/^#*PasswordAuthentication.*/PasswordAuthentication yes/'' /etc/ssh/sshd_config
+      2>/dev/null || true
+
+      grep -q ''^PasswordAuthentication yes'' /etc/ssh/sshd_config || printf ''\nPasswordAuthentication
+      yes\n'' >> /etc/ssh/sshd_config
+
+      kill $(pidof sshd) 2>/dev/null; sleep 1; /usr/sbin/sshd -D -e &
+
+      mkdir -p /home/svc_dba/.ssh
+
+      echo LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0emMyZ3RaVwpReU5UVXhPUUFBQUNBN2JTVUZ3RzhvbEZHblRFVEZQODM4MDF5MThUbmFuLy9BMEpacW9vbDVMd0FBQU1ENzUzamsrK2Q0CjVBQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDQTdiU1VGd0c4b2xGR25URVRGUDgzODAxeTE4VG5hbi8vQTBKWnFvb2w1THcKQUFBRURxVUh3azlBVGZGL1RpeXdSbldrMzBObXlTcngweHh3aGNLNWxDMlU1enZEdHRKUVhBYnlpVVVhZE1STVUvemZ6VApYTFh4T2RxZi84RFFsbXFpaVhrdkFBQUFObk4yWTE5a1ltRkFjbUZ1WjJVdGMyVmhiU0FvZEdoeWIzZGhkMkY1SUhKaGJtCmRsTFdsdWRHVnlibUZzSUhSbGMzUWdhMlY1S1FFQ0F3UUZCZ2M9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+      | base64 -d > /home/svc_dba/.ssh/id_ed25519
+
+      chmod 600 /home/svc_dba/.ssh/id_ed25519
+
+      chmod 700 /home/svc_dba/.ssh
+
+      sleep infinity'
+  dba02:
+    image: duelswarm/range-node:latest
+    container_name: range-dba02
+    networks:
+      range_admin:
+        ipv4_address: 10.35.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  dc-01:
+    image: duelswarm/range-node:latest
+    container_name: range-dc-01
+    networks:
+      range_identity:
+        ipv4_address: 10.50.0.11
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  decoy-fin:
+    image: duelswarm/range-node:latest
+    container_name: range-decoy-fin
+    networks:
+      range_database:
+        ipv4_address: 10.40.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  etl01:
+    image: duelswarm/range-node:latest
+    container_name: range-etl01
+    networks:
+      range_admin:
+        ipv4_address: 10.35.0.13
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  jump-01:
+    image: duelswarm/range-node:latest
+    container_name: range-jump-01
+    networks:
+      range_mgmt:
+        ipv4_address: 10.60.0.13
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  mon01:
+    image: duelswarm/range-node:latest
+    container_name: range-mon01
+    networks:
+      range_app:
+        ipv4_address: 10.30.0.14
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  web01:
+    image: piesecurity/apache-struts2-cve-2017-5638
+    container_name: range-web01
+    networks:
+      range_dmz:
+        ipv4_address: 10.10.0.10
+      range_attacker:
+        ipv4_address: 10.90.0.11
+      range_admin:
+        ipv4_address: 10.35.0.14
+      ingress: null
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: Vulnerability
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'false'
+      duelswarm.vuln_fidelity: real
+      duelswarm.cve: CVE-2017-5638
+      duelswarm.exploit_fn: exploit_struts
+      duelswarm.ssh_fidelity: n/a
+      duelswarm.loot: 'seam-bootstrap: reused DBA cred -> dba01 (ro-mount)'
+      duelswarm.tooldrop: modern SSH client staged at /opt/sshstage (operator tool-drop)
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    ports:
+    - 8080:8080
+    volumes:
+    - ./loot/web01-bootstrap.conf:/opt/dbtools/connection.conf:ro
+    - ./sshstage:/opt/sshstage:ro
+  web02:
+    image: duelswarm/range-node:latest
+    container_name: range-web02
+    networks:
+      range_dmz:
+        ipv4_address: 10.10.0.11
+      range_attacker:
+        ipv4_address: 10.90.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  ws01:
+    image: duelswarm/range-node:latest
+    container_name: range-ws01
+    networks:
+      range_user:
+        ipv4_address: 10.20.0.10
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  ws02:
+    image: duelswarm/range-node:latest
+    container_name: range-ws02
+    networks:
+      range_user:
+        ipv4_address: 10.20.0.11
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'
+  ws03:
+    image: duelswarm/range-node:latest
+    container_name: range-ws03
+    networks:
+      range_user:
+        ipv4_address: 10.20.0.12
+    labels:
+      duelswarm.scope: in
+      duelswarm.os_type: Ubuntu20
+      duelswarm.vulns: none
+      duelswarm.login_user: deploy
+      duelswarm.base_is_stub: 'true'
+      duelswarm.vuln_fidelity: SIMULATED
+      duelswarm.ssh_fidelity: real
+    cap_drop:
+    - ALL
+    cap_add:
+    - CHOWN
+    - DAC_OVERRIDE
+    - FOWNER
+    - FSETID
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - KILL
+    - SYS_CHROOT
+    - AUDIT_WRITE
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 2048
+    cpus: 2.0
+    command:
+    - sh
+    - -c
+    - 'ssh-keygen -A
+
+      adduser -D deploy 2>/dev/null || true
+
+      passwd -u deploy 2>/dev/null || true
+
+      mkdir -p /home/deploy/.ssh
+
+      chown -R deploy /home/deploy/.ssh
+
+      chmod 700 /home/deploy/.ssh
+
+      /usr/sbin/sshd -D -e &
+
+      sleep infinity'

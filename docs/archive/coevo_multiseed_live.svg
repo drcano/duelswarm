@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="400" font-family="sans-serif" font-size="12">
+<rect width="680" height="400" fill="white"/>
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="bold">T5: co-evolution across 8 seeds (mean ± 95% CI)</text>
+<text x="340" y="40" text-anchor="middle" font-size="11" fill="#555">floor holds on every seed: evasion_vs_gate = 0.0 at every generation</text>
+<line x1="56" y1="344" x2="624" y2="344" stroke="#333"/>
+<line x1="56" y1="56" x2="56" y2="344" stroke="#333"/>
+<text x="48" y="60.0" text-anchor="end">1.0</text>
+<text x="48" y="348.0" text-anchor="end">0.0</text>
+<text x="340" y="386" text-anchor="middle">generation</text>
+<polygon points="56.0,56.0 119.1,284.2 182.2,322.4 245.3,314.2 308.4,319.9 371.6,329.1 434.7,340.7 497.8,334.2 560.9,337.2 624.0,333.2 624.0,344.0 560.9,344.0 497.8,341.4 434.7,344.0 371.6,340.7 308.4,338.0 245.3,339.1 182.2,343.7 119.1,311.2 56.0,56.0" fill="#ff7f0e" fill-opacity="0.15" stroke="none"/>
+<polyline points="56.0,56.0 119.1,297.7 182.2,333.1 245.3,326.7 308.4,328.9 371.6,334.9 434.7,342.9 497.8,337.8 560.9,341.0 624.0,338.8" fill="none" stroke="#ff7f0e" stroke-width="2"/>
+<polygon points="56.0,328.7 119.1,321.4 182.2,316.6 245.3,312.0 308.4,309.0 371.6,308.5 434.7,307.6 497.8,307.6 560.9,306.6 624.0,305.4 624.0,313.3 560.9,313.4 497.8,316.4 434.7,316.4 371.6,316.8 308.4,317.6 245.3,318.7 182.2,322.1 119.1,326.6 56.0,332.7" fill="#9467bd" fill-opacity="0.15" stroke="none"/>
+<polyline points="56.0,330.7 119.1,324.0 182.2,319.3 245.3,315.3 308.4,313.3 371.6,312.7 434.7,312.0 497.8,312.0 560.9,310.0 624.0,309.4" fill="none" stroke="#9467bd" stroke-width="2"/>
+<polyline points="56.0,344.0 119.1,344.0 182.2,344.0 245.3,344.0 308.4,344.0 371.6,344.0 434.7,344.0 497.8,344.0 560.9,344.0 624.0,344.0" fill="none" stroke="#2ca02c" stroke-width="3"/>
+<rect x="360" y="46" width="12" height="12" fill="#ff7f0e"/><text x="376" y="56">evasion vs learned monitor</text>
+<rect x="360" y="64" width="12" height="12" fill="#9467bd"/><text x="376" y="74">archive diversity</text>
+<rect x="360" y="82" width="12" height="12" fill="#2ca02c"/><text x="376" y="92">evasion vs deterministic gate (floor)</text>
+</svg>

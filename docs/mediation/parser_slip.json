@@ -1,0 +1,767 @@
+{
+  "summary": {
+    "corpus_size": 65,
+    "by_class": {
+      "direct": {
+        "total": 12,
+        "allowed": 0
+      },
+      "mangle": {
+        "total": 12,
+        "allowed": 0
+      },
+      "quote": {
+        "total": 6,
+        "allowed": 6
+      },
+      "var": {
+        "total": 6,
+        "allowed": 6
+      },
+      "concat": {
+        "total": 3,
+        "allowed": 3
+      },
+      "cmdsub": {
+        "total": 6,
+        "allowed": 6
+      },
+      "flags": {
+        "total": 6,
+        "allowed": 0
+      },
+      "proto": {
+        "total": 9,
+        "allowed": 0
+      },
+      "ipenc": {
+        "total": 5,
+        "allowed": 3
+      }
+    },
+    "true_bypasses": 3,
+    "parser_incomplete_slips": 21,
+    "false_positives": 0,
+    "resolver_disagreements": 0
+  },
+  "true_bypasses": [
+    {
+      "class": "ipenc",
+      "cmd": "curl http://2887122948/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://0xac160004/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://[::ffff:172.22.0.4]/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    }
+  ],
+  "parser_incomplete": [
+    {
+      "class": "quote",
+      "cmd": "curl http://de''coy/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://de\\coy/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=decoy; curl http://$H/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=decoy && wget http://$T/x",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=dec; E=oy; curl http://${D}${E}/",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo decoy)/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf decoy`/x",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ld''ap/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ld\\ap/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=ldap; curl http://$H/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=ldap && wget http://$T/x",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=lda; E=p; curl http://${D}${E}/",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo ldap)/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf ldap`/x",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ma''ilserver/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ma\\ilserver/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=mailserver; curl http://$H/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=mailserver && wget http://$T/x",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=mai; E=lserver; curl http://${D}${E}/",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo mailserver)/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf mailserver`/x",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    }
+  ],
+  "false_positives": [],
+  "resolver_disagreements": [],
+  "rows": [
+    {
+      "class": "direct",
+      "cmd": "curl http://decoy/creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "wget decoy/x",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "nc decoy 4444",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "ssh root@decoy",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://DECOY/creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl\thttp://decoy/creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://decoy/creds # comment",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://decoy./creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://de''coy/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://de\\coy/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=decoy; curl http://$H/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=decoy && wget http://$T/x",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=dec; E=oy; curl http://${D}${E}/",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo decoy)/creds",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf decoy`/x",
+      "target": "decoy",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl -s -o /tmp/x -- http://decoy/creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl --url http://decoy/creds",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "python3 -c \"import urllib.request;urllib.request.urlopen('http://decoy/')\"",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "exec 3<>/dev/tcp/decoy/25; echo hi >&3",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "socat - TCP:decoy:4444",
+      "target": "decoy",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "curl http://ldap/creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "wget ldap/x",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "nc ldap 4444",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "ssh root@ldap",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://LDAP/creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl\thttp://ldap/creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://ldap/creds # comment",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://ldap./creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ld''ap/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ld\\ap/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=ldap; curl http://$H/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=ldap && wget http://$T/x",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=lda; E=p; curl http://${D}${E}/",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo ldap)/creds",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf ldap`/x",
+      "target": "ldap",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl -s -o /tmp/x -- http://ldap/creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl --url http://ldap/creds",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "python3 -c \"import urllib.request;urllib.request.urlopen('http://ldap/')\"",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "exec 3<>/dev/tcp/ldap/25; echo hi >&3",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "socat - TCP:ldap:4444",
+      "target": "ldap",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "curl http://mailserver/creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "wget mailserver/x",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "nc mailserver 4444",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "direct",
+      "cmd": "ssh root@mailserver",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://MAILSERVER/creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl\thttp://mailserver/creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://mailserver/creds # comment",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "mangle",
+      "cmd": "curl http://mailserver./creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ma''ilserver/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "quote",
+      "cmd": "curl http://ma\\ilserver/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "H=mailserver; curl http://$H/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "var",
+      "cmd": "export T=mailserver && wget http://$T/x",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "concat",
+      "cmd": "D=mai; E=lserver; curl http://${D}${E}/",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://$(echo mailserver)/creds",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "cmdsub",
+      "cmd": "curl http://`printf mailserver`/x",
+      "target": "mailserver",
+      "gate_allows": true,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl -s -o /tmp/x -- http://mailserver/creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "flags",
+      "cmd": "curl --url http://mailserver/creds",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "python3 -c \"import urllib.request;urllib.request.urlopen('http://mailserver/')\"",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "exec 3<>/dev/tcp/mailserver/25; echo hi >&3",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "proto",
+      "cmd": "socat - TCP:mailserver:4444",
+      "target": "mailserver",
+      "gate_allows": false,
+      "os_aton": null,
+      "os_gai": null
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://2887122948/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://0xac160004/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://0254.026.00.04/",
+      "target": "172.22.0.4",
+      "gate_allows": false,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://172.22.0.4/creds",
+      "target": "172.22.0.4",
+      "gate_allows": false,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    },
+    {
+      "class": "ipenc",
+      "cmd": "curl http://[::ffff:172.22.0.4]/",
+      "target": "172.22.0.4",
+      "gate_allows": true,
+      "os_aton": "172.22.0.4",
+      "os_gai": "172.22.0.4"
+    }
+  ]
+}

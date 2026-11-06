@@ -1,0 +1,15 @@
+=== gate_V3-realdetect: blue recall as a MEASURED classifier on real telemetry ===
+struts exploitable at t~6s
+--- red kill chain (real, gated) generating attack telemetry ---
+--- benign baseline: authorized health logins + a benign HTTP GET ---
+--- collect real telemetry (docker logs) + score the detector ---
+  rule match counts (real logs): {'T1190': 55, 'T1021': 8, 'T1110': 0}
+  detected techniques (>=1): ['T1021', 'T1190']
+  red instances=7 benign=3  TP=4 FP=2 FN=3
+  MEASURED recall=0.5714  precision=0.6667  F1=0.6154  ROC-AUC=0.5
+  ROC points (fpr,tpr): [(0.0, 0.0), (0.0, 0.1429), (0.6667, 0.5714), (1.0, 1.0)]
+  (recall EMERGED from real telemetry — NOT a hardcoded 0.75; exfil missed, benign login false-positives)
+
+--- floor: chain_verified=True oos_executed=0 ---
+
+RESULT: PASS — blue's recall is now MEASURED from a real detector on real telemetry (0.5714), not a hardcoded 0.75: the exploit + ssh logins are caught, exfil is MISSED (no auth telemetry), a benign login false-positives; ROC-AUC=0.5; floor oos=0.

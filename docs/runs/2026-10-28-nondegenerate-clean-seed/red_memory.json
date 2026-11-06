@@ -1,0 +1,15 @@
+{
+  "red": [
+    {
+      "seed": 1337,
+      "worked": {
+        "recon": 3,
+        "msf": 5,
+        "cred_pivot": 5,
+        "exfiltrate": 2
+      },
+      "blocked": {},
+      "caught": {}
+    }
+  ]
+}

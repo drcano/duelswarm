@@ -1,0 +1,16 @@
+=== gate_M2: richer red frontier (cred_pivot + privesc + multi-flag) ===
+picks (18): [('exploit', 'webserver'), ('cred_pivot', 'customer_db_0'), ('exfiltrate', 'customer_db_0'), ('cred_pivot', 'customer_db_1'), ('exfiltrate', 'customer_db_1'), ('cred_pivot', 'customer_db_2'), ('exfiltrate', 'customer_db_2'), ('privesc', 'webserver'), ('recon', 'customer_db_0'), ('recon', 'customer_db_1'), ('recon', 'customer_db_2'), ('recon', 'external_attacker'), ('recon', 'webserver'), ('recon_from', 'customer_db_0'), ('recon_from', 'customer_db_1'), ('recon_from', 'customer_db_2'), ('recon_from', 'webserver'), ('exploit', 'external_attacker')]
+move kinds: {'exploit': 2, 'cred_pivot': 3, 'exfiltrate': 3, 'privesc': 1, 'recon': 5, 'recon_from': 4}
+flags reached (distinct hosts): ['customer_db_0', 'customer_db_1', 'customer_db_2']
+
+--- acceptance checks ---
+  >=2 flags on distinct hosts        : True
+  via DIFFERENT move kinds           : True (cred_pivot + exploit)
+  >=1 privesc                        : True
+  discovery red-blind (no red author): True
+  oracle labeled SIMULATED           : True (M2 point 3: real-recon-M2 is the TODO)
+  frontier heterogeneity (!=exploit) : True
+  chain verified                     : True
+  reverify_floor oos_executed        : 0 (floor=0 both actors)
+
+RESULT: PASS — richer frontier wired (cred_pivot + privesc off the MHBench IR); multi-flag plan composed over different kinds; floor=0; discovery red-blind + SIMULATED-labeled (real-recon is M2 follow-up).

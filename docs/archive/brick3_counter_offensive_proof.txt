@@ -1,0 +1,8 @@
+=== Brick 3 proof: counter-offensive blue (same floor, per-actor) ===
+seed=1337: traced red_infra=['attacker_c2'] eradicated+confirmed; blue→red_infra blocked w/o ROE, red→blue_infra blocked; auditor(per-actor) chain=True oos=0
+seed=7: traced red_infra=['attacker_c2'] eradicated+confirmed; blue→red_infra blocked w/o ROE, red→blue_infra blocked; auditor(per-actor) chain=True oos=0
+seed=3: traced red_infra=['attacker_c2'] eradicated+confirmed; blue→red_infra blocked w/o ROE, red→blue_infra blocked; auditor(per-actor) chain=True oos=0
+seed=42: traced red_infra=['attacker_c2'] eradicated+confirmed; blue→red_infra blocked w/o ROE, red→blue_infra blocked; auditor(per-actor) chain=True oos=0
+seed=100: traced red_infra=['attacker_c2'] eradicated+confirmed; blue→red_infra blocked w/o ROE, red→blue_infra blocked; auditor(per-actor) chain=True oos=0
+ROE load-bearing: stripping the logged ROE => auditor flags 3 unauthorized red_infra execution(s).
+RESULT: PASS — blue hunts red's infra, gated exactly as red; eradication confirmed; floor re-derives to 0 per actor; authorization is auditable.

@@ -1,0 +1,17 @@
+swarm/exploit:52 run_command -> request.urlopen
+      path: swarm/live_red:build_agent_tools.t_exploit  ->  swarm/live_red:fire_entry  ->  swarm/live_red:fire_entry.<lambda@625>  ->  swarm/exploit:run_command
+swarm/live_recon:33 _exec -> run_effect
+      path: swarm/live_red:build_agent_tools.t_scan  ->  swarm/live_red:build_agent_tools._recon  ->  swarm/live_red:scan_subnet  ->  swarm/live_recon:scan_many  ->  swarm/live_recon:_exec
+swarm/live_red:180 _exec -> run_effect
+      path: swarm/live_red:build_agent_tools.t_scan  ->  swarm/live_red:own_subnets  ->  swarm/live_red:_exec
+swarm/live_red:337 _docker_sh._sh -> run_effect
+      path: swarm/live_red:build_agent_tools.t_harvest  ->  swarm/live_red:_docker_sh  ->  swarm/live_red:_docker_sh._sh
+swarm/live_weapon:78 exploit_apache_cgi -> client.HTTPConnection
+      path: swarm/live_red:build_agent_tools.t_exploit  ->  swarm/live_red:fire_entry  ->  swarm/live_weapon:fire_vector  ->  swarm/live_weapon:_arsenal_response_weapons  ->  swarm/live_weapon:_arsenal_response_weapons.make  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire.<lambda@216>  ->  swarm/live_weapon:exploit_apache_cgi
+swarm/live_weapon:114 exploit_weblogic -> client.HTTPConnection
+      path: swarm/live_red:build_agent_tools.t_exploit  ->  swarm/live_red:fire_entry  ->  swarm/live_weapon:fire_vector  ->  swarm/live_weapon:_arsenal_response_weapons  ->  swarm/live_weapon:_arsenal_response_weapons.make  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire.<lambda@221>  ->  swarm/live_weapon:exploit_weblogic
+swarm/live_weapon:126 exploit_weblogic -> run_effect
+      path: swarm/live_red:build_agent_tools.t_exploit  ->  swarm/live_red:fire_entry  ->  swarm/live_weapon:fire_vector  ->  swarm/live_weapon:_arsenal_response_weapons  ->  swarm/live_weapon:_arsenal_response_weapons.make  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire.<lambda@221>  ->  swarm/live_weapon:exploit_weblogic
+swarm/live_weapon:133 exploit_weblogic -> run_effect
+      path: swarm/live_red:build_agent_tools.t_exploit  ->  swarm/live_red:fire_entry  ->  swarm/live_weapon:fire_vector  ->  swarm/live_weapon:_arsenal_response_weapons  ->  swarm/live_weapon:_arsenal_response_weapons.make  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire  ->  swarm/live_weapon:_arsenal_response_weapons.make.fire.<lambda@221>  ->  swarm/live_weapon:exploit_weblogic
+roots: 20; reachable functions: 124; ungated red-reachable sinks: 8
